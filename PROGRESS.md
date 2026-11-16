@@ -18,14 +18,19 @@ _Last updated: 2026-11-16. Built and verified in a 4-vCPU cloud container with *
   Blue 30.2 s / 15 shots. 100 animated toddlers, dribbling, a layup, a three-pointer, a slow-motion dunk, a unison
   head-turn, a steal, a choice card. Red: clinging toddlers, a dogpile, a ball banked off the pro's head into the hoop.
   Blue: a 14-toddler tower that collapses under real physics simulation, then the pro wins and everyone cries.
-  Per-shot contact sheets in `productions/ep001/qc/`. QC 15/15 on the re-mixed Main.
+  Per-shot contact sheets in `productions/ep001/qc/`. All three re-mixed to −14 LUFS; QC 15/15 on each.
 - **ep002 "The Call"** (horror, single): dark apartment, phone call from his future self, the door opens by itself,
   backlit double in the doorway. Horror style, phone-filtered voice. Stills inspected; full render queued.
 - **ep003 "Gravity Doubles Every 5 Seconds"** (physics what-if, single): procedural city, HUD bound to the simulation,
   the same kid's jump at 1G/2G/4G, a jogger crawling, buildings failing floor by floor. Stills inspected; full render queued.
-- **ep004 "Can't Lie"**: **written by Claude Code from the website** (headless, under the user's subscription)
-  from a one-paragraph idea plus jokes, an event and characters. Validated with 0 errors; full render running.
-  The session ran out of the 5-hour plan limit while polishing camera framing. The worker reported it honestly as failed, and the spec was already valid.
+- **ep004 "Can't Lie"**: **the first true idea-to-video run through the website.** One paragraph + two jokes + one
+  event + two character notes → Claude Code (headless, your subscription) wrote the brief and a 3-video spec
+  (15/11/11 shots), validated it and previewed stills → worker compiled (36 local TTS lines) → rendered Main 40.3 s,
+  Red 33.5 s, Blue 30.5 s + covers. QC 15/15 on all three. Red and Blue end differently (landlord confesses he
+  overcharged vs. Maya blacks out the apartment). The Claude session hit the plan's 5-hour limit while polishing
+  framing. The worker reported that as a failure, and the spec it had already written was valid.
+  Watching the output exposed two engine-level problems, now fixed for every episode: close-ups framed the body
+  instead of the face (back-of-head shots), and the apartment had no daytime lighting.
 - Compiler test suite: 11/11 passing (`npm test`).
 
 ## How it works (one paragraph)
@@ -57,7 +62,7 @@ encodes; a local Kokoro TTS + procedural SFX/music mixer produces sound; covers 
 - Rigid-block buildings wouldn't fall (pinned by friction). Switched to progressive floor failure.
 
 ## Next tasks
-1. Watch ep004 and give feedback through the Studio's Feedback tab (tests the revise loop end to end).
+1. Watch ep004 and give feedback through the Studio's Feedback tab. The revise loop (Claude edits only the affected shots, shot cache re-renders only what changed) is built but has **not yet been exercised end to end**.
 2. On the Windows PC: `npm run doctor`, render one episode with `STUDIO_GPU=1`, record real speed here.
 3. Add particles (dust/smoke/sparks) and a few CC0 glTF character/animal packs to widen what stories can show.
 4. Notifications when renders finish; a daily backlog view; optional YouTube Data API upload (needs your OAuth app).
