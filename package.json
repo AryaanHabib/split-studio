@@ -17,7 +17,9 @@
     "worker": "tsx worker/worker.ts",
     "build:preview": "node tools/build-preview.mjs",
     "build:web": "node tools/build-preview.mjs && next build",
-    "app:prod": "node tools/app.mjs --prod"
+    "app:prod": "node tools/app.mjs --prod",
+    "setup:python": "node tools/setup-python.mjs",
+    "setup": "node tools/setup-python.mjs && node tools/setup-voices.mjs && node tools/doctor.mjs"
   },
   "keywords": [],
   "author": "",

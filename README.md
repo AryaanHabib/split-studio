@@ -20,14 +20,11 @@ on a choice, plus two fully animated branch videos.
    npx playwright install chromium
    ```
    ```bash
-   pip install kokoro-onnx soundfile numpy
+   npm run setup
    ```
-   ```bash
-   npm run setup:voices
-   ```
-   ```bash
-   npm run doctor
-   ```
+   `npm run setup` installs the voice packages into the same Python the studio uses (`python -m pip`),
+   downloads and verifies the local voice model, then prints the machine report (`npm run doctor`).
+   Everything in the report should show ✓.
 3. If `doctor` shows your graphics card as the WebGL renderer, render on the GPU (PowerShell):
    ```bash
    $env:STUDIO_GPU="1"

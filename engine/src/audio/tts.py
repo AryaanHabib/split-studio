@@ -8,8 +8,15 @@ character mouths in sync with the speech.
 Existing files are reused (cache by content hash), so re-running is cheap.
 """
 import argparse, json, os, sys
-import numpy as np
-import soundfile as sf
+try:
+    import numpy as np
+    import soundfile as sf
+    import kokoro_onnx  # noqa: F401  (imported lazily below; checked here so setup problems are reported clearly)
+except ModuleNotFoundError as e:
+    print(f"\nMissing Python package '{e.name}' for the Python running the studio:\n  {sys.executable}\n"
+          f"Install the voice packages into THIS Python with:\n  \"{sys.executable}\" -m pip install kokoro-onnx soundfile numpy\n"
+          f"(or run: npm run setup:python)\n", file=sys.stderr)
+    sys.exit(2)
 
 def envelope(samples: np.ndarray, sr: int, fps: int = 30) -> list:
     hop = sr // fps
