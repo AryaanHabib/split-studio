@@ -5,7 +5,7 @@ Claude Code session (your own subscription) writes a structured episode spec; th
 3D animation, voices, sound, edit, captions and covers. The first format is **Red/Blue**: a Main video that ends
 on a choice, plus two fully animated branch videos.
 
-> Status: **engine + three genre tests working; website not built yet.** See `PROGRESS.md`.
+> Status: **engine, three genre tests and the website MVP working.** See `PROGRESS.md`.
 
 ## Quick start (Windows)
 1. Install the free prerequisites:
@@ -32,11 +32,15 @@ on a choice, plus two fully animated branch videos.
    ```bash
    $env:STUDIO_GPU="1"
    ```
-4. Render an episode:
+4. Start the studio (website + background worker):
    ```bash
-   npm run produce -- episodes/ep001-toddlers/episode.json
+   npm run app
    ```
-   Output goes to `productions/ep001/final/*.mp4`, `covers/`, `qc/`, plus `report.json`.
+   Open http://localhost:3000 → **Create** → describe the idea → **Develop story with Claude**. The worker runs
+   Claude Code on this PC with your own login (Claude Code must be installed and logged in; no API key is used).
+   Then **Compile preview**, scrub the live preview, **Render draft** or **Render final**, watch the three videos,
+   give feedback, approve, and use **Publish** for the manual posting checklist.
+   Renders keep running if you close the browser. Outputs: `productions/<id>/final/*.mp4`, `covers/`, `qc/`.
 
 Linux/macOS: the same steps (`export STUDIO_GPU=1`).
 

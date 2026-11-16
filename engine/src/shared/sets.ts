@@ -57,7 +57,7 @@ export const SETS: Record<string, SetDef> = {
   },
   apartment: {
     id: 'apartment',
-    description: 'Small night-time apartment: living room with sofa, side table, landline phone, window with city lights, hallway door.',
+    description: 'Small apartment (day or night lighting): living room with sofa, side table, landline phone, window with city lights, hallway door.',
     anchors: {
       center: [0, 0, 0],
       sofa: [0, 0, -2.2],
@@ -73,7 +73,7 @@ export const SETS: Record<string, SetDef> = {
       { kind: 'box', pos: [0, 0.22, -2.3], size: [1.1, 0.22, 0.42], name: 'sofa' },
     ],
     bounds: { minX: -2.8, maxX: 2.8, minZ: -2.6, maxZ: 2.8 },
-    lighting: ['night', 'lamp', 'blackout', 'phone-glow'],
+    lighting: ['day', 'night', 'lamp', 'blackout'],
   },
   city: {
     id: 'city',

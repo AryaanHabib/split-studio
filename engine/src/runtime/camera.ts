@@ -12,6 +12,7 @@ export interface CamCtx {
   resolve(target: any, t: number): THREE.Vector3; // precise (current pose)
   approx(target: any, t: number): THREE.Vector3; // root-based (cheap, any time)
   heading(target: any, t: number): number;
+  faceYaw?(target: any): number | null;
   heightOf(target: any): number;
 }
 
@@ -61,7 +62,8 @@ export function evalCamera(spec: CameraSpec, ctx: CamCtx): { pos: THREE.Vector3;
       const part = spec.part ?? 'head';
       const tgtName = typeof spec.target === 'string' ? `${spec.target}.${part}` : spec.target;
       const p = ctx.resolve(tgtName, ctx.t);
-      const h = ctx.heading(spec.target, ctx.t) + (spec.rel ?? 0) * D2R;
+      const fy = spec.facing === 'body' ? null : ctx.faceYaw?.(spec.target) ?? null;
+      const h = (fy ?? ctx.heading(spec.target, ctx.t)) + (spec.rel ?? 0) * D2R;
       const dist = (spec.dist ?? 1.9) + (spec.push ? -spec.push * u : 0);
       pos = p.clone().add(new THREE.Vector3(Math.sin(h) * dist, spec.height ?? 0.05, Math.cos(h) * dist));
       look = p.clone().add(new THREE.Vector3(0, spec.lookHeight ?? -0.14, 0));

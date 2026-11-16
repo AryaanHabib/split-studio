@@ -135,12 +135,9 @@ async function loop() {
   claudeVersion = claudeAvailable();
   console.log(`[worker] running in ${ROOT}. Claude Code: ${claudeVersion ?? 'not found'}`);
   setInterval(() => setSetting('worker_heartbeat', { at: Date.now(), claude: claudeVersion, busy: current ? current.job.id : null }), 3000);
+  // cancellation watchdog: runs independently because the loop below is awaiting the running job
+  setInterval(() => { if (current && getJob(current.job.id)?.status === 'cancel_requested') killTree(current.child); }, 1000);
   for (;;) {
-    if (current) {
-      const j = getJob(current.job.id);
-      if (j?.status === 'cancel_requested') killTree(current.child);
-      await new Promise((r) => setTimeout(r, 700)); continue;
-    }
     const next = db().prepare("SELECT * FROM jobs WHERE status = 'queued' ORDER BY id LIMIT 1").get() as any;
     if (!next) { await new Promise((r) => setTimeout(r, 1000)); continue; }
     const job: Job = { ...next, args: JSON.parse(next.args || '{}') };

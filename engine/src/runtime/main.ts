@@ -111,8 +111,15 @@ function makeResolvers(s: SceneRT) {
     return approx(target, t);
   };
   const heading = (target: any, t: number) => { const a = s.actors.get(String(target).split('.')[0]); return a ? a.rootAt(t, actorOf).h : 0; };
+  // yaw of the head's forward direction (after look-at turns); null if the face points up/down (lying)
+  const faceYaw = (target: any) => {
+    const a = s.actors.get(String(target).split('.')[0]); if (!a?.puppet) return null;
+    const hd = a.puppet.j.head; hd.updateWorldMatrix(true, false);
+    const f = new THREE.Vector3(0, 0, 1).transformDirection(hd.matrixWorld);
+    return Math.hypot(f.x, f.z) > 0.55 ? Math.atan2(f.x, f.z) : null;
+  };
   const heightOf = (target: any) => s.actors.get(String(target).split('.')[0])?.height ?? 1.7;
-  return { actorOf, approx, precise, heading, heightOf };
+  return { actorOf, approx, precise, heading, heightOf, faceYaw };
 }
 
 function sampleArr(arr: number[], t0: number, dt: number, t: number, stride: number, off: number) {
@@ -193,7 +200,7 @@ function renderAt(T: number, opts: { overlays?: boolean; frame?: number } = {}) 
   }
   s.set.update(t, s.def.events);
   // camera
-  const ctx: CamCtx = { t, lt: T - shot.start, u: (T - shot.start) / Math.max(1e-3, shot.end - shot.start), dur: shot.end - shot.start, resolve: R.precise, approx: R.approx, heading: R.heading, heightOf: R.heightOf };
+  const ctx: CamCtx = { t, lt: T - shot.start, u: (T - shot.start) / Math.max(1e-3, shot.end - shot.start), dur: shot.end - shot.start, resolve: R.precise, approx: R.approx, heading: R.heading, heightOf: R.heightOf, faceYaw: R.faceYaw };
   const cam = evalCamera({ seed: shot.index, ...shot.camera }, ctx);
   camera.fov = cam.fov; camera.position.copy(cam.pos); camera.up.set(0, 1, 0); camera.lookAt(cam.look);
   if (cam.roll) camera.rotateZ(cam.roll);

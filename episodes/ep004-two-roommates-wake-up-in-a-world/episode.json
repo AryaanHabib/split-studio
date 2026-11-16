@@ -85,24 +85,36 @@
   "home": {
    "set": "apartment",
    "params": {
-    "lights": "lamp"
+    "lights": "day"
    },
    "cast": {
     "theo": {
-     "at": [-0.35, -2.12],
+     "at": [
+      -0.35,
+      -2.12
+     ],
      "facing": 0
     },
     "maya": {
-     "at": [0.6, -1.4],
+     "at": [
+      0.6,
+      -1.4
+     ],
      "facing": "theo"
     },
     "pruitt": {
-     "at": [3.75, 1.2],
+     "at": [
+      3.75,
+      1.2
+     ],
      "facing": -90
     },
     "narr": {
      "char": "narrator",
-     "at": [-2.4, 2.4],
+     "at": [
+      -2.4,
+      2.4
+     ],
      "hiddenFrom": 0
     }
    },
@@ -110,7 +122,11 @@
     "noodles": {
      "kind": "box",
      "params": {
-      "size": [0.12, 0.13, 0.12],
+      "size": [
+       0.12,
+       0.13,
+       0.12
+      ],
       "color": "#f4f1ea"
      },
      "heldBy": "maya",
@@ -119,261 +135,1353 @@
    },
    "tracks": {
     "maya": [
-     { "do": "face", "expr": "angry", "at": 0 },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": 0 },
-     { "do": "upper:holdBall", "dur": 1.8, "at": 0 },
-     { "do": "say", "text": "Did you eat my noodles?", "at": 0.25, "mark": "q1" },
-     { "do": "face", "expr": "confused", "at": "@lie1+0.2" },
-     { "do": "lookAt", "target": "lamp", "dur": 2.2, "snap": true, "at": "@lie1+0.15" },
-     { "do": "lookAt", "target": [-1.6, 1.7, -2.4], "dur": "hold", "at": "@rule1-0.3" },
-     { "do": "face", "expr": "grin", "at": "@rule1.done-0.4" },
-     { "do": "turnTo", "target": "theo", "dur": 0.35, "at": "@rule1.done-0.2" },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": "@rule1.done-0.2" },
-     { "do": "throw", "prop": "noodles", "to": "kitchen", "apex": 0.8, "flight": 0.7, "style": "over", "mark": "toss" },
-     { "do": "walkTo", "to": [1.0, -1.6], "dur": 0.5 },
-     { "do": "turnTo", "target": "theo", "dur": 0.3 },
-     { "do": "dance", "dur": 1.1, "mark": "twirl" },
-     { "do": "handsOnHips", "dur": 3.6 },
-     { "do": "face", "expr": "smug", "at": "@twirl" },
-     { "do": "say", "text": "Okay. Honest question. Does this outfit look good?", "at": "@twirl+0.5", "mark": "outfitQ" },
-     { "do": "face", "expr": "confused", "at": "@bold.done" },
-     { "do": "say", "text": "Bold... good?", "at": "@bold.done+0.2", "mark": "boldGood" },
-     { "do": "face", "expr": "angry", "at": "@love+0.3" },
-     { "do": "armsCrossed", "dur": 2.4, "at": "@love+0.2" },
-     { "do": "lookAt", "target": [0.3, 2.7, -0.6], "dur": 1.4, "snap": true, "at": "@nlie.done+0.15" },
-     { "do": "face", "expr": "confused", "at": "@nlie.done+0.2" },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": "@ntrue" },
-     { "do": "face", "expr": "angry", "at": "@ntrue+0.2" },
-     { "do": "handsOnHips", "dur": 1.6, "at": "@ntrue" },
-     { "do": "lookAt", "target": [2.95, 1.1, 1.2], "dur": 2.6, "snap": true, "at": "@knock+0.1" },
-     { "do": "face", "expr": "shock", "at": "@knock+0.15" },
-     { "do": "freeze", "dur": 1.5, "at": "@knock+0.1" },
-     { "do": "face", "expr": "worried", "at": "@rent.done" },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": "@cant" },
-     { "do": "say", "text": "So who talks?", "fx": "whisper", "at": "@cant.done+0.25", "mark": "who" },
-     { "do": "shrug", "dur": 1.2, "at": "@cant.done+0.25" },
-     { "do": "idle", "dur": 5 }
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 0
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": 0
+     },
+     {
+      "do": "upper:holdBall",
+      "dur": 1.8,
+      "at": 0
+     },
+     {
+      "do": "say",
+      "text": "Did you eat my noodles?",
+      "at": 0.25,
+      "mark": "q1"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@lie1+0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": "lamp",
+      "dur": 2.2,
+      "snap": true,
+      "at": "@lie1+0.15"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       -1.6,
+       1.7,
+       -2.4
+      ],
+      "dur": "hold",
+      "at": "@rule1-0.3"
+     },
+     {
+      "do": "face",
+      "expr": "grin",
+      "at": "@rule1.done-0.4"
+     },
+     {
+      "do": "turnTo",
+      "target": "theo",
+      "dur": 0.35,
+      "at": "@rule1.done-0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": "@rule1.done-0.2"
+     },
+     {
+      "do": "throw",
+      "prop": "noodles",
+      "to": "kitchen",
+      "apex": 0.8,
+      "flight": 0.7,
+      "style": "over",
+      "mark": "toss"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1.0,
+       -1.6
+      ],
+      "dur": 0.5
+     },
+     {
+      "do": "turnTo",
+      "target": "theo",
+      "dur": 0.3
+     },
+     {
+      "do": "dance",
+      "dur": 1.1,
+      "mark": "twirl"
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 3.6
+     },
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": "@twirl"
+     },
+     {
+      "do": "say",
+      "text": "Okay. Honest question. Does this outfit look good?",
+      "at": "@twirl+0.5",
+      "mark": "outfitQ"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@bold.done"
+     },
+     {
+      "do": "say",
+      "text": "Bold... good?",
+      "at": "@bold.done+0.2",
+      "mark": "boldGood"
+     },
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": "@love+0.3"
+     },
+     {
+      "do": "armsCrossed",
+      "dur": 2.4,
+      "at": "@love+0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0.3,
+       2.7,
+       -0.6
+      ],
+      "dur": 1.4,
+      "snap": true,
+      "at": "@nlie.done+0.15"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@nlie.done+0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": "@ntrue"
+     },
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": "@ntrue+0.2"
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 1.6,
+      "at": "@ntrue"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       2.95,
+       1.1,
+       1.2
+      ],
+      "dur": 2.6,
+      "snap": true,
+      "at": "@knock+0.1"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@knock+0.15"
+     },
+     {
+      "do": "freeze",
+      "dur": 1.5,
+      "at": "@knock+0.1"
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@rent.done"
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": "@cant"
+     },
+     {
+      "do": "say",
+      "text": "So who talks?",
+      "fx": "whisper",
+      "at": "@cant.done+0.25",
+      "mark": "who"
+     },
+     {
+      "do": "shrug",
+      "dur": 1.2,
+      "at": "@cant.done+0.25"
+     },
+     {
+      "do": "idle",
+      "dur": 5
+     }
     ],
     "theo": [
-     { "do": "sit", "seat": true, "held": true, "dur": 2.15, "at": 0 },
-     { "do": "face", "expr": "sleepy", "at": 0 },
-     { "do": "lookAt", "target": "maya.head", "dur": "hold", "at": 0.3 },
-     { "do": "say", "text": "No.", "at": "@q1.done+0.25", "mark": "no" },
-     { "do": "face", "expr": "guilty", "at": "@no-0.2" },
-     { "do": "sneeze", "dur": 1.2, "at": "@no.done+0.05", "mark": "sn1" },
-     { "do": "face", "expr": "shock", "at": "@sn1+0.1" },
-     { "do": "face", "expr": "guilty", "at": "@sn1.end" },
-     { "do": "say", "text": "Yes. I ate them. I'm so sorry.", "at": "@sn1.end+0.05", "mark": "yes" },
-     { "do": "walkTo", "to": [0.25, -0.6], "dur": 1.0, "at": "@sn1.end" },
-     { "do": "turnTo", "target": "maya", "dur": 0.3 },
-     { "do": "face", "expr": "worried", "at": "@outfitQ.done" },
-     { "do": "say", "text": "It looks... so...", "at": "@outfitQ.done+0.35", "mark": "so" },
-     { "do": "face", "expr": "scared", "at": "@so.done-0.3" },
-     { "do": "say", "text": "...bold.", "at": "@so.done+0.35", "mark": "bold" },
-     { "do": "face", "expr": "terrified", "at": "@boldGood.done" },
-     { "do": "say", "text": "I LOVE it!", "at": "@boldGood.done+0.3", "mark": "love" },
-     { "do": "sneeze", "dur": 0.9, "at": "@love.done+0.05", "mark": "sn2" },
-     { "do": "sneeze", "dur": 1.0, "mark": "sn3" },
-     { "do": "fall", "dir": -1, "dur": 0.7, "mark": "fall" },
-     { "do": "lie", "dur": 4.6 },
-     { "do": "face", "expr": "dazed", "at": "@fall.end" },
-     { "do": "lookAt", "target": [0.3, 2.7, -0.6], "dur": 1.4, "snap": true, "at": "@nlie.done+0.25" },
-     { "do": "face", "expr": "confused", "at": "@nlie.done+0.3" },
-     { "do": "getUp", "dur": 0.9, "at": "@knock+0.2" },
-     { "do": "lookAt", "target": [2.95, 1.1, 1.2], "dur": 2.4, "snap": true, "at": "@knock+0.15" },
-     { "do": "face", "expr": "scared", "at": "@knock+0.2" },
-     { "do": "scared", "dur": 1.6 },
-     { "do": "face", "expr": "terrified", "at": "@rent.done" },
-     { "do": "lookAt", "target": "maya.head", "dur": "hold", "at": "@rent.done+0.1" },
-     { "do": "say", "text": "We can't lie to him!", "fx": "whisper", "at": "@rent.done+0.3", "mark": "cant" },
-     { "do": "idle", "dur": 6 }
+     {
+      "do": "sit",
+      "seat": true,
+      "held": true,
+      "dur": 2.15,
+      "at": 0
+     },
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": 0
+     },
+     {
+      "do": "lookAt",
+      "target": "maya.head",
+      "dur": "hold",
+      "at": 0.3
+     },
+     {
+      "do": "say",
+      "text": "No.",
+      "at": "@q1.done+0.25",
+      "mark": "no"
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@no-0.2"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.2,
+      "at": "@no.done+0.05",
+      "mark": "sn1"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@sn1+0.1"
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@sn1.end"
+     },
+     {
+      "do": "say",
+      "text": "Yes. I ate them. I'm so sorry.",
+      "at": "@sn1.end+0.05",
+      "mark": "yes"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       0.25,
+       -0.6
+      ],
+      "dur": 1.0,
+      "at": "@sn1.end"
+     },
+     {
+      "do": "turnTo",
+      "target": "maya",
+      "dur": 0.3
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@outfitQ.done"
+     },
+     {
+      "do": "say",
+      "text": "It looks... so...",
+      "at": "@outfitQ.done+0.35",
+      "mark": "so"
+     },
+     {
+      "do": "face",
+      "expr": "scared",
+      "at": "@so.done-0.3"
+     },
+     {
+      "do": "say",
+      "text": "...bold.",
+      "at": "@so.done+0.35",
+      "mark": "bold"
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": "@boldGood.done"
+     },
+     {
+      "do": "say",
+      "text": "I LOVE it!",
+      "at": "@boldGood.done+0.3",
+      "mark": "love"
+     },
+     {
+      "do": "sneeze",
+      "dur": 0.9,
+      "at": "@love.done+0.05",
+      "mark": "sn2"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.0,
+      "mark": "sn3"
+     },
+     {
+      "do": "fall",
+      "dir": -1,
+      "dur": 0.7,
+      "mark": "fall"
+     },
+     {
+      "do": "lie",
+      "dur": 4.6
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": "@fall.end"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0.3,
+       2.7,
+       -0.6
+      ],
+      "dur": 1.4,
+      "snap": true,
+      "at": "@nlie.done+0.25"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@nlie.done+0.3"
+     },
+     {
+      "do": "getUp",
+      "dur": 0.9,
+      "at": "@knock+0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       2.95,
+       1.1,
+       1.2
+      ],
+      "dur": 2.4,
+      "snap": true,
+      "at": "@knock+0.15"
+     },
+     {
+      "do": "face",
+      "expr": "scared",
+      "at": "@knock+0.2"
+     },
+     {
+      "do": "scared",
+      "dur": 1.6
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": "@rent.done"
+     },
+     {
+      "do": "lookAt",
+      "target": "maya.head",
+      "dur": "hold",
+      "at": "@rent.done+0.1"
+     },
+     {
+      "do": "say",
+      "text": "We can't lie to him!",
+      "fx": "whisper",
+      "at": "@rent.done+0.3",
+      "mark": "cant"
+     },
+     {
+      "do": "idle",
+      "dur": 6
+     }
     ],
     "pruitt": [
-     { "do": "armsCrossed", "dur": 60, "at": 0 },
-     { "do": "face", "expr": "angry", "at": 0 },
-     { "do": "say", "text": "It's Pruitt. Rent's three weeks late. Open up.", "gain": -3, "at": "@knock+1.15", "mark": "rent" }
+     {
+      "do": "armsCrossed",
+      "dur": 60,
+      "at": 0
+     },
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 0
+     },
+     {
+      "do": "say",
+      "text": "It's Pruitt. Rent's three weeks late. Open up.",
+      "gain": -3,
+      "at": "@knock+1.15",
+      "mark": "rent"
+     }
     ],
     "narr": [
-     { "do": "say", "text": "Overnight, lying became physically impossible.", "speaker": "Narrator", "at": "@yes.done+0.25", "mark": "rule1" },
-     { "do": "say", "text": "Luckily, Maya took it really well.", "speaker": "Narrator", "at": "@fall.end+0.6", "mark": "nlie" },
-     { "do": "say", "text": "She did not.", "speaker": "Narrator", "at": "@nlie.done+1.35", "mark": "ntrue" }
+     {
+      "do": "say",
+      "text": "Overnight, lying became physically impossible.",
+      "speaker": "Narrator",
+      "at": "@yes.done+0.25",
+      "mark": "rule1"
+     },
+     {
+      "do": "say",
+      "text": "Luckily, Maya took it really well.",
+      "speaker": "Narrator",
+      "at": "@fall.end+0.6",
+      "mark": "nlie"
+     },
+     {
+      "do": "say",
+      "text": "She did not.",
+      "speaker": "Narrator",
+      "at": "@nlie.done+1.35",
+      "mark": "ntrue"
+     }
     ],
     "world": [
-     { "do": "lights", "preset": "lamp", "at": 0 },
-     { "do": "flicker", "dur": 0.9, "at": "@no+0.05", "mark": "lie1" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@no+0.05" },
-     { "do": "flicker", "dur": 0.35, "at": "@so+0.55" },
-     { "do": "flicker", "dur": 1.4, "at": "@love+0.05", "mark": "lie2" },
-     { "do": "sound", "id": "glitch", "gain": -12, "at": "@love+0.05" },
-     { "do": "flicker", "dur": 1.1, "at": "@nlie+0.7", "mark": "lie3" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@nlie+0.7" },
-     { "do": "sound", "id": "sneeze", "gain": 0, "rate": 0.82, "at": "@nlie.done+0.1", "mark": "narrSneeze" },
-     { "do": "sound", "id": "thud", "gain": 2, "at": "@ntrue.done+0.45", "mark": "knock" },
-     { "do": "sound", "id": "thud", "gain": 2, "at": "@knock+0.32" },
-     { "do": "sound", "id": "thud", "gain": 2, "at": "@knock+0.64" }
+     {
+      "do": "lights",
+      "preset": "day",
+      "at": 0
+     },
+     {
+      "do": "flicker",
+      "dur": 0.9,
+      "at": "@no+0.05",
+      "mark": "lie1"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@no+0.05"
+     },
+     {
+      "do": "flicker",
+      "dur": 0.35,
+      "at": "@so+0.55"
+     },
+     {
+      "do": "flicker",
+      "dur": 1.4,
+      "at": "@love+0.05",
+      "mark": "lie2"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -12,
+      "at": "@love+0.05"
+     },
+     {
+      "do": "flicker",
+      "dur": 1.1,
+      "at": "@nlie+0.7",
+      "mark": "lie3"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@nlie+0.7"
+     },
+     {
+      "do": "sound",
+      "id": "sneeze",
+      "gain": 0,
+      "rate": 0.82,
+      "at": "@nlie.done+0.1",
+      "mark": "narrSneeze"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "gain": 2,
+      "at": "@ntrue.done+0.45",
+      "mark": "knock"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "gain": 2,
+      "at": "@knock+0.32"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "gain": 2,
+      "at": "@knock+0.64"
+     }
     ]
    }
   },
   "red": {
    "set": "apartment",
-   "continueFrom": { "scene": "home", "at": "@end" },
+   "continueFrom": {
+    "scene": "home",
+    "at": "@end"
+   },
    "tracks": {
     "theo": [
-     { "do": "face", "expr": "worried", "at": 0 },
-     { "do": "walkTo", "to": [1.55, 0.45], "speed": 1.3, "at": 0.2, "mark": "walkD" },
-     { "do": "turnTo", "target": [2.95, 1.2], "dur": 0.3 },
-     { "do": "lookAt", "target": "pruitt.head", "dur": "hold", "at": "@walkD.end" },
-     { "do": "face", "expr": "happy", "at": "@entered.end" },
-     { "do": "turnTo", "target": "pruitt", "dur": 0.3, "at": "@entered.end" },
-     { "do": "wave", "dur": 1.0, "at": "@entered.end+0.1" },
-     { "do": "say", "text": "Good evening, Mr. Pruitt! You look wonderful.", "at": "@entered.end+0.1", "mark": "compl" },
-     { "do": "sneeze", "dur": 1.2, "at": "@compl.done+0.05", "mark": "tsn" },
-     { "do": "face", "expr": "guilty", "at": "@tsn.end" },
-     { "do": "say", "text": "Sorry. You look... tired.", "at": "@tsn.end+0.1", "mark": "tired" },
-     { "do": "face", "expr": "worried", "at": "@rentNow.done" },
-     { "do": "say", "text": "We don't have it. We spent it on a karaoke machine.", "at": "@rentNow.done+0.3", "mark": "karaoke" },
-     { "do": "talkGesture", "dur": 2.2, "at": "@rentNow.done+0.3" },
-     { "do": "lookAt", "target": "pruitt.head", "dur": "hold", "at": "@psn.end" },
-     { "do": "face", "expr": "shock", "at": "@double.done" },
-     { "do": "say", "text": "So we're... paid up?", "at": "@double.done+0.3", "mark": "paid" },
-     { "do": "face", "expr": "happy", "at": "@paidUp.done" },
-     { "do": "turnTo", "target": "maya", "dur": 0.4, "at": "@close+0.1" },
-     { "do": "lookAt", "target": [0.6, 2.7, 0.2], "dur": 1.4, "snap": true, "at": "@hero.done+0.2" },
-     { "do": "face", "expr": "confused", "at": "@hero.done+0.25" },
-     { "do": "face", "expr": "cry", "at": "@cried+0.2" },
-     { "do": "cry", "dur": 3.0, "at": "@cried+0.2" }
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1.55,
+       0.45
+      ],
+      "speed": 1.3,
+      "at": 0.2,
+      "mark": "walkD"
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.95,
+       1.2
+      ],
+      "dur": 0.3
+     },
+     {
+      "do": "lookAt",
+      "target": "pruitt.head",
+      "dur": "hold",
+      "at": "@walkD.end"
+     },
+     {
+      "do": "face",
+      "expr": "happy",
+      "at": "@entered.end"
+     },
+     {
+      "do": "turnTo",
+      "target": "pruitt",
+      "dur": 0.3,
+      "at": "@entered.end"
+     },
+     {
+      "do": "wave",
+      "dur": 1.0,
+      "at": "@entered.end+0.1"
+     },
+     {
+      "do": "say",
+      "text": "Good evening, Mr. Pruitt! You look wonderful.",
+      "at": "@entered.end+0.1",
+      "mark": "compl"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.2,
+      "at": "@compl.done+0.05",
+      "mark": "tsn"
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@tsn.end"
+     },
+     {
+      "do": "say",
+      "text": "Sorry. You look... tired.",
+      "at": "@tsn.end+0.1",
+      "mark": "tired"
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@rentNow.done"
+     },
+     {
+      "do": "say",
+      "text": "We don't have it. We spent it on a karaoke machine.",
+      "at": "@rentNow.done+0.3",
+      "mark": "karaoke"
+     },
+     {
+      "do": "talkGesture",
+      "dur": 2.2,
+      "at": "@rentNow.done+0.3"
+     },
+     {
+      "do": "lookAt",
+      "target": "pruitt.head",
+      "dur": "hold",
+      "at": "@psn.end"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@double.done"
+     },
+     {
+      "do": "say",
+      "text": "So we're... paid up?",
+      "at": "@double.done+0.3",
+      "mark": "paid"
+     },
+     {
+      "do": "face",
+      "expr": "happy",
+      "at": "@paidUp.done"
+     },
+     {
+      "do": "turnTo",
+      "target": "maya",
+      "dur": 0.4,
+      "at": "@close+0.1"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0.6,
+       2.7,
+       0.2
+      ],
+      "dur": 1.4,
+      "snap": true,
+      "at": "@hero.done+0.2"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@hero.done+0.25"
+     },
+     {
+      "do": "face",
+      "expr": "cry",
+      "at": "@cried+0.2"
+     },
+     {
+      "do": "cry",
+      "dur": 3.0,
+      "at": "@cried+0.2"
+     }
     ],
     "maya": [
-     { "do": "face", "expr": "worried", "at": 0 },
-     { "do": "walkTo", "to": [0.7, -0.2], "speed": 1.2, "at": 0.6 },
-     { "do": "turnTo", "target": [2.2, 1.35], "dur": 0.3 },
-     { "do": "lookAt", "target": "pruitt.head", "dur": "hold", "at": 2.0 },
-     { "do": "face", "expr": "guilty", "at": "@karaoke+0.9" },
-     { "do": "facepalm", "dur": 1.4, "at": "@karaoke+1.0" },
-     { "do": "face", "expr": "smug", "at": "@psn+0.6" },
-     { "do": "say", "text": "Ooh. How patient, exactly?", "at": "@psn.end+0.15", "mark": "how" },
-     { "do": "walkTo", "to": [1.1, 0.1], "dur": 0.6, "at": "@psn.end+0.15" },
-     { "do": "handsOnHips", "dur": 2.4 },
-     { "do": "face", "expr": "grin", "at": "@paidUp.done" },
-     { "do": "walkTo", "to": "theo", "stopShort": 0.55, "dur": 0.7, "at": "@close+0.2" },
-     { "do": "lookAt", "target": [0.6, 2.7, 0.2], "dur": 1.4, "snap": true, "at": "@hero.done+0.15" },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": "@cried" },
-     { "do": "face", "expr": "happy", "at": "@cried+0.3" },
-     { "do": "hug", "dur": 2.6, "at": "@cried+0.4" }
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       0.7,
+       -0.2
+      ],
+      "speed": 1.2,
+      "at": 0.6
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.2,
+       1.35
+      ],
+      "dur": 0.3
+     },
+     {
+      "do": "lookAt",
+      "target": "pruitt.head",
+      "dur": "hold",
+      "at": 2.0
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@karaoke+0.9"
+     },
+     {
+      "do": "facepalm",
+      "dur": 1.4,
+      "at": "@karaoke+1.0"
+     },
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": "@psn+0.6"
+     },
+     {
+      "do": "say",
+      "text": "Ooh. How patient, exactly?",
+      "at": "@psn.end+0.15",
+      "mark": "how"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1.1,
+       0.1
+      ],
+      "dur": 0.6,
+      "at": "@psn.end+0.15"
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 2.4
+     },
+     {
+      "do": "face",
+      "expr": "grin",
+      "at": "@paidUp.done"
+     },
+     {
+      "do": "walkTo",
+      "to": "theo",
+      "stopShort": 0.55,
+      "dur": 0.7,
+      "at": "@close+0.2"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0.6,
+       2.7,
+       0.2
+      ],
+      "dur": 1.4,
+      "snap": true,
+      "at": "@hero.done+0.15"
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": "@cried"
+     },
+     {
+      "do": "face",
+      "expr": "happy",
+      "at": "@cried+0.3"
+     },
+     {
+      "do": "hug",
+      "dur": 2.6,
+      "at": "@cried+0.4"
+     }
     ],
     "pruitt": [
-     { "do": "face", "expr": "angry", "at": 0 },
-     { "do": "walkTo", "to": [2.2, 1.35], "dur": 0.9, "gait": "heavyWalk", "at": "@opened+0.3", "mark": "entered" },
-     { "do": "turnTo", "target": "theo", "dur": 0.3 },
-     { "do": "lookAt", "target": "theo.head", "dur": "hold", "at": "@opened" },
-     { "do": "armsCrossed", "dur": 3.0, "at": "@entered.end+0.3" },
-     { "do": "face", "expr": "confused", "at": "@compl+0.8" },
-     { "do": "face", "expr": "sad", "at": "@tired.done-0.4" },
-     { "do": "face", "expr": "angry", "at": "@tired.done+0.1" },
-     { "do": "say", "text": "Rent. Now.", "at": "@tired.done+0.3", "mark": "rentNow" },
-     { "do": "point", "target": "theo", "dur": 1.6, "at": "@karaoke.done+0.3" },
-     { "do": "say", "text": "I have been VERY patient with you two.", "at": "@karaoke.done+0.3", "mark": "patient" },
-     { "do": "sneeze", "dur": 1.2, "at": "@patient.done+0.05", "mark": "psn" },
-     { "do": "face", "expr": "guilty", "at": "@how.done" },
-     { "do": "lookAt", "target": "maya.head", "dur": 1.5, "at": "@how+0.2" },
-     { "do": "say", "text": "...I've been charging you double.", "at": "@how.done+0.4", "mark": "double" },
-     { "do": "face", "expr": "sad", "at": "@paid.done" },
-     { "do": "say", "text": "You're paid up.", "at": "@paid.done+0.3", "mark": "paidUp" },
-     { "do": "turnTo", "target": [2.95, 1.2], "dur": 0.5, "at": "@paidUp.done+0.2" },
-     { "do": "walkTo", "to": [3.8, 1.2], "dur": 1.1, "gait": "heavyWalk" }
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       2.2,
+       1.35
+      ],
+      "dur": 0.9,
+      "gait": "heavyWalk",
+      "at": "@opened+0.3",
+      "mark": "entered"
+     },
+     {
+      "do": "turnTo",
+      "target": "theo",
+      "dur": 0.3
+     },
+     {
+      "do": "lookAt",
+      "target": "theo.head",
+      "dur": "hold",
+      "at": "@opened"
+     },
+     {
+      "do": "armsCrossed",
+      "dur": 3.0,
+      "at": "@entered.end+0.3"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@compl+0.8"
+     },
+     {
+      "do": "face",
+      "expr": "sad",
+      "at": "@tired.done-0.4"
+     },
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": "@tired.done+0.1"
+     },
+     {
+      "do": "say",
+      "text": "Rent. Now.",
+      "at": "@tired.done+0.3",
+      "mark": "rentNow"
+     },
+     {
+      "do": "point",
+      "target": "theo",
+      "dur": 1.6,
+      "at": "@karaoke.done+0.3"
+     },
+     {
+      "do": "say",
+      "text": "I have been VERY patient with you two.",
+      "at": "@karaoke.done+0.3",
+      "mark": "patient"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.2,
+      "at": "@patient.done+0.05",
+      "mark": "psn"
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@how.done"
+     },
+     {
+      "do": "lookAt",
+      "target": "maya.head",
+      "dur": 1.5,
+      "at": "@how+0.2"
+     },
+     {
+      "do": "say",
+      "text": "...I've been charging you double.",
+      "at": "@how.done+0.4",
+      "mark": "double"
+     },
+     {
+      "do": "face",
+      "expr": "sad",
+      "at": "@paid.done"
+     },
+     {
+      "do": "say",
+      "text": "You're paid up.",
+      "at": "@paid.done+0.3",
+      "mark": "paidUp"
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.95,
+       1.2
+      ],
+      "dur": 0.5,
+      "at": "@paidUp.done+0.2"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       3.8,
+       1.2
+      ],
+      "dur": 1.1,
+      "gait": "heavyWalk"
+     }
     ],
     "narr": [
-     { "do": "say", "text": "Theo handled it like a hero.", "speaker": "Narrator", "at": "@close+0.9", "mark": "hero" },
-     { "do": "say", "text": "He cried a little.", "speaker": "Narrator", "at": "@hero.done+1.3", "mark": "cried" }
+     {
+      "do": "say",
+      "text": "Theo handled it like a hero.",
+      "speaker": "Narrator",
+      "at": "@close+0.9",
+      "mark": "hero"
+     },
+     {
+      "do": "say",
+      "text": "He cried a little.",
+      "speaker": "Narrator",
+      "at": "@hero.done+1.3",
+      "mark": "cried"
+     }
     ],
     "world": [
-     { "do": "door", "open": 0.85, "dur": 0.7, "hallLight": 2.5, "at": "@walkD.end+0.25", "mark": "opened" },
-     { "do": "sound", "id": "creak", "gain": -6, "at": "@opened" },
-     { "do": "flicker", "dur": 0.9, "at": "@compl+0.9" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@compl+0.9" },
-     { "do": "flicker", "dur": 1.0, "at": "@patient+0.6" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@patient+0.6" },
-     { "do": "door", "open": 0, "dur": 0.5, "hallLight": 0, "at": "@paidUp.done+2.0", "mark": "close" },
-     { "do": "sound", "id": "thud", "gain": -2, "at": "@close+0.45" },
-     { "do": "flicker", "dur": 1.0, "at": "@hero+0.5" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@hero+0.5" },
-     { "do": "sound", "id": "sneeze", "rate": 0.82, "at": "@hero.done+0.1" }
+     {
+      "do": "door",
+      "open": 0.85,
+      "dur": 0.7,
+      "hallLight": 2.5,
+      "at": "@walkD.end+0.25",
+      "mark": "opened"
+     },
+     {
+      "do": "sound",
+      "id": "creak",
+      "gain": -6,
+      "at": "@opened"
+     },
+     {
+      "do": "flicker",
+      "dur": 0.9,
+      "at": "@compl+0.9"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@compl+0.9"
+     },
+     {
+      "do": "flicker",
+      "dur": 1.0,
+      "at": "@patient+0.6"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@patient+0.6"
+     },
+     {
+      "do": "door",
+      "open": 0,
+      "dur": 0.5,
+      "hallLight": 0,
+      "at": "@paidUp.done+2.0",
+      "mark": "close"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "gain": -2,
+      "at": "@close+0.45"
+     },
+     {
+      "do": "flicker",
+      "dur": 1.0,
+      "at": "@hero+0.5"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@hero+0.5"
+     },
+     {
+      "do": "sound",
+      "id": "sneeze",
+      "rate": 0.82,
+      "at": "@hero.done+0.1"
+     }
     ]
+   },
+   "params": {
+    "lights": "day"
    }
   },
   "blue": {
    "set": "apartment",
-   "continueFrom": { "scene": "home", "at": "@end" },
+   "continueFrom": {
+    "scene": "home",
+    "at": "@end"
+   },
    "tracks": {
     "maya": [
-     { "do": "face", "expr": "smug", "at": 0 },
-     { "do": "walkTo", "to": [1.55, 0.45], "speed": 1.7, "at": 0.15, "mark": "strut" },
-     { "do": "turnTo", "target": [2.95, 1.2], "dur": 0.3 },
-     { "do": "lookAt", "target": "pruitt.head", "dur": "hold", "at": "@strut.end" },
-     { "do": "turnTo", "target": "pruitt", "dur": 0.3, "at": "@entered.end" },
-     { "do": "handsOnHips", "dur": 1.6 },
-     { "do": "say", "text": "Mr. Pruitt! The rent is in the mail.", "at": "@entered.end+0.1", "mark": "mail" },
-     { "do": "sneeze", "dur": 1.2, "at": "@mail.done+0.05", "mark": "msn1" },
-     { "do": "face", "expr": "determined", "at": "@msn1.end" },
-     { "do": "say", "text": "The check is—", "at": "@msn1.end+0.05", "mark": "check" },
-     { "do": "sneeze", "dur": 1.1, "at": "@check.done", "mark": "msn2" },
-     { "do": "face", "expr": "smug", "at": "@uhhuh.done" },
-     { "do": "say", "text": "Actually, I'm the landlord here.", "at": "@uhhuh.done+0.2", "mark": "landlord" },
-     { "do": "sneeze", "dur": 0.9, "at": "@landlord.done+0.05", "mark": "msn3" },
-     { "do": "fall", "dir": -1, "dur": 0.7, "mark": "fall" },
-     { "do": "lie", "dur": 30 },
-     { "do": "face", "expr": "dazed", "at": "@fall.end" },
-     { "do": "say", "text": "Yes.", "at": "@power.done+0.4", "mark": "yes" },
-     { "do": "face", "expr": "smug", "at": "@still.done" },
-     { "do": "say", "text": "That's tomorrow-Maya's problem.", "at": "@still.done+0.3", "mark": "prob" },
-     { "do": "face", "expr": "guilty", "at": "@nEnd.done-0.4" }
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1.55,
+       0.45
+      ],
+      "speed": 1.7,
+      "at": 0.15,
+      "mark": "strut"
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.95,
+       1.2
+      ],
+      "dur": 0.3
+     },
+     {
+      "do": "lookAt",
+      "target": "pruitt.head",
+      "dur": "hold",
+      "at": "@strut.end"
+     },
+     {
+      "do": "turnTo",
+      "target": "pruitt",
+      "dur": 0.3,
+      "at": "@entered.end"
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 1.6
+     },
+     {
+      "do": "say",
+      "text": "Mr. Pruitt! The rent is in the mail.",
+      "at": "@entered.end+0.1",
+      "mark": "mail"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.2,
+      "at": "@mail.done+0.05",
+      "mark": "msn1"
+     },
+     {
+      "do": "face",
+      "expr": "determined",
+      "at": "@msn1.end"
+     },
+     {
+      "do": "say",
+      "text": "The check is\u2014",
+      "at": "@msn1.end+0.05",
+      "mark": "check"
+     },
+     {
+      "do": "sneeze",
+      "dur": 1.1,
+      "at": "@check.done",
+      "mark": "msn2"
+     },
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": "@uhhuh.done"
+     },
+     {
+      "do": "say",
+      "text": "Actually, I'm the landlord here.",
+      "at": "@uhhuh.done+0.2",
+      "mark": "landlord"
+     },
+     {
+      "do": "sneeze",
+      "dur": 0.9,
+      "at": "@landlord.done+0.05",
+      "mark": "msn3"
+     },
+     {
+      "do": "fall",
+      "dir": -1,
+      "dur": 0.7,
+      "mark": "fall"
+     },
+     {
+      "do": "lie",
+      "dur": 30
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": "@fall.end"
+     },
+     {
+      "do": "say",
+      "text": "Yes.",
+      "at": "@power.done+0.4",
+      "mark": "yes"
+     },
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": "@still.done"
+     },
+     {
+      "do": "say",
+      "text": "That's tomorrow-Maya's problem.",
+      "at": "@still.done+0.3",
+      "mark": "prob"
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@nEnd.done-0.4"
+     }
     ],
     "theo": [
-     { "do": "face", "expr": "terrified", "at": 0 },
-     { "do": "walkTo", "to": [-2.1, -0.3], "speed": 2.4, "gait": "sneak", "at": 0.1 },
-     { "do": "turnTo", "target": [2.95, 1.2], "dur": 0.3 },
-     { "do": "crouch", "dur": 0.6 },
-     { "do": "scared", "dur": 0.1 },
-     { "do": "lookAt", "target": "maya.head", "dur": "hold", "at": 1.5 },
-     { "do": "face", "expr": "worried", "at": "@close" },
-     { "do": "getUp", "dur": 0.6, "at": "@close+0.2" },
-     { "do": "say", "text": "We still don't have the rent.", "at": "@close+0.5", "mark": "still" },
-     { "do": "face", "expr": "sad", "at": "@nEnd" },
-     { "do": "facepalm", "dur": 1.6, "at": "@nEnd+0.6" }
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       -2.1,
+       -0.3
+      ],
+      "speed": 2.4,
+      "gait": "sneak",
+      "at": 0.1
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.95,
+       1.2
+      ],
+      "dur": 0.3
+     },
+     {
+      "do": "crouch",
+      "dur": 0.6
+     },
+     {
+      "do": "scared",
+      "dur": 0.1
+     },
+     {
+      "do": "lookAt",
+      "target": "maya.head",
+      "dur": "hold",
+      "at": 1.5
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@close"
+     },
+     {
+      "do": "getUp",
+      "dur": 0.6,
+      "at": "@close+0.2"
+     },
+     {
+      "do": "say",
+      "text": "We still don't have the rent.",
+      "at": "@close+0.5",
+      "mark": "still"
+     },
+     {
+      "do": "face",
+      "expr": "sad",
+      "at": "@nEnd"
+     },
+     {
+      "do": "facepalm",
+      "dur": 1.6,
+      "at": "@nEnd+0.6"
+     }
     ],
     "pruitt": [
-     { "do": "face", "expr": "angry", "at": 0 },
-     { "do": "walkTo", "to": [2.2, 1.35], "dur": 0.9, "gait": "heavyWalk", "at": "@opened+0.3", "mark": "entered" },
-     { "do": "turnTo", "target": "maya", "dur": 0.3 },
-     { "do": "lookAt", "target": "maya.head", "dur": "hold", "at": "@opened" },
-     { "do": "armsCrossed", "dur": 4.5, "at": "@entered.end+0.3" },
-     { "do": "say", "text": "Uh-huh.", "at": "@msn2.end+0.05", "mark": "uhhuh" },
-     { "do": "face", "expr": "shock", "at": "@blow+0.1" },
-     { "do": "face", "expr": "confused", "at": "@blow+0.9" },
-     { "do": "say", "text": "...Did the power just go out?", "at": "@blow+1.0", "mark": "power" },
-     { "do": "face", "expr": "sleepy", "at": "@yes.done" },
-     { "do": "say", "text": "I'll come back tomorrow.", "at": "@yes.done+0.5", "mark": "tmrw" },
-     { "do": "turnTo", "target": [2.95, 1.2], "dur": 0.5, "at": "@tmrw.done+0.1" },
-     { "do": "walkTo", "to": [3.8, 1.2], "dur": 1.1, "gait": "heavyWalk" }
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       2.2,
+       1.35
+      ],
+      "dur": 0.9,
+      "gait": "heavyWalk",
+      "at": "@opened+0.3",
+      "mark": "entered"
+     },
+     {
+      "do": "turnTo",
+      "target": "maya",
+      "dur": 0.3
+     },
+     {
+      "do": "lookAt",
+      "target": "maya.head",
+      "dur": "hold",
+      "at": "@opened"
+     },
+     {
+      "do": "armsCrossed",
+      "dur": 4.5,
+      "at": "@entered.end+0.3"
+     },
+     {
+      "do": "say",
+      "text": "Uh-huh.",
+      "at": "@msn2.end+0.05",
+      "mark": "uhhuh"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@blow+0.1"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@blow+0.9"
+     },
+     {
+      "do": "say",
+      "text": "...Did the power just go out?",
+      "at": "@blow+1.0",
+      "mark": "power"
+     },
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": "@yes.done"
+     },
+     {
+      "do": "say",
+      "text": "I'll come back tomorrow.",
+      "at": "@yes.done+0.5",
+      "mark": "tmrw"
+     },
+     {
+      "do": "turnTo",
+      "target": [
+       2.95,
+       1.2
+      ],
+      "dur": 0.5,
+      "at": "@tmrw.done+0.1"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       3.8,
+       1.2
+      ],
+      "dur": 1.1,
+      "gait": "heavyWalk"
+     }
     ],
     "narr": [
-     { "do": "say", "text": "Tomorrow-Maya also did not have the rent.", "speaker": "Narrator", "at": "@prob.done+0.4", "mark": "nEnd" }
+     {
+      "do": "say",
+      "text": "Tomorrow-Maya also did not have the rent.",
+      "speaker": "Narrator",
+      "at": "@prob.done+0.4",
+      "mark": "nEnd"
+     }
     ],
     "world": [
-     { "do": "door", "open": 0.85, "dur": 0.6, "hallLight": 2.5, "at": "@strut.end+0.2", "mark": "opened" },
-     { "do": "sound", "id": "creak", "gain": -6, "at": "@opened" },
-     { "do": "flicker", "dur": 0.8, "at": "@mail+0.9" },
-     { "do": "sound", "id": "glitch", "gain": -14, "at": "@mail+0.9" },
-     { "do": "flicker", "dur": 0.7, "at": "@check+0.2" },
-     { "do": "sound", "id": "glitch", "gain": -12, "at": "@check+0.2" },
-     { "do": "flicker", "dur": 1.5, "at": "@landlord+0.3" },
-     { "do": "sound", "id": "glitch", "gain": -10, "at": "@landlord+0.3" },
-     { "do": "sound", "id": "pop", "gain": 2, "at": "@landlord.done+0.1", "mark": "blow" },
-     { "do": "lights", "preset": "night", "at": "@blow" },
-     { "do": "door", "open": 0.85, "dur": 0.1, "hallLight": 0.4, "at": "@blow" },
-     { "do": "door", "open": 0, "dur": 0.5, "hallLight": 0, "at": "@tmrw.done+1.9", "mark": "close" },
-     { "do": "sound", "id": "thud", "gain": -2, "at": "@close+0.45" }
+     {
+      "do": "door",
+      "open": 0.85,
+      "dur": 0.6,
+      "hallLight": 2.5,
+      "at": "@strut.end+0.2",
+      "mark": "opened"
+     },
+     {
+      "do": "sound",
+      "id": "creak",
+      "gain": -6,
+      "at": "@opened"
+     },
+     {
+      "do": "flicker",
+      "dur": 0.8,
+      "at": "@mail+0.9"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -14,
+      "at": "@mail+0.9"
+     },
+     {
+      "do": "flicker",
+      "dur": 0.7,
+      "at": "@check+0.2"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -12,
+      "at": "@check+0.2"
+     },
+     {
+      "do": "flicker",
+      "dur": 1.5,
+      "at": "@landlord+0.3"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "gain": -10,
+      "at": "@landlord+0.3"
+     },
+     {
+      "do": "sound",
+      "id": "pop",
+      "gain": 2,
+      "at": "@landlord.done+0.1",
+      "mark": "blow"
+     },
+     {
+      "do": "lights",
+      "preset": "night",
+      "at": "@blow"
+     },
+     {
+      "do": "door",
+      "open": 0.85,
+      "dur": 0.1,
+      "hallLight": 0.4,
+      "at": "@blow"
+     },
+     {
+      "do": "door",
+      "open": 0,
+      "dur": 0.5,
+      "hallLight": 0,
+      "at": "@tmrw.done+1.9",
+      "mark": "close"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "gain": -2,
+      "at": "@close+0.45"
+     }
     ]
+   },
+   "params": {
+    "lights": "day"
    }
   }
  },
@@ -389,84 +1497,330 @@
     "bpm": 118,
     "gain": -17,
     "cues": [
-     { "shot": "hook", "at": 0, "intensity": 0.4 },
-     { "shot": "outfit", "at": 0, "intensity": 0.7 },
-     { "shot": "theoPanic", "at": 0, "intensity": 0.15 },
-     { "shot": "love", "at": 0.6, "intensity": 0.8 },
-     { "shot": "knock", "at": 0, "intensity": 0.0 },
-     { "shot": "choice", "at": 0, "intensity": 0.6 }
+     {
+      "shot": "hook",
+      "at": 0,
+      "intensity": 0.4
+     },
+     {
+      "shot": "outfit",
+      "at": 0,
+      "intensity": 0.7
+     },
+     {
+      "shot": "theoPanic",
+      "at": 0,
+      "intensity": 0.15
+     },
+     {
+      "shot": "love",
+      "at": 0.6,
+      "intensity": 0.8
+     },
+     {
+      "shot": "knock",
+      "at": 0,
+      "intensity": 0.0
+     },
+     {
+      "shot": "choice",
+      "at": 0,
+      "intensity": 0.6
+     }
     ]
    },
    "shots": [
     {
-     "id": "hook", "purpose": "hook", "scene": "home", "from": 0, "to": "@q1.done+0.15",
-     "camera": { "type": "static", "pos": [-1.5, 1.45, 0.2], "look": [0.1, 0.85, -1.75], "fov": 50, "handheld": 0.3 }
+     "id": "hook",
+     "purpose": "hook",
+     "scene": "home",
+     "from": 0,
+     "to": "@q1.done+0.15",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -1.5,
+       1.45,
+       0.2
+      ],
+      "look": [
+       0.1,
+       0.85,
+       -1.75
+      ],
+      "fov": 50,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "no", "purpose": "payoff", "scene": "home", "from": "@no-0.2", "to": "@sn1.end",
-     "camera": { "type": "close", "target": "theo", "dist": 1.5, "rel": 18, "handheld": 0.4 }
+     "id": "no",
+     "purpose": "payoff",
+     "scene": "home",
+     "from": "@no-0.2",
+     "to": "@sn1.end",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.5,
+      "rel": 18,
+      "handheld": 0.4
+     }
     },
     {
-     "id": "yes", "purpose": "reaction", "scene": "home", "from": "@yes-0.05", "to": "@yes.done+0.15",
-     "camera": { "type": "close", "target": "theo", "dist": 1.3, "rel": -20, "push": 0.3 }
+     "id": "yes",
+     "purpose": "reaction",
+     "scene": "home",
+     "from": "@yes-0.05",
+     "to": "@yes.done+0.15",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.3,
+      "rel": -20,
+      "push": 0.3
+     }
     },
     {
-     "id": "rule", "purpose": "establish", "scene": "home", "from": "@rule1-0.2", "to": "@toss.release+0.5",
-     "camera": { "type": "close", "target": "maya", "dist": 1.8, "rel": -25, "height": -0.15, "lookHeight": 0.05 }
+     "id": "rule",
+     "purpose": "establish",
+     "scene": "home",
+     "from": "@rule1-0.2",
+     "to": "@toss.release+0.5",
+     "camera": {
+      "type": "close",
+      "target": "maya",
+      "dist": 1.8,
+      "rel": -25,
+      "height": -0.15,
+      "lookHeight": 0.05
+     }
     },
     {
-     "id": "outfit", "purpose": "escalate", "scene": "home", "from": "@twirl-0.1", "to": "@outfitQ.done+0.15",
-     "camera": { "type": "static", "pos": [-0.9, 1.3, -0.3], "look": [1.0, 0.95, -1.6], "fov": 50, "handheld": 0.3 }
+     "id": "outfit",
+     "purpose": "escalate",
+     "scene": "home",
+     "from": "@twirl-0.1",
+     "to": "@outfitQ.done+0.15",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -0.9,
+       1.3,
+       -0.3
+      ],
+      "look": [
+       1.0,
+       0.95,
+       -1.6
+      ],
+      "fov": 50,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "theoPanic", "purpose": "reaction", "scene": "home", "from": "@outfitQ.done", "to": "@bold.done+0.2",
-     "camera": { "type": "close", "target": "theo", "dist": 1.4, "rel": 35, "push": 0.45, "handheld": 0.3 }
+     "id": "theoPanic",
+     "purpose": "reaction",
+     "scene": "home",
+     "from": "@outfitQ.done",
+     "to": "@bold.done+0.2",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.4,
+      "rel": 35,
+      "push": 0.45,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "boldGood", "purpose": "escalate", "scene": "home", "from": "@boldGood-0.1", "to": "@boldGood.done+0.15",
-     "camera": { "type": "close", "target": "maya", "dist": 1.3, "rel": -30 }
+     "id": "boldGood",
+     "purpose": "escalate",
+     "scene": "home",
+     "from": "@boldGood-0.1",
+     "to": "@boldGood.done+0.15",
+     "camera": {
+      "type": "close",
+      "target": "maya",
+      "dist": 1.3,
+      "rel": -30
+     }
     },
     {
-     "id": "love", "purpose": "payoff", "scene": "home", "from": "@love-0.1", "to": "@fall.end+0.35",
-     "camera": { "type": "close", "target": "theo", "part": "chest", "dist": 1.35, "rel": 35, "height": 0.25, "lookHeight": 0.2, "fov": 60, "handheld": 0.4 }
+     "id": "love",
+     "purpose": "payoff",
+     "scene": "home",
+     "from": "@love-0.1",
+     "to": "@fall.end+0.35",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "part": "chest",
+      "dist": 1.35,
+      "rel": 35,
+      "height": 0.25,
+      "lookHeight": 0.2,
+      "fov": 60,
+      "handheld": 0.4
+     }
     },
     {
-     "id": "narrLie", "purpose": "payoff", "scene": "home", "from": "@nlie-0.1", "to": "@nlie.done+1.1",
-     "camera": { "type": "static", "pos": [-1.7, 2.6, 2.3], "look": [0.2, 0.3, -0.45], "fov": 56, "handheld": 0.3 }
+     "id": "narrLie",
+     "purpose": "payoff",
+     "scene": "home",
+     "from": "@nlie-0.1",
+     "to": "@nlie.done+1.1",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -1.7,
+       2.6,
+       2.3
+      ],
+      "look": [
+       0.2,
+       0.3,
+       -0.45
+      ],
+      "fov": 56,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "narrTrue", "purpose": "payoff", "scene": "home", "from": "@ntrue-0.1", "to": "@ntrue.done+0.35",
-     "camera": { "type": "close", "target": "maya", "dist": 1.6, "rel": -40, "height": -0.55, "lookHeight": 0.05, "fov": 46 }
+     "id": "narrTrue",
+     "purpose": "payoff",
+     "scene": "home",
+     "from": "@ntrue-0.1",
+     "to": "@ntrue.done+0.35",
+     "camera": {
+      "type": "close",
+      "target": "maya",
+      "dist": 1.6,
+      "rel": -40,
+      "height": -0.55,
+      "lookHeight": 0.05,
+      "fov": 46
+     }
     },
     {
-     "id": "knock", "purpose": "escalate", "scene": "home", "from": "@knock-0.1", "to": "@knock+1.1",
-     "camera": { "type": "static", "pos": [1.1, 1.3, -0.5], "look": [2.95, 1.1, 1.2], "fov": 46 }
+     "id": "knock",
+     "purpose": "escalate",
+     "scene": "home",
+     "from": "@knock-0.1",
+     "to": "@knock+1.1",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.1,
+       1.3,
+       -0.5
+      ],
+      "look": [
+       2.95,
+       1.1,
+       1.2
+      ],
+      "fov": 46
+     }
     },
     {
-     "id": "rent", "purpose": "reaction", "scene": "home", "from": "@rent-0.1", "to": "@rent.done+0.15",
-     "camera": { "type": "static", "pos": [-2.1, 1.5, -1.9], "look": [0.8, 1.0, -1.0], "fov": 58, "handheld": 0.3 }
+     "id": "rent",
+     "purpose": "reaction",
+     "scene": "home",
+     "from": "@rent-0.1",
+     "to": "@rent.done+0.15",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -2.1,
+       1.5,
+       -1.9
+      ],
+      "look": [
+       0.8,
+       1.0,
+       -1.0
+      ],
+      "fov": 58,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "whisperT", "purpose": "escalate", "scene": "home", "from": "@cant-0.1", "to": "@cant.done+0.1",
-     "camera": { "type": "close", "target": "theo", "dist": 1.3, "rel": 35, "push": 0.3 }
+     "id": "whisperT",
+     "purpose": "escalate",
+     "scene": "home",
+     "from": "@cant-0.1",
+     "to": "@cant.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.3,
+      "rel": 35,
+      "push": 0.3
+     }
     },
     {
-     "id": "whisperM", "purpose": "escalate", "scene": "home", "from": "@who-0.1", "to": "@who.done+0.2",
-     "camera": { "type": "ots", "from": "theo", "to": "maya", "dist": 0.8, "side": 0.4 }
+     "id": "whisperM",
+     "purpose": "escalate",
+     "scene": "home",
+     "from": "@who-0.1",
+     "to": "@who.done+0.2",
+     "camera": {
+      "type": "ots",
+      "from": "theo",
+      "to": "maya",
+      "dist": 0.8,
+      "side": 0.4
+     }
     },
     {
-     "id": "choice", "purpose": "choice", "scene": "home", "from": "@who.done+0.2", "dur": 4.4,
-     "camera": { "type": "dolly", "from": [-1.55, 1.6, -2.05], "to": [-1.25, 1.55, -1.75], "look": [2.6, 1.0, 1.0], "fov": 52, "handheld": 0.3 },
-     "narration": { "text": "Nobody can lie. Who answers the door?", "at": 0.1 },
+     "id": "choice",
+     "purpose": "choice",
+     "scene": "home",
+     "from": "@who.done+0.2",
+     "dur": 4.4,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       -1.55,
+       1.6,
+       -2.05
+      ],
+      "to": [
+       -1.25,
+       1.55,
+       -1.75
+      ],
+      "look": [
+       2.6,
+       1.0,
+       1.0
+      ],
+      "fov": 52,
+      "handheld": 0.3
+     },
+     "narration": {
+      "text": "Nobody can lie. Who answers the door?",
+      "at": 0.1
+     },
      "overlays": [
-      { "kind": "choice", "question": "Nobody can lie. Who answers the door?", "red": "Theo answers (too polite)", "blue": "Maya answers (too confident)", "footer": "Choose your team ↓", "at": 0.3 }
+      {
+       "kind": "choice",
+       "question": "Nobody can lie. Who answers the door?",
+       "red": "Theo answers (too polite)",
+       "blue": "Maya answers (too confident)",
+       "footer": "Choose your team \u2193",
+       "at": 0.3
+      }
      ]
     }
    ],
-   "cover": { "shot": "love", "at": 1.2 }
+   "cover": {
+    "shot": "love",
+    "at": 1.2
+   }
   },
   "red": {
-   "title": "Team Red — Theo answers the door",
+   "title": "Team Red \u2014 Theo answers the door",
    "branch": "red",
    "style": "bright-cartoon",
    "narrator": "bm_george",
@@ -476,64 +1830,238 @@
     "bpm": 112,
     "gain": -17,
     "cues": [
-     { "shot": "walkR", "at": 0, "intensity": 0.5 },
-     { "shot": "patient", "at": 0, "intensity": 0.2 },
-     { "shot": "paid", "at": 0.5, "intensity": 0.8 }
+     {
+      "shot": "walkR",
+      "at": 0,
+      "intensity": 0.5
+     },
+     {
+      "shot": "patient",
+      "at": 0,
+      "intensity": 0.2
+     },
+     {
+      "shot": "paid",
+      "at": 0.5,
+      "intensity": 0.8
+     }
     ]
    },
    "shots": [
     {
-     "id": "walkR", "purpose": "establish", "scene": "red", "from": 0, "to": "@entered.end+0.1",
-     "camera": { "type": "static", "pos": [-0.6, 1.5, -1.7], "look": [2.5, 1.0, 0.9], "fov": 50, "handheld": 0.3 }
+     "id": "walkR",
+     "purpose": "establish",
+     "scene": "red",
+     "from": 0,
+     "to": "@entered.end+0.1",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -0.6,
+       1.5,
+       -1.7
+      ],
+      "look": [
+       2.5,
+       1.0,
+       0.9
+      ],
+      "fov": 50,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "compliment", "purpose": "payoff", "scene": "red", "from": "@compl-0.1", "to": "@tsn.end",
-     "camera": { "type": "static", "pos": [0.0, 1.5, 2.25], "look": [2.0, 1.1, 0.95], "fov": 55, "handheld": 0.3 }
+     "id": "compliment",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@compl-0.1",
+     "to": "@tsn.end",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.5,
+       2.25
+      ],
+      "look": [
+       2.0,
+       1.1,
+       0.95
+      ],
+      "fov": 55,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "tired", "purpose": "reaction", "scene": "red", "from": "@tired-0.1", "to": "@rentNow.done+0.15",
-     "camera": { "type": "close", "target": "pruitt", "dist": 1.4, "rel": 35 }
+     "id": "tired",
+     "purpose": "reaction",
+     "scene": "red",
+     "from": "@tired-0.1",
+     "to": "@rentNow.done+0.15",
+     "camera": {
+      "type": "close",
+      "target": "pruitt",
+      "dist": 1.4,
+      "rel": 35
+     }
     },
     {
-     "id": "karaoke", "purpose": "escalate", "scene": "red", "from": "@karaoke-0.1", "to": "@karaoke+1.0",
-     "camera": { "type": "close", "target": "theo", "dist": 1.4, "rel": -40 }
+     "id": "karaoke",
+     "purpose": "escalate",
+     "scene": "red",
+     "from": "@karaoke-0.1",
+     "to": "@karaoke+1.0",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.4,
+      "rel": -40
+     }
     },
     {
-     "id": "facepalm", "purpose": "reaction", "scene": "red", "from": "@karaoke+1.0", "to": "@karaoke.done+0.2",
-     "camera": { "type": "static", "pos": [0.2, 1.5, 1.4], "look": [0.7, 1.25, -0.2], "fov": 42 }
+     "id": "facepalm",
+     "purpose": "reaction",
+     "scene": "red",
+     "from": "@karaoke+1.0",
+     "to": "@karaoke.done+0.2",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.2,
+       1.5,
+       1.4
+      ],
+      "look": [
+       0.7,
+       1.25,
+       -0.2
+      ],
+      "fov": 42
+     }
     },
     {
-     "id": "patient", "purpose": "payoff", "scene": "red", "from": "@patient-0.1", "to": "@psn.end",
-     "camera": { "type": "static", "pos": [0.0, 1.5, 2.25], "look": [2.0, 1.1, 0.95], "fov": 55, "handheld": 0.3 }
+     "id": "patient",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@patient-0.1",
+     "to": "@psn.end",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.5,
+       2.25
+      ],
+      "look": [
+       2.0,
+       1.1,
+       0.95
+      ],
+      "fov": 55,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "how", "purpose": "escalate", "scene": "red", "from": "@how-0.15", "to": "@how.done+0.1",
-     "camera": { "type": "close", "target": "maya", "dist": 1.4, "rel": -40 }
+     "id": "how",
+     "purpose": "escalate",
+     "scene": "red",
+     "from": "@how-0.15",
+     "to": "@how.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "maya",
+      "dist": 1.4,
+      "rel": -40
+     }
     },
     {
-     "id": "double", "purpose": "reveal", "scene": "red", "from": "@double-0.1", "to": "@double.done+0.2",
-     "camera": { "type": "close", "target": "pruitt", "dist": 1.4, "rel": 35, "push": 0.35 }
+     "id": "double",
+     "purpose": "reveal",
+     "scene": "red",
+     "from": "@double-0.1",
+     "to": "@double.done+0.2",
+     "camera": {
+      "type": "close",
+      "target": "pruitt",
+      "dist": 1.4,
+      "rel": 35,
+      "push": 0.35
+     }
     },
     {
-     "id": "paid", "purpose": "payoff", "scene": "red", "from": "@paid-0.1", "to": "@close+0.5",
-     "camera": { "type": "static", "pos": [0.0, 1.5, 2.25], "look": [2.0, 1.1, 0.9], "fov": 54 }
+     "id": "paid",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@paid-0.1",
+     "to": "@close+0.5",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.5,
+       2.25
+      ],
+      "look": [
+       2.0,
+       1.1,
+       0.9
+      ],
+      "fov": 54
+     }
     },
     {
-     "id": "hero", "purpose": "payoff", "scene": "red", "from": "@hero-0.1", "to": "@hero.done+1.0",
-     "camera": { "type": "static", "pos": [0.0, 1.6, 2.25], "look": [1.3, 1.1, 0.3], "fov": 52, "handheld": 0.3 }
+     "id": "hero",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@hero-0.1",
+     "to": "@hero.done+1.0",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.6,
+       2.25
+      ],
+      "look": [
+       1.3,
+       1.1,
+       0.3
+      ],
+      "fov": 52,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "cried", "purpose": "payoff", "scene": "red", "from": "@cried-0.1", "to": "@cried+3.2",
-     "camera": { "type": "close", "target": "theo", "dist": 1.9, "rel": -25, "fov": 46 },
+     "id": "cried",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@cried-0.1",
+     "to": "@cried+3.2",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.9,
+      "rel": -25,
+      "fov": 46
+     },
      "overlays": [
-      { "kind": "card", "text": "Honesty paid the rent", "sub": "(the landlord was overcharging)", "color": "#ffffff", "at": 1.4 }
+      {
+       "kind": "card",
+       "text": "Honesty paid the rent",
+       "sub": "(the landlord was overcharging)",
+       "color": "#ffffff",
+       "at": 1.4
+      }
      ]
     }
    ],
-   "cover": { "shot": "patient", "at": 2.2 }
+   "cover": {
+    "shot": "patient",
+    "at": 2.2
+   }
   },
   "blue": {
-   "title": "Team Blue — Maya answers the door",
+   "title": "Team Blue \u2014 Maya answers the door",
    "branch": "blue",
    "style": "bright-cartoon",
    "narrator": "bm_george",
@@ -543,63 +2071,257 @@
     "bpm": 126,
     "gain": -17,
     "cues": [
-     { "shot": "strut", "at": 0, "intensity": 0.7 },
-     { "shot": "landlord", "at": 0, "intensity": 0.9 },
-     { "shot": "power", "at": 0, "intensity": 0.0 },
-     { "shot": "prob", "at": 0, "intensity": 0.4 }
+     {
+      "shot": "strut",
+      "at": 0,
+      "intensity": 0.7
+     },
+     {
+      "shot": "landlord",
+      "at": 0,
+      "intensity": 0.9
+     },
+     {
+      "shot": "power",
+      "at": 0,
+      "intensity": 0.0
+     },
+     {
+      "shot": "prob",
+      "at": 0,
+      "intensity": 0.4
+     }
     ]
    },
    "shots": [
     {
-     "id": "strut", "purpose": "establish", "scene": "blue", "from": 0, "to": "@entered.end+0.1",
-     "camera": { "type": "static", "pos": [-1.0, 1.4, 2.3], "look": [2.2, 0.95, 0.4], "fov": 52, "handheld": 0.3 }
+     "id": "strut",
+     "purpose": "establish",
+     "scene": "blue",
+     "from": 0,
+     "to": "@entered.end+0.1",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -1.0,
+       1.4,
+       2.3
+      ],
+      "look": [
+       2.2,
+       0.95,
+       0.4
+      ],
+      "fov": 52,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "mail", "purpose": "payoff", "scene": "blue", "from": "@mail-0.1", "to": "@msn1.end",
-     "camera": { "type": "static", "pos": [0.0, 1.5, 2.25], "look": [2.0, 1.1, 0.95], "fov": 55, "handheld": 0.3 }
+     "id": "mail",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@mail-0.1",
+     "to": "@msn1.end",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.5,
+       2.25
+      ],
+      "look": [
+       2.0,
+       1.1,
+       0.95
+      ],
+      "fov": 55,
+      "handheld": 0.3
+     }
     },
     {
-     "id": "check", "purpose": "escalate", "scene": "blue", "from": "@check-0.1", "to": "@msn2.end",
-     "camera": { "type": "close", "target": "maya", "dist": 1.5, "rel": -40, "handheld": 0.5 }
+     "id": "check",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@check-0.1",
+     "to": "@msn2.end",
+     "camera": {
+      "type": "close",
+      "target": "maya",
+      "dist": 1.5,
+      "rel": -40,
+      "handheld": 0.5
+     }
     },
     {
-     "id": "uhhuh", "purpose": "reaction", "scene": "blue", "from": "@uhhuh-0.1", "to": "@uhhuh.done+0.15",
-     "camera": { "type": "close", "target": "pruitt", "dist": 1.4, "rel": 35 }
+     "id": "uhhuh",
+     "purpose": "reaction",
+     "scene": "blue",
+     "from": "@uhhuh-0.1",
+     "to": "@uhhuh.done+0.15",
+     "camera": {
+      "type": "close",
+      "target": "pruitt",
+      "dist": 1.4,
+      "rel": 35
+     }
     },
     {
-     "id": "landlord", "purpose": "payoff", "scene": "blue", "from": "@landlord-0.1", "to": "@fall.end+0.45",
-     "camera": { "type": "static", "pos": [0.0, 1.55, 2.3], "look": [1.85, 0.9, 0.8], "fov": 62, "handheld": 0.4, "shake": { "at": 2.1, "amp": 0.25, "decay": 0.4 } }
+     "id": "landlord",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@landlord-0.1",
+     "to": "@fall.end+0.45",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.0,
+       1.55,
+       2.3
+      ],
+      "look": [
+       1.85,
+       0.9,
+       0.8
+      ],
+      "fov": 62,
+      "handheld": 0.4,
+      "shake": {
+       "at": 2.1,
+       "amp": 0.25,
+       "decay": 0.4
+      }
+     }
     },
     {
-     "id": "power", "purpose": "escalate", "scene": "blue", "from": "@power-0.1", "to": "@power.done+0.1",
-     "camera": { "type": "close", "target": "pruitt", "dist": 1.5, "rel": 35 }
+     "id": "power",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@power-0.1",
+     "to": "@power.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "pruitt",
+      "dist": 1.5,
+      "rel": 35
+     }
     },
     {
-     "id": "yes", "purpose": "payoff", "scene": "blue", "from": "@yes-0.25", "to": "@yes.done+0.4",
-     "camera": { "type": "static", "pos": [1.75, 1.55, -1.25], "look": [1.0, 0.15, -0.25], "fov": 46 }
+     "id": "yes",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@yes-0.25",
+     "to": "@yes.done+0.4",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.75,
+       1.55,
+       -1.25
+      ],
+      "look": [
+       1.0,
+       0.15,
+       -0.25
+      ],
+      "fov": 46
+     }
     },
     {
-     "id": "doorClose", "purpose": "payoff", "scene": "blue", "from": "@tmrw-0.1", "to": "@close+0.5",
-     "camera": { "type": "static", "pos": [0.9, 1.3, -0.6], "look": [2.95, 1.0, 1.2], "fov": 50 }
+     "id": "doorClose",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@tmrw-0.1",
+     "to": "@close+0.5",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.9,
+       1.3,
+       -0.6
+      ],
+      "look": [
+       2.95,
+       1.0,
+       1.2
+      ],
+      "fov": 50
+     }
     },
     {
-     "id": "still", "purpose": "escalate", "scene": "blue", "from": "@still-0.15", "to": "@still.done+0.1",
-     "camera": { "type": "close", "target": "theo", "dist": 1.5, "rel": -35 }
+     "id": "still",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@still-0.15",
+     "to": "@still.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "theo",
+      "dist": 1.5,
+      "rel": -35
+     }
     },
     {
-     "id": "prob", "purpose": "payoff", "scene": "blue", "from": "@prob-0.1", "to": "@prob.done+0.2",
-     "camera": { "type": "static", "pos": [0.3, 1.2, -1.0], "look": [1.1, 0.15, -0.2], "fov": 44 }
+     "id": "prob",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@prob-0.1",
+     "to": "@prob.done+0.2",
+     "camera": {
+      "type": "static",
+      "pos": [
+       0.3,
+       1.2,
+       -1.0
+      ],
+      "look": [
+       1.1,
+       0.15,
+       -0.2
+      ],
+      "fov": 44
+     }
     },
     {
-     "id": "nEnd", "purpose": "payoff", "scene": "blue", "from": "@nEnd-0.1", "to": "@nEnd.done+2.3",
-     "camera": { "type": "static", "pos": [2.5, 2.2, -0.6], "look": [-0.6, 0.45, -0.3], "fov": 52 },
+     "id": "nEnd",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@nEnd-0.1",
+     "to": "@nEnd.done+2.3",
+     "camera": {
+      "type": "static",
+      "pos": [
+       2.5,
+       2.2,
+       -0.6
+      ],
+      "look": [
+       -0.6,
+       0.45,
+       -0.3
+      ],
+      "fov": 52
+     },
      "overlays": [
-      { "kind": "card", "text": "Rent: still due", "sub": "(the bluff blew the fuses)", "color": "#ffffff", "at": 2.9 }
+      {
+       "kind": "card",
+       "text": "Rent: still due",
+       "sub": "(the bluff blew the fuses)",
+       "color": "#ffffff",
+       "at": 2.9
+      }
      ]
     }
    ],
-   "cover": { "shot": "landlord", "at": 2.4 }
+   "cover": {
+    "shot": "landlord",
+    "at": 2.4
+   }
   }
  },
- "covers": { "video": "main", "shot": "love", "at": 1.2, "label": false }
+ "covers": {
+  "video": "main",
+  "shot": "love",
+  "at": 1.2,
+  "label": false
+ }
 }

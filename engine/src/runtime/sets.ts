@@ -224,7 +224,12 @@ function buildApartment(params: Record<string, any>, seed: number): BuiltSet {
     for (let b = 0; b < 14; b++) { const x = b * 38 + r() * 10, h = 120 + r() * 200; c.fillStyle = '#0a0d16'; c.fillRect(x, 384 - h, 34, h); for (let wy = 384 - h + 8; wy < 380; wy += 14) for (let wx = x + 4; wx < x + 30; wx += 9) if (r() < 0.35) { c.fillStyle = r() < 0.8 ? '#ffd27a' : '#9fd3ff'; c.fillRect(wx, wy, 4, 6); } }
     c.fillStyle = '#e8ecf5'; c.beginPath(); c.arc(420, 70, 22, 0, Math.PI * 2); c.fill();
   });
-  const win = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.3), new THREE.MeshBasicMaterial({ map: cityTex })); win.position.set(-2.94, 1.6, -0.5); win.rotation.y = Math.PI / 2; g.add(win);
+  const dayTex = canvasTex(512, 384, (c) => {
+    const grd = c.createLinearGradient(0, 0, 0, 384); grd.addColorStop(0, '#8ec5ff'); grd.addColorStop(1, '#dbeeff'); c.fillStyle = grd; c.fillRect(0, 0, 512, 384);
+    for (let b = 0; b < 14; b++) { const x = b * 38 + r() * 10, h = 120 + r() * 200; c.fillStyle = ['#c9c2b6', '#a8b4c4', '#d8cfc0'][b % 3]; c.fillRect(x, 384 - h, 34, h); c.fillStyle = 'rgba(80,110,150,0.5)'; for (let wy = 384 - h + 8; wy < 380; wy += 14) for (let wx = x + 4; wx < x + 30; wx += 9) c.fillRect(wx, wy, 4, 6); }
+  });
+  const winMat = new THREE.MeshBasicMaterial({ map: cityTex });
+  const win = new THREE.Mesh(new THREE.PlaneGeometry(1.8, 1.3), winMat); win.position.set(-2.94, 1.6, -0.5); win.rotation.y = Math.PI / 2; g.add(win);
   const winFrame = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.4, 1.9), mat('#2a2622')); winFrame.position.set(-2.96, 1.6, -0.5); g.add(winFrame);
   for (const z of [-0.5]) { const mull = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.3, 0.04), mat('#2a2622')); mull.position.set(-2.92, 1.6, z); g.add(mull); }
   // sofa
@@ -262,9 +267,13 @@ function buildApartment(params: Record<string, any>, seed: number): BuiltSet {
     update(t, events) {
       const le = latest(events, 'lights', t); const preset = le?.p.preset ?? params.lights ?? 'night';
       const flick = latest(events, 'flicker', t);
-      let lampI = preset === 'blackout' ? 0 : preset === 'lamp' ? 30 : 22; let hemiI = preset === 'blackout' ? 0.22 : 0.6; fillA.intensity = preset === 'blackout' ? 1.2 : 2.5;
+      const day = preset === 'day';
+      let lampI = preset === 'blackout' ? 0 : preset === 'lamp' ? 30 : day ? 6 : 22; let hemiI = preset === 'blackout' ? 0.22 : day ? 1.5 : 0.6; fillA.intensity = preset === 'blackout' ? 1.2 : day ? 6 : 2.5;
+      // daytime: warm sun through the window, bright sky fill, daylight city view
+      moon.color.set(day ? '#fff1d6' : '#8fb0ff'); moon.intensity = day ? 3.2 : 1.4; hemi.color.set(day ? '#fff8ee' : '#6c7fa8'); hemi.groundColor.set(day ? '#8a7560' : '#1b1612');
+      fillA.color.set(day ? '#fff4e6' : '#7f93c9'); winMat.map = day ? dayTex : cityTex;
       if (flick && t - flick.t < (flick.p.dur ?? 1.2)) { const f = Math.sin((t - flick.t) * 60) * Math.sin((t - flick.t) * 23); lampI *= f > 0.1 ? 1 : 0.05; }
-      lamp.intensity = lampI; hemi.intensity = hemiI; shadeM.emissiveIntensity = lampI > 0.5 ? 0.6 : 0.02;
+      lamp.intensity = lampI; hemi.intensity = hemiI; lamp.castShadow = !day && lampI > 1; shadeM.emissiveIntensity = lampI > 0.5 ? 0.6 : 0.02;
       const ring = latest(events, 'phoneRing', t); const ringing = ring && ring.p.on !== false;
       const rp = ringing ? (Math.sin((t - ring!.t) * 18) > 0 && ((t - ring!.t) % 2.4) < 1.4 ? 1 : 0) : 0;
       phoneGlow.intensity = rp * 6; (phoneLight.material as THREE.MeshBasicMaterial).color.set(rp ? '#ff2020' : '#330000');
