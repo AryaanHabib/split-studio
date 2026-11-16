@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 /** Exit code meaning "the spec has errors" (a normal outcome, reported in feasibility.json), as opposed to 1 = crash. */
 const EXIT_SPEC_ERRORS = 3;
-import { spawn } from 'node:child_process';
+import { spawn, execFileSync } from 'node:child_process';
 import { EpisodeSchema, type Episode } from './compiler/schema';
 import { compileEpisode, collectTts, type TtsResult, type TtsLine, type Issue } from './compiler/compile';
 import { buildRuntime, renderStills, renderRanges, concatClips, ROOT } from './render/render';
@@ -99,6 +99,11 @@ async function main() {
   }
 
   if (cmd === 'produce') {
+    // preflight: fail fast with an actionable message instead of crashing mid-render
+    try { execFileSync('ffmpeg', ['-version'], { stdio: 'ignore' }); } catch {
+      console.error('FFmpeg was not found on PATH. Rendering needs it.\n  Windows: winget install --id Gyan.FFmpeg -e   (then open a NEW terminal and run npm run app again)\n  macOS: brew install ffmpeg   ·   Linux: sudo apt install ffmpeg');
+      process.exit(1);
+    }
     const log: string[] = []; const L = (s: string) => { console.log(s); log.push(s); };
     const t0 = Date.now();
     L(`THE SPLIT STUDIO — producing "${ep.title}" (${ep.id})`);

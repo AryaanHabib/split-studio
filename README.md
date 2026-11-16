@@ -11,7 +11,7 @@ on a choice, plus two fully animated branch videos.
 1. Install the free prerequisites:
    - Node.js 20+ (https://nodejs.org)
    - Python 3.10+ (https://python.org; tick "Add to PATH")
-   - FFmpeg full build (https://www.gyan.dev/ffmpeg/builds/); unzip and add its `bin` folder to PATH
+   - FFmpeg: `winget install --id Gyan.FFmpeg -e` in PowerShell, then open a **new** terminal so PATH updates
 2. In a terminal in this folder:
    ```bash
    npm install

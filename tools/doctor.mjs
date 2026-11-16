@@ -20,7 +20,7 @@ try { const s = fs.statfsSync(ROOT); P(`Disk (project drive): ${((s.bavail * s.b
 P(`Node: ${process.version} ${ok(parseInt(process.versions.node) >= 20)} (need ≥ 20)`);
 if (process.platform === 'win32') { const gpu = tryRun('powershell', ['-NoProfile', '-Command', 'Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name']); P(`GPU (Windows): ${gpu ?? 'unknown'}`); }
 else { const gpu = tryRun('nvidia-smi', ['--query-gpu=name,memory.total', '--format=csv,noheader']); P(`GPU (nvidia-smi): ${gpu ?? 'none detected'}`); }
-const ff = tryRun('ffmpeg', ['-version']); P(`FFmpeg: ${ok(ff)} ${ff ? ff.split('\n')[0] : 'not on PATH — install from https://www.gyan.dev/ffmpeg/builds/ (free) and add to PATH'}`);
+const ff = tryRun('ffmpeg', ['-version']); P(`FFmpeg: ${ok(ff)} ${ff ? ff.split('\n')[0] : 'not on PATH → Windows: winget install --id Gyan.FFmpeg -e  (then open a NEW terminal)'}`);
 if (ff) { const filters = tryRun('ffmpeg', ['-hide_banner', '-filters']) ?? ''; P(`  rubberband (pitch-preserving voice shift): ${ok(filters.includes('rubberband'))}  loudnorm: ${ok(filters.includes('loudnorm'))}`); }
 const py = process.env.STUDIO_PYTHON ?? (process.platform === 'win32' ? 'python' : 'python3');
 const pyv = tryRun(py, ['--version']); P(`Python (${py}): ${ok(pyv)} ${pyv ?? 'not found — install Python 3.10+ from python.org'}`);

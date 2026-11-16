@@ -35,5 +35,6 @@ for (const v of VOICES) {
   fs.writeFileSync(f, Buffer.from(await r.arrayBuffer())); console.log(`voice ${v}`);
 }
 const py = process.env.STUDIO_PYTHON ?? (process.platform === 'win32' ? 'python' : 'python3');
-execFileSync(py, ['-I', path.join(ROOT, 'tools/build_voices.py'), vdir, path.join(dir, 'voices.npz')], { stdio: 'inherit' });
+// no -I: isolated mode hides user-installed packages (pip --user on Windows). The script only reads the .pt files as raw bytes.
+execFileSync(py, [path.join(ROOT, 'tools/build_voices.py'), vdir, path.join(dir, 'voices.npz')], { stdio: 'inherit' });
 console.log('Done. Test with: npm run doctor');
