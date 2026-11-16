@@ -139,7 +139,12 @@ function propPos(s: SceneRT, def: CompiledProp, t: number): THREE.Vector3 {
       const root = a.rootAt(tt, actorOf);
       const fwd = new THREE.Vector3(Math.sin(root.h), 0, Math.cos(root.h));
       let p: THREE.Vector3;
-      if (seg.hand === 'both') p = a.part('handL').add(a.part('handR')).multiplyScalar(0.5).addScaledVector(fwd, r * 0.9);
+      if (seg.hand === 'both') {
+        p = a.part('handL').add(a.part('handR')).multiplyScalar(0.5);
+        const head = a.part('head');
+        if (p.y > head.y) p.add(new THREE.Vector3(0, r * 1.15, 0)).addScaledVector(fwd, r * 0.2); // held overhead: rest on top of the hands
+        else p.addScaledVector(fwd, r * 0.9);
+      }
       else if (seg.hand === 'head') p = a.part('headTop').add(new THREE.Vector3(0, r, 0));
       else p = a.part(seg.hand === 'L' ? 'handL' : 'handR').addScaledVector(fwd, r * 0.4).add(new THREE.Vector3(0, -r * 0.6, 0));
       if (seg.mode === 'dribble') {
@@ -204,12 +209,17 @@ function renderAt(T: number, opts: { overlays?: boolean; frame?: number } = {}) 
     const A = cam.pos, B = cam.look; const AB = B.clone().sub(A); const L2 = AB.lengthSq();
     for (const a of s.actors.values()) {
       if (keep.has(a.def.id) || !a.obj.visible) continue;
-      const c = a.obj.position.clone(); c.y += a.height * 0.6;
-      const u = c.clone().sub(A).dot(AB) / L2;
-      const nearLens = c.distanceTo(A) < a.height * 0.75 + 0.3;
-      if (!nearLens && (u < 0 || u > 0.9)) continue;
-      const d = A.clone().addScaledVector(AB, Math.max(0, u)).distanceTo(c);
-      if (nearLens || (clearView && d < Math.max(0.35, a.height * 0.45))) { a.obj.visible = false; hiddenNow.push(a.obj); }
+      let hide = false;
+      for (const f of [0.5, 0.9]) {
+        const c = a.obj.position.clone(); c.y += a.height * f;
+        const u = c.clone().sub(A).dot(AB) / L2;
+        const nearLens = c.distanceTo(A) < a.height * 0.75 + (clearView ? 0.6 : 0.3);
+        if (nearLens) { hide = true; break; }
+        if (!clearView || u < 0 || u > 0.9) continue;
+        const d = A.clone().addScaledVector(AB, u).distanceTo(c);
+        if (d < Math.max(0.35, a.height * 0.42)) { hide = true; break; }
+      }
+      if (hide) { a.obj.visible = false; hiddenNow.push(a.obj); }
     }
   }
   renderer.render(s.scene, camera);
@@ -264,6 +274,8 @@ function renderAt(T: number, opts: { overlays?: boolean; frame?: number } = {}) 
     const s = scenes.get(shotAt(T).scene)!;
     return { ...info, camera: camera.position.toArray(), fov: camera.fov, actors: [...s.actors.values()].filter((a) => !a.def.id.includes('_')).map((a) => ({ id: a.def.id, pos: a.obj.position.toArray(), visible: a.obj.visible, height: a.height })) };
   },
+  draw(T: number) { return renderAt(T, { frame: Math.round(T * video.fps) }); },
+  canvas() { return comp; },
   still(T: number, overlays = false) {
     renderAt(T, { overlays });
     return comp.toDataURL('image/png');

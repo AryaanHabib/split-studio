@@ -218,7 +218,12 @@
      {
       "do": "lookAt",
       "target": "toddlers",
-      "dur": 1.4
+      "dur": 2.0
+     },
+     {
+      "do": "turnTo",
+      "target": "toddlers",
+      "dur": 0.35
      },
      {
       "do": "shrug",
@@ -1764,16 +1769,21 @@
      "camera": {
       "type": "static",
       "pos": [
-       2.8,
-       0.9,
-       -6.4
+       2.6,
+       1.1,
+       -5.6
       ],
       "look": [
        0,
-       0.75,
-       -6.4
+       0.8,
+       -6.5
       ],
-      "fov": 46
+      "fov": 50,
+      "clearView": true,
+      "keep": [
+       "dex",
+       "gus"
+      ]
      }
     },
     {
@@ -1800,9 +1810,9 @@
       "type": "close",
       "target": "gus",
       "dist": 1.9,
-      "height": -0.3,
-      "lookHeight": 0.0,
-      "fov": 50
+      "height": 0.12,
+      "lookHeight": 0.28,
+      "fov": 52
      }
     },
     {
@@ -2126,12 +2136,22 @@
      "from": "@thumb",
      "to": "@gg.done+0.5",
      "camera": {
-      "type": "close",
-      "target": "dex",
-      "part": "head",
-      "dist": 1.5,
-      "height": 1.0,
-      "lookHeight": 0.0
+      "type": "static",
+      "pos": [
+       2.2,
+       1.3,
+       -12.6
+      ],
+      "look": [
+       0.6,
+       0.35,
+       -11.3
+      ],
+      "fov": 46,
+      "clearView": true,
+      "keep": [
+       "dex"
+      ]
      }
     },
     {

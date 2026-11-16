@@ -206,7 +206,7 @@
     {
      "scene": "a",
      "from": 0,
-     "to": 3,
+     "to": 1.0,
      "camera": {
       "type": "wide",
       "targets": [
@@ -220,11 +220,11 @@
     {
      "scene": "a",
      "from": 3,
-     "to": 6,
+     "to": 4.0,
      "camera": {
       "type": "follow",
       "target": "dex",
-      "dist": 4.5,
+      "dist": 3.0,
       "height": 1.4,
       "rel": 150,
       "lookHeight": 1.2
@@ -233,29 +233,10 @@
     {
      "scene": "a",
      "from": 6,
-     "to": 9,
+     "to": 7.0,
      "camera": {
       "type": "close",
       "target": "gus"
-     }
-    },
-    {
-     "scene": "a",
-     "from": 9,
-     "to": 11,
-     "camera": {
-      "type": "close",
-      "target": "dex"
-     }
-    },
-    {
-     "scene": "a",
-     "from": 2,
-     "to": 5,
-     "camera": {
-      "type": "close",
-      "target": "ref",
-      "dist": 3
      }
     }
    ]

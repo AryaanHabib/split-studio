@@ -10,7 +10,7 @@ import crypto from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { EpisodeSchema, type Episode } from './compiler/schema';
 import { compileEpisode, collectTts, type TtsResult, type TtsLine, type Issue } from './compiler/compile';
-import { buildRuntime, renderVideo, renderStills, ROOT } from './render/render';
+import { buildRuntime, renderStills, renderRanges, concatClips, ROOT } from './render/render';
 import { mixVideo, mux } from './audio/mix';
 import { makeCovers } from './covers/covers';
 import { qcVideo } from './qc/qc';
@@ -68,7 +68,20 @@ async function main() {
   if (cmd === 'validate') {
     const { issues } = await compileEpisode(ep, Object.fromEntries(collectTts(ep).map((l) => [l.key, { file: '', dur: Math.max(0.8, l.text.split(' ').length * 0.33), env: [] }])));
     console.log(`Feasibility report for "${ep.title}" (${ep.id})  [speech durations estimated]`);
+    fs.writeFileSync(path.join(prodDir, 'feasibility.json'), JSON.stringify(issues, null, 2));
     process.exit(printIssues(issues) ? 1 : 0);
+  }
+
+  if (cmd === 'compile') {
+    // speech + compile + feasibility, no rendering (used by the website's live preview)
+    const { videos, issues } = await compileWithTts(ep, prodDir);
+    const nErr = printIssues(issues);
+    fs.mkdirSync(path.join(prodDir, 'compiled'), { recursive: true });
+    for (const [vid, v] of Object.entries(videos)) fs.writeFileSync(path.join(prodDir, 'compiled', `${vid}.json`), JSON.stringify(v));
+    fs.writeFileSync(path.join(prodDir, 'feasibility.json'), JSON.stringify(issues, null, 2));
+    fs.writeFileSync(path.join(prodDir, 'compiled', 'index.json'), JSON.stringify(Object.fromEntries(Object.entries(videos).map(([k, v]) => [k, { title: v.title, duration: v.duration, shots: v.shots.map((s) => ({ id: s.id, start: s.start, end: s.end, purpose: s.purpose, camera: s.camera.type })) }]))));
+    console.log(`compiled ${Object.keys(videos).length} video(s)`);
+    process.exit(nErr ? 1 : 0);
   }
 
   if (cmd === 'stills') {
@@ -99,13 +112,32 @@ async function main() {
       const v = videos[vid]; if (!v) { L(`unknown video ${vid}`); continue; }
       const json = JSON.stringify(v); const hash = crypto.createHash('sha1').update(json + scale).digest('hex').slice(0, 12);
       fs.writeFileSync(path.join(dirs.compiled, `${vid}.json`), json);
-      const silent = path.join(dirs.renders, `${vid}_${hash}.mp4`);
-      L(`\n▶ ${vid}: ${v.duration.toFixed(1)}s, ${v.shots.length} shots, ${v.audio.length} audio cues`);
-      if (!fs.existsSync(silent) || flag('force') === 'true') {
+      // ---- per-shot render cache: a shot is re-rendered only if something that affects its pixels changed
+      const RENDER_VERSION = 'r3';
+      const sceneHash: Record<string, string> = {};
+      for (const sc of v.scenes) sceneHash[sc.id] = crypto.createHash('sha1').update(JSON.stringify(sc)).digest('hex');
+      const shotDir = path.join(dirs.renders, vid); fs.mkdirSync(shotDir, { recursive: true });
+      const forced = new Set((flag('shots') ?? '').split(',').filter(Boolean));
+      const reuseOld = flag('reuse-shots') === 'true';
+      const plan = v.shots.map((sh) => {
+        const f0 = Math.round(sh.start * v.fps), f1 = Math.round(sh.end * v.fps);
+        const ov = v.overlays.filter((o) => o.t1 > sh.start && o.t0 < sh.end);
+        const h = crypto.createHash('sha1').update(JSON.stringify({ RENDER_VERSION, sh, f0, f1, scene: sceneHash[sh.scene], ov, grade: v.grade, scale, w: v.width, h: v.height })).digest('hex').slice(0, 12);
+        const out = path.join(shotDir, `${String(sh.index).padStart(2, '0')}_${sh.id}_${h}.mp4`);
+        let use = out;
+        if (!fs.existsSync(out) && reuseOld && !forced.has(sh.id)) { const prev = fs.readdirSync(shotDir).filter((f) => f.startsWith(`${String(sh.index).padStart(2, '0')}_${sh.id}_`) && f.endsWith('.mp4') && !f.includes('.tmp')).map((f) => path.join(shotDir, f)).sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0]; if (prev) use = prev; }
+        const need = flag('force') === 'true' || forced.has(sh.id) || !fs.existsSync(use);
+        return { sh, f0, f1, out, use: need ? out : use, need };
+      }).filter((p) => p.f1 > p.f0);
+      const todo = plan.filter((p) => p.need);
+      L(`  shots: ${plan.length - todo.length} cached, ${todo.length} to render (${todo.reduce((n, p) => n + p.f1 - p.f0, 0)} frames)`);
+      if (todo.length) {
         let last = 0;
-        const r = await renderVideo(v, { out: silent, scale, workers: Number(flag('workers', '1')), onProgress: (d, n) => { const now = Date.now(); if (now - last > 15000 || d === n) { last = now; process.stdout.write(`  render ${d}/${n} frames (${((d / n) * 100).toFixed(0)}%)\n`); } } });
-        L(`  rendered ${r.frames} frames in ${r.seconds.toFixed(0)}s (${(r.frames / r.seconds).toFixed(2)} fps)`);
-      } else L(`  render cached (${path.basename(silent)})`);
+        const r = await renderRanges(v, todo.map((p) => ({ from: p.f0, to: p.f1, out: p.out })), { scale, onProgress: (d, n) => { const now = Date.now(); if (now - last > 15000 || d === n) { last = now; process.stdout.write(`  render ${d}/${n} frames (${((d / n) * 100).toFixed(0)}%)\n`); } } });
+        L(`  rendered ${r.frames} frames in ${r.seconds.toFixed(0)}s (${(r.frames / Math.max(1, r.seconds)).toFixed(2)} fps)`);
+      }
+      const silent = path.join(dirs.renders, `${vid}_${hash}.mp4`);
+      await concatClips(plan.map((p) => p.use), silent);
       const mix = await mixVideo(v, dirs.audio);
       L(`  audio: ${mix.voices} voice line(s), ${mix.sfx} sfx, music=${v.music?.style ?? 'none'}, input loudness ${mix.lufs?.toFixed(1)} LUFS -> normalized to -14${mix.missing.length ? `, MISSING: ${mix.missing.join(', ')}` : ''}`);
       const final = path.join(dirs.final, `${ep.id}_${vid}.mp4`);

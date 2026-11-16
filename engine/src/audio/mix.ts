@@ -118,7 +118,7 @@ export async function mixVideo(video: CompiledVideo, outDir: string): Promise<Mi
   writeWavStereo(raw, L.subarray(0, Math.ceil(video.duration * SR)), R.subarray(0, Math.ceil(video.duration * SR)));
   // two-pass loudness normalization
   const out = path.join(outDir, `${video.id}_mix.wav`);
-  const meas = await run('ffmpeg', ['-hide_banner', '-i', raw, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], { capture: true }).catch((err) => String(err));
+  const meas = await run('ffmpeg', ['-hide_banner', '-i', raw, '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json', '-f', 'null', '-'], { capture: true, stderr: true }).catch((err) => String(err));
   const m = /\{[\s\S]*?"input_i"[\s\S]*?\}/.exec(meas);
   let lufs: number | undefined;
   if (m) {

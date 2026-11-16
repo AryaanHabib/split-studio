@@ -28,13 +28,13 @@ export async function qcVideo(file: string, video: CompiledVideo, sheetOut?: str
   const dec = await run('ffmpeg', ['-v', 'error', '-i', file, '-f', 'null', '-'], { capture: true }).then(() => '').catch((e) => String(e));
   add('decodes cleanly', dec === '', dec ? dec.slice(0, 300) : 'no decoder errors');
   // black frames + frozen segments
-  const bd = await run('ffmpeg', ['-hide_banner', '-i', file, '-vf', 'blackdetect=d=0.4:pix_th=0.06,freezedetect=n=0.0008:d=2.5', '-an', '-f', 'null', '-'], { capture: true }).catch((e) => String(e));
+  const bd = await run('ffmpeg', ['-hide_banner', '-i', file, '-vf', 'blackdetect=d=0.4:pix_th=0.06,freezedetect=n=0.0008:d=2.5', '-an', '-f', 'null', '-'], { capture: true, stderr: true }).catch((e) => String(e));
   const blacks = [...String(bd).matchAll(/black_start:([\d.]+) black_end:([\d.]+)/g)].map((m) => `${m[1]}-${m[2]}s`);
   add('no unintended black sections', blacks.length === 0, blacks.length ? blacks.join(', ') : 'none', 'warning');
   const freezes = [...String(bd).matchAll(/freeze_start: ([\d.]+)[\s\S]*?freeze_duration: ([\d.]+)/g)].map((m) => `${(+m[1]).toFixed(1)}s for ${(+m[2]).toFixed(1)}s`);
   add('no frozen picture > 2.5s', freezes.length === 0, freezes.length ? freezes.join(', ') : 'none', 'warning');
   // silence + loudness
-  const sd = await run('ffmpeg', ['-hide_banner', '-i', file, '-af', 'silencedetect=n=-50dB:d=1.5,ebur128=peak=true', '-vn', '-f', 'null', '-'], { capture: true }).catch((e) => String(e));
+  const sd = await run('ffmpeg', ['-hide_banner', '-i', file, '-af', 'silencedetect=n=-50dB:d=1.5,ebur128=peak=true', '-vn', '-f', 'null', '-'], { capture: true, stderr: true }).catch((e) => String(e));
   const sil = [...String(sd).matchAll(/silence_start: ([\d.]+)[\s\S]*?silence_end: ([\d.]+)/g)].map((m) => `${(+m[1]).toFixed(1)}-${(+m[2]).toFixed(1)}s`);
   add('no unwanted silence > 1.5s', sil.length === 0, sil.length ? sil.join(', ') : 'none', 'warning');
   const I = /I:\s+(-?[\d.]+) LUFS/.exec(String(sd).split('Summary:').pop() ?? ''); const tp = /Peak:\s+(-?[\d.]+) dBFS/.exec(String(sd).split('Summary:').pop() ?? '');

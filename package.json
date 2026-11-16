@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsx --test tests/*.test.ts",
     "studio": "tsx engine/src/cli.ts",
     "docs": "tsx engine/src/tools/gen-docs.ts",
     "validate": "tsx engine/src/cli.ts validate",
@@ -12,19 +12,29 @@
     "stills": "tsx engine/src/cli.ts stills",
     "typecheck": "tsc",
     "doctor": "node tools/doctor.mjs",
-    "setup:voices": "node tools/setup-voices.mjs"
+    "setup:voices": "node tools/setup-voices.mjs",
+    "app": "node tools/app.mjs",
+    "worker": "tsx worker/worker.ts",
+    "build:preview": "node tools/build-preview.mjs",
+    "build:web": "node tools/build-preview.mjs && next build",
+    "app:prod": "node tools/app.mjs --prod"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@dimforge/rapier3d-deterministic-compat": "^0.21.0",
+    "next": "^15.5.29",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "sharp": "^0.34.4",
     "three": "^0.180.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/three": "^0.180.0",
     "esbuild": "^0.25.10",
     "playwright": "^1.63.0",

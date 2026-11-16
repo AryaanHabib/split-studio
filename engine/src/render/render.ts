@@ -97,12 +97,44 @@ export async function renderStills(video: CompiledVideo, times: number[], outPat
   } finally { await browser.close(); srv.close(); }
 }
 
-export function run(cmd: string, args: string[], opts: { capture?: boolean; input?: string } = {}): Promise<string> {
+export function run(cmd: string, args: string[], opts: { capture?: boolean; input?: string; stderr?: boolean } = {}): Promise<string> {
   return new Promise((resolve, reject) => {
     const p = spawn(cmd, args, { stdio: [opts.input !== undefined ? 'pipe' : 'ignore', opts.capture ? 'pipe' : 'inherit', 'pipe'] });
     let out = '', err = '';
     p.stdout?.on('data', (d) => (out += d)); p.stderr?.on('data', (d) => { err += d; });
     if (opts.input !== undefined) { p.stdin!.write(opts.input); p.stdin!.end(); }
-    p.on('close', (c) => (c === 0 ? resolve(out) : reject(new Error(`${cmd} ${args.slice(0, 6).join(' ')}… exited ${c}\n${err.slice(-2000)}`))));
+    p.on('close', (c) => (c === 0 ? resolve(opts.stderr ? out + err : out) : reject(new Error(`${cmd} ${args.slice(0, 6).join(' ')}… exited ${c}\n${err.slice(-2000)}`))));
   });
+}
+
+/** Render several frame ranges of one video into separate clips, reusing one browser page (shot cache). */
+export async function renderRanges(video: CompiledVideo, ranges: { from: number; to: number; out: string }[], opts: { scale?: number; quality?: number; crf?: number; onProgress?: (done: number, total: number) => void } = {}) {
+  if (!ranges.length) return { frames: 0, seconds: 0 };
+  const scale = opts.scale ?? 1;
+  const W = Math.round(video.width * scale / 2) * 2, H = Math.round(video.height * scale / 2) * 2;
+  const total = ranges.reduce((n, r) => n + (r.to - r.from), 0);
+  const srv = await serve(); const browser = await launch(); const t0 = Date.now(); let done = 0;
+  try {
+    const { page } = await openPage(browser, srv.url, video, scale);
+    for (const r of ranges) {
+      const tmp = r.out + '.tmp.mp4';
+      const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(video.fps), '-c:v', 'mjpeg', '-i', '-', '-vf', `scale=${W}:${H}:flags=lanczos,format=yuv420p`, '-c:v', 'libx264', '-preset', 'medium', '-crf', String(opts.crf ?? 18), '-r', String(video.fps), '-f', 'mp4', tmp], { stdio: ['pipe', 'inherit', 'inherit'] });
+      const ffDone = new Promise<void>((res, rej) => ff.on('close', (c) => (c === 0 ? res() : rej(new Error(`ffmpeg exited ${c}`)))));
+      for (let i = r.from; i < r.to; i++) {
+        const fr = await page.evaluate(([i, q]) => (window as any).studio.frame(i, q), [i, opts.quality ?? 0.92] as const);
+        const buf = Buffer.from(fr.data.slice(fr.data.indexOf(',') + 1), 'base64');
+        if (!ff.stdin.write(buf)) await new Promise((r2) => ff.stdin.once('drain', r2));
+        done++; opts.onProgress?.(done, total);
+      }
+      ff.stdin.end(); await ffDone; fs.renameSync(tmp, r.out); // atomic: interrupted renders never leave a half clip in the cache
+    }
+  } finally { await browser.close(); srv.close(); }
+  return { frames: total, seconds: (Date.now() - t0) / 1000 };
+}
+
+export async function concatClips(clips: string[], out: string) {
+  const list = out + '.list.txt';
+  fs.writeFileSync(list, clips.map((p) => `file '${path.resolve(p).replace(/'/g, "'\\''")}'`).join('\n'));
+  await run('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', out]);
+  fs.rmSync(list, { force: true });
 }
