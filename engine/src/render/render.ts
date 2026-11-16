@@ -6,10 +6,12 @@ import { spawn } from 'node:child_process';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import * as esbuild from 'esbuild';
 import type { CompiledVideo } from '../shared/types';
 
-export const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../..');
+// fileURLToPath handles Windows drive letters (new URL().pathname gives "/C:/..." which breaks paths)
+export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const BUNDLE = `runtime-${process.pid}`;
 export async function buildRuntime() {
@@ -78,7 +80,7 @@ export async function renderVideo(video: CompiledVideo, opts: RenderOpts) {
       return partFile;
     }));
     const list = parts.filter(Boolean) as string[];
-    fs.writeFileSync(path.join(tmpDir, 'list.txt'), list.map((p) => `file '${path.resolve(p)}'`).join('\n'));
+    fs.writeFileSync(path.join(tmpDir, 'list.txt'), list.map((p) => `file '${path.resolve(p).replace(/\\/g, '/')}'`).join('\n'));
     await run('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', path.join(tmpDir, 'list.txt'), '-c', 'copy', opts.out]);
     fs.rmSync(tmpDir, { recursive: true, force: true });
   } finally { await browser.close(); srv.close(); }
@@ -134,7 +136,7 @@ export async function renderRanges(video: CompiledVideo, ranges: { from: number;
 
 export async function concatClips(clips: string[], out: string) {
   const list = out + '.list.txt';
-  fs.writeFileSync(list, clips.map((p) => `file '${path.resolve(p).replace(/'/g, "'\\''")}'`).join('\n'));
+  fs.writeFileSync(list, clips.map((p) => `file '${path.resolve(p).replace(/\\/g, '/').replace(/'/g, "'\\''")}'`).join('\n'));
   await run('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', out]);
   fs.rmSync(list, { force: true });
 }

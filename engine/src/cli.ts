@@ -7,6 +7,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+
+/** Exit code meaning "the spec has errors" (a normal outcome, reported in feasibility.json), as opposed to 1 = crash. */
+const EXIT_SPEC_ERRORS = 3;
 import { spawn } from 'node:child_process';
 import { EpisodeSchema, type Episode } from './compiler/schema';
 import { compileEpisode, collectTts, type TtsResult, type TtsLine, type Issue } from './compiler/compile';
@@ -59,7 +63,7 @@ async function compileWithTts(ep: Episode, prodDir: string) {
 }
 
 async function main() {
-  if (!cmd || cmd === 'help') { console.log(fs.readFileSync(new URL(import.meta.url), 'utf8').split('\n').slice(1, 7).join('\n')); return; }
+  if (!cmd || cmd === 'help') { console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 7).join('\n')); return; }
   const epFile = args[1]; if (!epFile) throw new Error('episode.json path required');
   const ep = loadEpisode(epFile);
   const prodDir = path.join(ROOT, 'productions', ep.id);
@@ -69,7 +73,7 @@ async function main() {
     const { issues } = await compileEpisode(ep, Object.fromEntries(collectTts(ep).map((l) => [l.key, { file: '', dur: Math.max(0.8, l.text.split(' ').length * 0.33), env: [] }])));
     console.log(`Feasibility report for "${ep.title}" (${ep.id})  [speech durations estimated]`);
     fs.writeFileSync(path.join(prodDir, 'feasibility.json'), JSON.stringify(issues, null, 2));
-    process.exit(printIssues(issues) ? 1 : 0);
+    process.exit(printIssues(issues) ? EXIT_SPEC_ERRORS : 0);
   }
 
   if (cmd === 'compile') {
@@ -81,7 +85,7 @@ async function main() {
     fs.writeFileSync(path.join(prodDir, 'feasibility.json'), JSON.stringify(issues, null, 2));
     fs.writeFileSync(path.join(prodDir, 'compiled', 'index.json'), JSON.stringify(Object.fromEntries(Object.entries(videos).map(([k, v]) => [k, { title: v.title, duration: v.duration, shots: v.shots.map((s) => ({ id: s.id, start: s.start, end: s.end, purpose: s.purpose, camera: s.camera.type })) }]))));
     console.log(`compiled ${Object.keys(videos).length} video(s)`);
-    process.exit(nErr ? 1 : 0);
+    process.exit(nErr ? EXIT_SPEC_ERRORS : 0);
   }
 
   if (cmd === 'stills') {
@@ -101,7 +105,7 @@ async function main() {
     const { videos, issues } = await compileWithTts(ep, prodDir);
     const nErr = printIssues(issues);
     fs.writeFileSync(path.join(prodDir, 'feasibility.json'), JSON.stringify(issues, null, 2));
-    if (nErr && flag('allow-errors') !== 'true') { L('Stopping: fix the errors above (nothing was silently dropped).'); process.exit(1); }
+    if (nErr && flag('allow-errors') !== 'true') { L('Stopping: fix the errors above (nothing was silently dropped).'); process.exit(EXIT_SPEC_ERRORS); }
     const which = (flag('videos') ?? Object.keys(videos).join(',')).split(',');
     const scale = Number(flag('scale', '1'));
     const dirs = { compiled: path.join(prodDir, 'compiled'), renders: path.join(prodDir, 'renders'), audio: path.join(prodDir, 'audio'), final: path.join(prodDir, 'final'), covers: path.join(prodDir, 'covers'), qc: path.join(prodDir, 'qc') };

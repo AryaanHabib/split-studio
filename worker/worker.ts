@@ -9,6 +9,7 @@ import { spawn, execFileSync, type ChildProcess } from 'node:child_process';
 import { db, enqueue, getJob, updateJob, jobLogPath, ROOT, EPISODES, productionId, snapshotSpec, setSetting, type Job } from '../lib/server/store';
 
 const TSX = path.join(ROOT, 'node_modules', 'tsx', 'dist', 'cli.mjs');
+const EXIT_SPEC_ERRORS = 3; // engine/src/cli.ts
 const CLI = path.join(ROOT, 'engine', 'src', 'cli.ts');
 let current: { job: Job; child: ChildProcess } | null = null;
 
@@ -16,12 +17,16 @@ function log(job: Job, line: string) { fs.mkdirSync(path.dirname(jobLogPath(job.
 
 function killTree(child: ChildProcess) {
   if (!child.pid) return;
-  try { if (process.platform === 'win32') execFileSync('taskkill', ['/pid', String(child.pid), '/T', '/F']); else process.kill(-child.pid, 'SIGTERM'); } catch { /* already gone */ }
+  try { if (WIN) execFileSync('taskkill', ['/pid', String(child.pid), '/T', '/F']); else process.kill(-child.pid, 'SIGTERM'); } catch { /* already gone */ }
 }
 
-export function claudeAvailable() { try { return execFileSync(process.platform === 'win32' ? 'claude.cmd' : 'claude', ['--version'], { encoding: 'utf8', shell: process.platform === 'win32' }).trim(); } catch { return null; } }
+const WIN = process.platform === 'win32';
+/** On Windows, `claude` may be claude.cmd (npm install) or claude.exe (native install); a shell resolves either. */
+export function claudeAvailable() { try { return execFileSync('claude', ['--version'], { encoding: 'utf8', shell: WIN, stdio: ['ignore', 'pipe', 'pipe'] }).trim(); } catch { return null; } }
+/** cmd.exe does not quote arguments for us: wrap anything with spaces or special characters. */
+const winQuote = (a: string) => (/[\s()*&|<>^"%!]/.test(a) ? `"${a.replace(/"/g, '\\"')}"` : a);
 
-function commandFor(job: Job): { cmd: string; args: string[]; env?: NodeJS.ProcessEnv; parse?: 'claude' } | string {
+function commandFor(job: Job): { cmd: string; args: string[]; env?: NodeJS.ProcessEnv; parse?: 'claude'; stdin?: string; shell?: boolean } | string {
   const dir = path.join(EPISODES, job.episode);
   const spec = path.join(dir, 'episode.json');
   const a = job.args ?? {};
@@ -40,7 +45,6 @@ function commandFor(job: Job): { cmd: string; args: string[]; env?: NodeJS.Proce
       return cli(...x);
     }
     case 'develop': case 'revise': {
-      const claude = process.platform === 'win32' ? 'claude.cmd' : 'claude';
       const tmplFile = path.join(ROOT, '.claude', 'commands', job.kind === 'develop' ? 'develop-story.md' : 'revise.md');
       const tmpl = fs.readFileSync(tmplFile, 'utf8').replace(/^---[\s\S]*?---\n/, '');
       let argText: string;
@@ -56,9 +60,11 @@ function commandFor(job: Job): { cmd: string; args: string[]; env?: NodeJS.Proce
       const env = { ...process.env }; delete env.ANTHROPIC_API_KEY; delete env.ANTHROPIC_AUTH_TOKEN; delete env.CLAUDE_CODE_USE_BEDROCK; delete env.CLAUDE_CODE_USE_VERTEX;
       // Least privilege: Claude may read the project, but may only write inside this episode's folder,
       // the story bible and the playbook. Anything else is denied (non-interactive "default" mode = no prompts).
-      return { cmd: claude, args: ['-p', prompt, '--output-format', 'stream-json', '--verbose', '--permission-mode', 'default',
+      // The (long, multi-line) prompt goes through stdin: command-line quoting through cmd.exe would mangle it.
+      const args = ['-p', '--output-format', 'stream-json', '--verbose', '--permission-mode', 'default',
         '--allowedTools', 'Read', 'Glob', 'Grep', `Edit(episodes/${job.episode}/**)`, 'Edit(bible/**)', 'Edit(docs/SHOWRUNNER_PLAYBOOK.md)',
-        'Bash(npm run validate:*)', 'Bash(npm run stills:*)', 'Bash(npm run studio -- compile:*)', 'Bash(ls:*)'], env, parse: 'claude' };
+        'Bash(npm run validate:*)', 'Bash(npm run stills:*)', 'Bash(npm run studio -- compile:*)', 'Bash(ls:*)'];
+      return { cmd: 'claude', args: WIN ? args.map(winQuote) : args, env, parse: 'claude', stdin: prompt, shell: WIN };
     }
   }
   return `Unknown job kind ${job.kind}`;
@@ -83,7 +89,9 @@ async function runJob(job: Job) {
   }
   const c = commandFor(job);
   if (typeof c === 'string') { finish(job, 'failed', c); return; }
-  const child = spawn(c.cmd, c.args, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'], env: c.env ?? process.env, detached: process.platform !== 'win32', shell: process.platform === 'win32' && c.cmd.endsWith('.cmd') });
+  const child = spawn(c.cmd, c.args, { cwd: ROOT, stdio: [c.stdin !== undefined ? 'pipe' : 'ignore', 'pipe', 'pipe'], env: c.env ?? process.env, detached: !WIN, shell: c.shell ?? false, windowsHide: true });
+  if (c.stdin !== undefined) { child.stdin!.write(c.stdin); child.stdin!.end(); }
+  child.on('error', (e) => log(job, `spawn error: ${e.message}`));
   current = { job, child };
   updateJob(job.id, { pid: child.pid ?? null });
   let buf = '';
@@ -102,11 +110,9 @@ async function runJob(job: Job) {
   current = null;
   const fresh = getJob(job.id)!;
   if (fresh.status === 'cancel_requested') { finish(job, 'cancelled', 'Cancelled by user'); return; }
-  if (code !== 0) {
-    // validation failures are a normal outcome (feasibility report written), not a crash
-    finish(job, job.kind === 'validate' || job.kind === 'compile' ? 'completed' : 'failed', code !== 0 && (job.kind === 'validate' || job.kind === 'compile') ? 'Spec has errors — see the feasibility report' : `exit code ${code}`);
-    return;
-  }
+  // exit 3 = the spec has errors (normal outcome, written to the feasibility report); anything else non-zero is a crash
+  if (code === EXIT_SPEC_ERRORS && c.cmd === process.execPath) { finish(job, job.kind === 'produce' ? 'failed' : 'completed', 'Spec has errors — see the feasibility report on the Story tab'); return; }
+  if (code !== 0) { finish(job, 'failed', `crashed (exit code ${code}) — see the log`); return; }
   finish(job, 'completed', null);
   // follow-ups: after Claude writes/revises a spec, compile it so the Studio can preview immediately
   if (job.kind === 'develop' || job.kind === 'revise') {
