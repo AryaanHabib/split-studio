@@ -1,0 +1,10 @@
+node_modules/
+engine/dist/
+tools/models/
+productions/*/renders/
+productions/*/audio/
+productions/*/stills/
+productions/*/compiled/
+productions/**/*_frames/
+scratch/
+*.log

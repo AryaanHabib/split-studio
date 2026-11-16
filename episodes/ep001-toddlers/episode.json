@@ -1,0 +1,2580 @@
+{
+ "id": "ep001",
+ "title": "100 Toddlers vs 1 Pro",
+ "series": "Red/Blue",
+ "format": "red-blue",
+ "seed": 1001,
+ "logline": "A cocky pro basketball player cruises to 20-0 against one hundred toddlers \u2014 until one tiny kid in a headband stands in his way, and the pro agrees that the next basket wins.",
+ "hook": "The image of one giant athlete facing a sea of toddlers, then the toddlers' unison head-turn.",
+ "mandatory": [
+  "100 toddlers on court",
+  "pro leads 20-0",
+  "toddler steals the ball",
+  "next basket wins",
+  "Red and Blue have different winners"
+ ],
+ "avoid": [
+  "real athletes or team logos",
+  "toddlers getting hurt (falls are cushioned and comic)"
+ ],
+ "choice": {
+  "question": "Next basket wins. The toddlers have the ball. What should they do?",
+  "red": "All 100 rush the pro",
+  "blue": "Build a toddler tower"
+ },
+ "characters": {
+  "dex": {
+   "name": "Dex",
+   "archetype": "athlete",
+   "voice": "am_onyx",
+   "steps": "squeak",
+   "personality": "smug, lazy, secretly fragile",
+   "look": {
+    "height": 2.16,
+    "skin": "#8d5a3b",
+    "shirt": "#f2b134",
+    "pants": "#1d1d1d",
+    "number": "1",
+    "accessory": "headband",
+    "accessoryColor": "#f5f5f5",
+    "hair": "buzz",
+    "hairColor": "#1a1210",
+    "shoes": "#f5f5f5"
+   }
+  },
+  "gus": {
+   "name": "Gus",
+   "archetype": "toddler",
+   "voice": "af_sky",
+   "voicePitch": 5,
+   "personality": "tiny general, zero fear",
+   "look": {
+    "shirt": "#2ec4b6",
+    "accessory": "headband",
+    "accessoryColor": "#e63946",
+    "hair": "spiky",
+    "hairColor": "#3b2a1f",
+    "skin": "#e8b48f"
+   }
+  },
+  "toddler": {
+   "name": "Toddler",
+   "archetype": "toddler",
+   "voice": "af_bella",
+   "voicePitch": 6,
+   "variants": {
+    "shirt": [
+     "#ffadad",
+     "#ffd6a5",
+     "#fdffb6",
+     "#caffbf",
+     "#9bf6ff",
+     "#a0c4ff",
+     "#bdb2ff",
+     "#ffc6ff",
+     "#f1faee"
+    ],
+    "skin": [
+     "#f1c7a6",
+     "#d9a07b",
+     "#a86b45",
+     "#ffd9bf",
+     "#c68e63",
+     "#7a4a2c"
+    ],
+    "hair": [
+     "tuft",
+     "curly",
+     "bald",
+     "short",
+     "tuft"
+    ],
+    "hairColor": [
+     "#3b2a1f",
+     "#e0b04a",
+     "#1a1210",
+     "#8a4b2a"
+    ],
+    "accessory": [
+     "none",
+     "none",
+     "none",
+     "bow",
+     "pacifier"
+    ],
+    "accessoryColor": [
+     "#ff70a6",
+     "#70d6ff",
+     "#ffd670"
+    ]
+   }
+  },
+  "ref": {
+   "name": "REF-9000",
+   "kind": "gltf",
+   "model": "models/RobotExpressive.glb",
+   "scale": 0.36,
+   "voice": "am_echo"
+  }
+ },
+ "scenes": {
+  "game": {
+   "set": "court",
+   "params": {
+    "logo": "SPLIT ARENA"
+   },
+   "cast": {
+    "dex": {
+     "at": [
+      0,
+      0.5
+     ],
+     "facing": "hoop"
+    },
+    "ref": {
+     "at": [
+      7.8,
+      -6.0
+     ],
+     "facing": "center"
+    }
+   },
+   "crowds": {
+    "toddlers": {
+     "template": "toddler",
+     "count": 100,
+     "formation": "grid",
+     "cols": 10,
+     "center": [
+      0,
+      -8.6
+     ],
+     "spacing": 0.62,
+     "facing": "dex",
+     "named": {
+      "gus": {
+       "char": "gus",
+       "index": 94
+      }
+     }
+    }
+   },
+   "props": {
+    "ball": {
+     "kind": "ball",
+     "heldBy": "dex"
+    }
+   },
+   "tracks": {
+    "dex": [
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": 0
+     },
+     {
+      "do": "dribble",
+      "dur": 2.8,
+      "at": 0
+     },
+     {
+      "do": "say",
+      "text": "That's it? That's the whole team?",
+      "at": 3.9,
+      "mark": "dexLine1"
+     },
+     {
+      "do": "dribble",
+      "dur": 3.2
+     },
+     {
+      "do": "dribbleTo",
+      "prop": "ball",
+      "to": [
+       6.4,
+       -1.5
+      ],
+      "gait": "run",
+      "at": "@whistle+0.3",
+      "mark": "drive"
+     },
+     {
+      "do": "dribbleTo",
+      "prop": "ball",
+      "to": [
+       3.6,
+       -10.6
+      ],
+      "gait": "run"
+     },
+     {
+      "do": "shoot",
+      "prop": "ball",
+      "outcome": "make",
+      "jump": 0.6,
+      "apex": 0.7,
+      "mark": "bucket1"
+     },
+     {
+      "do": "lookAt",
+      "target": "toddlers",
+      "dur": 1.4
+     },
+     {
+      "do": "shrug",
+      "dur": 1.3
+     },
+     {
+      "do": "teleport",
+      "to": [
+       -6.2,
+       -7.2
+      ],
+      "facing": "hoop",
+      "at": "@bucket1.end+1.6",
+      "mark": "mont1"
+     },
+     {
+      "do": "hold",
+      "prop": "ball",
+      "hand": "both"
+     },
+     {
+      "do": "shoot",
+      "prop": "ball",
+      "outcome": "make",
+      "apex": 1.4,
+      "mark": "three"
+     },
+     {
+      "do": "turnTo",
+      "target": "toddlers"
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 1.0
+     },
+     {
+      "do": "teleport",
+      "to": [
+       2.5,
+       -3.5
+      ],
+      "facing": "hoop",
+      "at": "@three.end+1.2",
+      "mark": "mont2"
+     },
+     {
+      "do": "hold",
+      "prop": "ball",
+      "hand": "both"
+     },
+     {
+      "do": "dunk",
+      "prop": "ball",
+      "mark": "dunk"
+     },
+     {
+      "do": "celebrate",
+      "dur": 1.2
+     },
+     {
+      "do": "teleport",
+      "to": [
+       0,
+       -1.2
+      ],
+      "facing": "hoop",
+      "at": "@dunk.end+1.6",
+      "mark": "twist"
+     },
+     {
+      "do": "hold",
+      "prop": "ball",
+      "hand": "both"
+     },
+     {
+      "do": "face",
+      "expr": "smug"
+     },
+     {
+      "do": "dribbleTo",
+      "prop": "ball",
+      "to": [
+       0,
+       -6.0
+      ],
+      "gait": "walk",
+      "speed": 1.5,
+      "mark": "approach"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": "@approach.end"
+     },
+     {
+      "do": "dribble",
+      "dur": 10,
+      "at": "@approach.end"
+     },
+     {
+      "do": "say",
+      "text": "Uh... little man? You're in my way.",
+      "at": "@approach.end+0.3",
+      "mark": "dexLine2"
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@unison+0.4"
+     },
+     {
+      "do": "say",
+      "text": "...Ref?",
+      "at": "@unison+1.5",
+      "mark": "dexRef"
+     },
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": "@refLine.done+0.3"
+     },
+     {
+      "do": "say",
+      "text": "Fine. Next basket wins.",
+      "at": "@refLine.done+0.4",
+      "mark": "dexDeal"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@steal.arrive"
+     },
+     {
+      "do": "shock",
+      "dur": 0.8,
+      "at": "@steal.arrive"
+     },
+     {
+      "do": "stumble",
+      "dur": 0.9
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": "@steal.arrive+1.6"
+     }
+    ],
+    "gus": [
+     {
+      "do": "face",
+      "expr": "determined",
+      "at": "@twist"
+     },
+     {
+      "do": "teleport",
+      "to": [
+       0,
+       -7.2
+      ],
+      "facing": "dex",
+      "at": "@twist"
+     },
+     {
+      "do": "lookAt",
+      "target": "dex.chest",
+      "dur": "hold",
+      "at": "@twist"
+     },
+     {
+      "do": "upper:armsOut",
+      "dur": 2.6,
+      "at": "@approach.end-0.5"
+     },
+     {
+      "do": "runTo",
+      "to": "dex",
+      "stopShort": 0.55,
+      "at": "@dexDeal.done+0.3"
+     },
+     {
+      "do": "grab",
+      "prop": "ball",
+      "mark": "steal",
+      "hold": 6
+     },
+     {
+      "do": "face",
+      "expr": "grin",
+      "at": "@steal.arrive+0.4"
+     },
+     {
+      "do": "upper:raiseBall",
+      "dur": 8,
+      "at": "@steal.arrive+0.6"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0,
+       0.9,
+       2
+      ],
+      "dur": "hold",
+      "at": "@steal.arrive+0.7"
+     }
+    ],
+    "toddlers": [
+     {
+      "do": "group:do",
+      "action": "wave",
+      "count": 9,
+      "at": 0.8,
+      "stagger": 1.0,
+      "dur": 1.4
+     },
+     {
+      "do": "group:lookAt",
+      "target": "dex",
+      "at": "@drive",
+      "dur": "hold",
+      "stagger": 0.6
+     },
+     {
+      "do": "group:walkTo",
+      "to": [
+       0,
+       -2.6
+      ],
+      "spread": 1.0,
+      "at": "@drive+0.5",
+      "stagger": 1.2,
+      "speed": 0.75
+     },
+     {
+      "do": "group:formUp",
+      "center": [
+       0,
+       -8.1
+      ],
+      "facing": "dex",
+      "spacing": 0.62,
+      "cols": 11,
+      "at": "@twist"
+     },
+     {
+      "do": "group:lookAt",
+      "target": "gus",
+      "at": "@twist",
+      "dur": "hold",
+      "stagger": 0.5
+     },
+     {
+      "do": "group:lookAt",
+      "target": "dex.head",
+      "at": "@dexLine2.done+0.6",
+      "snap": true,
+      "stagger": 0.0,
+      "dur": "hold",
+      "mark": "unison"
+     },
+     {
+      "do": "group:face",
+      "expr": "determined",
+      "at": "@unison",
+      "stagger": 0
+     },
+     {
+      "do": "group:walkTo",
+      "to": [
+       0,
+       -7.4
+      ],
+      "spread": 1.0,
+      "at": "@unison+0.25",
+      "stagger": 0.0,
+      "speed": 0.9
+     },
+     {
+      "do": "group:face",
+      "expr": "laugh",
+      "at": "@steal.arrive+0.3",
+      "stagger": 0.3
+     },
+     {
+      "do": "group:do",
+      "action": "celebrate",
+      "at": "@steal.arrive+0.3",
+      "stagger": 0.5,
+      "dur": 5
+     }
+    ],
+    "ref": [
+     {
+      "do": "say",
+      "text": "First to twenty-one. Play ball.",
+      "at": "@dexLine1.done+0.3",
+      "mark": "refRules"
+     },
+     {
+      "do": "wave",
+      "dur": 1.0,
+      "at": "@refRules.done"
+     },
+     {
+      "do": "lookAt",
+      "target": "dex",
+      "at": "@dexRef",
+      "dur": 3
+     },
+     {
+      "do": "shrug",
+      "dur": 1.6,
+      "at": "@dexRef.done+0.2"
+     },
+     {
+      "do": "say",
+      "text": "There is no rule against that.",
+      "at": "@dexRef.done+0.2",
+      "mark": "refLine"
+     }
+    ],
+    "world": [
+     {
+      "do": "crowd",
+      "level": 0.3,
+      "at": 0
+     },
+     {
+      "do": "sound",
+      "id": "whistle",
+      "at": "@refRules.done+0.1",
+      "mark": "whistle"
+     },
+     {
+      "do": "crowd",
+      "level": 0.9,
+      "at": "@bucket1.arrive"
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@bucket1.arrive",
+      "gain": -4
+     },
+     {
+      "do": "crowd",
+      "level": 0.3,
+      "at": "@bucket1.arrive+2"
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@three.arrive",
+      "gain": -4
+     },
+     {
+      "do": "crowd",
+      "level": 1.0,
+      "at": "@dunk.arrive"
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@dunk.arrive",
+      "gain": -2
+     },
+     {
+      "do": "crowd",
+      "level": 0.2,
+      "at": "@twist"
+     },
+     {
+      "do": "crowd",
+      "level": 0.0,
+      "at": "@unison"
+     },
+     {
+      "do": "sound",
+      "id": "drone",
+      "at": "@unison",
+      "gain": -8,
+      "dur": 4
+     },
+     {
+      "do": "sound",
+      "id": "crowdGasp",
+      "at": "@steal.arrive",
+      "gain": -2
+     },
+     {
+      "do": "crowd",
+      "level": 1.0,
+      "at": "@steal.arrive+0.5"
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@steal.arrive+0.5",
+      "gain": -3
+     }
+    ]
+   }
+  },
+  "red": {
+   "set": "court",
+   "continueFrom": {
+    "scene": "game",
+    "at": "@end"
+   },
+   "tracks": {
+    "gus": [
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 0
+     },
+     {
+      "do": "lookAt",
+      "target": "dex.chest",
+      "dur": "hold",
+      "at": 0
+     },
+     {
+      "do": "upper:raiseBall",
+      "dur": 2.2,
+      "at": 0
+     },
+     {
+      "do": "say",
+      "text": "CHAAAARGE!",
+      "at": 0.2,
+      "mark": "charge"
+     },
+     {
+      "do": "walkTo",
+      "to": "dex",
+      "stopShort": 2.2,
+      "at": "@pile.end+0.6",
+      "mark": "gusWalk"
+     },
+     {
+      "do": "face",
+      "expr": "determined",
+      "at": "@gusWalk"
+     },
+     {
+      "do": "jumpTo",
+      "to": "dex.chest",
+      "height": 0.5,
+      "landY": 0.62,
+      "dur": 0.8,
+      "mark": "climb"
+     },
+     {
+      "do": "turnTo",
+      "target": "hoop",
+      "dur": 0.5
+     },
+     {
+      "do": "throw",
+      "prop": "ball",
+      "to": "hoop",
+      "via": [
+       "dex.head"
+      ],
+      "style": "under",
+      "apex": 0.3,
+      "viaApex": 1.5,
+      "viaSound": "boing",
+      "then": "make",
+      "mark": "shot"
+     },
+     {
+      "do": "face",
+      "expr": "laugh",
+      "at": "@shot.arrive+0.2"
+     },
+     {
+      "do": "celebrate",
+      "dur": 4,
+      "at": "@shot.arrive+0.2"
+     }
+    ],
+    "toddlers": [
+     {
+      "do": "group:face",
+      "expr": "angry",
+      "at": 0.3
+     },
+     {
+      "do": "group:cling",
+      "target": "dex",
+      "count": 8,
+      "at": "@charge+0.3",
+      "dur": 1.1,
+      "mark": "cling"
+     },
+     {
+      "do": "group:swarm",
+      "target": "dex",
+      "radius": 1.0,
+      "speed": 2.4,
+      "stagger": 0.6,
+      "at": "@charge+0.4",
+      "count": 40,
+      "nearest": "dex"
+     },
+     {
+      "do": "group:lookAt",
+      "target": "dex",
+      "dur": "hold",
+      "at": "@charge+0.4"
+     },
+     {
+      "do": "group:do",
+      "action": "fall",
+      "fromGroup": "toddlers_cling",
+      "dir": 1,
+      "at": "@timber+0.05",
+      "stagger": 0.1
+     },
+     {
+      "do": "group:pileOn",
+      "target": "dex",
+      "count": 55,
+      "stagger": 0.035,
+      "at": "@timber+0.45",
+      "mark": "pile"
+     },
+     {
+      "do": "group:face",
+      "expr": "happy",
+      "at": "@pile.end"
+     },
+     {
+      "do": "group:lookAt",
+      "target": "gus",
+      "dur": "hold",
+      "at": "@gusWalk"
+     },
+     {
+      "do": "group:face",
+      "expr": "laugh",
+      "at": "@shot.arrive+0.2",
+      "stagger": 0.2
+     },
+     {
+      "do": "group:do",
+      "action": "celebrate",
+      "excludeGroup": "toddlers_pile",
+      "at": "@shot.arrive+0.2",
+      "stagger": 0.4,
+      "dur": 4
+     }
+    ],
+    "dex": [
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": 0
+     },
+     {
+      "do": "panic",
+      "dur": 1.3,
+      "at": "@charge+0.2"
+     },
+     {
+      "do": "turnTo",
+      "target": "hoop",
+      "dur": 0.4
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       0.6,
+       -9.7
+      ],
+      "gait": "heavyWalk",
+      "speed": 0.6,
+      "dur": 3.4,
+      "mark": "drag"
+     },
+     {
+      "do": "say",
+      "text": "Get off! Get OFF!",
+      "at": "@drag+0.3",
+      "mark": "getOff"
+     },
+     {
+      "do": "stumble",
+      "dur": 0.6
+     },
+     {
+      "do": "fall",
+      "dir": 1,
+      "dur": 0.8,
+      "mark": "timber"
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": "@timber.end"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@shot.via0"
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": "@shot.via0+0.6"
+     },
+     {
+      "do": "thumbsUpLying",
+      "dur": 2.2,
+      "at": "@shot.arrive+2.4",
+      "mark": "thumb",
+      "dir": 1
+     },
+     {
+      "do": "say",
+      "text": "...good game.",
+      "at": "@thumb+0.4",
+      "mark": "gg"
+     }
+    ],
+    "ref": [
+     {
+      "do": "lookAt",
+      "target": "dex",
+      "dur": "hold",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       5.0,
+       -8.5
+      ],
+      "at": "@timber+0.6"
+     },
+     {
+      "do": "celebrate",
+      "dur": 3,
+      "at": "@shot.arrive+0.4"
+     },
+     {
+      "do": "say",
+      "text": "Basket counts. Toddlers win.",
+      "at": "@shot.arrive+0.6",
+      "mark": "refWin"
+     }
+    ],
+    "world": [
+     {
+      "do": "crowd",
+      "level": 1.0,
+      "at": 0
+     },
+     {
+      "do": "sound",
+      "id": "crowdGasp",
+      "at": "@timber+0.55",
+      "gain": -2
+     },
+     {
+      "do": "crowd",
+      "level": 0.6,
+      "at": "@timber+1"
+     },
+     {
+      "do": "crowd",
+      "level": 0.1,
+      "at": "@gusWalk"
+     },
+     {
+      "do": "sound",
+      "id": "crowdGasp",
+      "at": "@shot.via0+0.1",
+      "gain": -4
+     },
+     {
+      "do": "sound",
+      "id": "buzzer",
+      "at": "@shot.arrive+0.1",
+      "gain": -4
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@shot.arrive+0.15",
+      "gain": 0
+     },
+     {
+      "do": "crowd",
+      "level": 1.0,
+      "at": "@shot.arrive+0.1"
+     },
+     {
+      "do": "sound",
+      "id": "crowdLaugh",
+      "at": "@gg.done+0.1",
+      "gain": -6
+     }
+    ]
+   },
+   "duration": 29
+  },
+  "blue": {
+   "set": "court",
+   "continueFrom": {
+    "scene": "game",
+    "at": "@end"
+   },
+   "tracks": {
+    "gus": [
+     {
+      "do": "face",
+      "expr": "determined",
+      "at": 0
+     },
+     {
+      "do": "pointUp",
+      "dur": 1.4,
+      "at": 0.1
+     },
+     {
+      "do": "say",
+      "text": "TOWER!",
+      "at": 0.2,
+      "mark": "call"
+     },
+     {
+      "do": "face",
+      "expr": "grin",
+      "at": "@toddlers.tower+0.3"
+     },
+     {
+      "do": "turnTo",
+      "target": "hoop",
+      "dur": 0.5,
+      "at": "@toddlers.tower+0.2"
+     },
+     {
+      "do": "balance",
+      "dur": 30
+     },
+     {
+      "do": "face",
+      "expr": "scared",
+      "at": "@poke+0.4"
+     },
+     {
+      "do": "release",
+      "prop": "ball",
+      "at": "@collapse+0.05",
+      "vel": [
+       0.4,
+       1.5,
+       2.2
+      ]
+     },
+     {
+      "do": "cry",
+      "dur": 5,
+      "at": "@win.arrive+1.5"
+     },
+     {
+      "do": "face",
+      "expr": "cry",
+      "at": "@win.arrive+1.6"
+     },
+     {
+      "do": "say",
+      "text": "Waaaah!",
+      "at": "@win.arrive+1.9",
+      "caption": false
+     },
+     {
+      "do": "face",
+      "expr": "grin",
+      "at": "@rematch.done+0.5"
+     },
+     {
+      "do": "lookAt",
+      "target": "dex.head",
+      "dur": "hold",
+      "at": "@rematch.done+0.5",
+      "snap": true
+     }
+    ],
+    "toddlers": [
+     {
+      "do": "group:face",
+      "expr": "determined",
+      "at": 0.2
+     },
+     {
+      "do": "group:tower",
+      "spot": [
+       0,
+       -11.75
+      ],
+      "rows": [
+       5,
+       4,
+       3,
+       2
+      ],
+      "top": "gus",
+      "facing": "dex",
+      "rowDelay": 1.0,
+      "stagger": 0.3,
+      "at": "@call+0.6",
+      "mark": "build"
+     },
+     {
+      "do": "group:swarm",
+      "target": [
+       0,
+       -11.75
+      ],
+      "radius": 2.0,
+      "speed": 1.8,
+      "excludeGroup": "toddlers_tower",
+      "at": "@call+0.8",
+      "stagger": 1.0
+     },
+     {
+      "do": "group:lookAt",
+      "target": "gus",
+      "dur": "hold",
+      "at": "@call+2.5",
+      "excludeGroup": "toddlers_tower"
+     },
+     {
+      "do": "group:do",
+      "action": "celebrate",
+      "excludeGroup": "toddlers_tower",
+      "at": "@toddlers.tower",
+      "stagger": 0.5,
+      "dur": 2.5
+     },
+     {
+      "do": "group:face",
+      "expr": "scared",
+      "at": "@poke+0.4",
+      "stagger": 0.2
+     },
+     {
+      "do": "group:sway",
+      "of": "toddlers_tower",
+      "dur": 1.5,
+      "amp": 0.07,
+      "freq": 1.4,
+      "at": "@poke+0.25",
+      "mark": "sway"
+     },
+     {
+      "do": "group:collapse",
+      "of": "toddlers_tower",
+      "push": [
+       0,
+       0.4,
+       1.6
+      ],
+      "dur": 3.5,
+      "at": "@sway.end",
+      "mark": "collapse"
+     },
+     {
+      "do": "group:face",
+      "expr": "cry",
+      "at": "@win.arrive+1.5",
+      "stagger": 0.3
+     },
+     {
+      "do": "group:do",
+      "action": "cry",
+      "at": "@win.arrive+1.5",
+      "stagger": 0.4,
+      "dur": 4.5
+     },
+     {
+      "do": "group:face",
+      "expr": "grin",
+      "at": "@rematch.done+0.5",
+      "stagger": 0
+     },
+     {
+      "do": "group:lookAt",
+      "target": "dex.head",
+      "dur": "hold",
+      "at": "@rematch.done+0.5",
+      "snap": true,
+      "stagger": 0
+     }
+    ],
+    "toddlers_31": [
+     {
+      "do": "say",
+      "text": "Waaah!",
+      "at": "@win.arrive+1.7",
+      "caption": false
+     }
+    ],
+    "toddlers_57": [
+     {
+      "do": "say",
+      "text": "Wahhh!",
+      "at": "@win.arrive+2.4",
+      "caption": false
+     }
+    ],
+    "dex": [
+     {
+      "do": "face",
+      "expr": "smug",
+      "at": 0
+     },
+     {
+      "do": "armsCrossed",
+      "dur": 4.5,
+      "at": 0.5
+     },
+     {
+      "do": "say",
+      "text": "Cute. Real cute.",
+      "at": "@call+1.4",
+      "mark": "cute"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@toddlers.tower+0.3"
+     },
+     {
+      "do": "say",
+      "text": "Oh no. Oh no no no.",
+      "at": "@toddlers.tower+0.5",
+      "mark": "ohno"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       0.3,
+       -10.75
+      ],
+      "speed": 1.3,
+      "at": "@ohno.done+0.1",
+      "mark": "walkover"
+     },
+     {
+      "do": "face",
+      "expr": "smug"
+     },
+     {
+      "do": "push",
+      "dur": 0.7,
+      "mark": "poke"
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": "@collapse"
+     },
+     {
+      "do": "pickUp",
+      "prop": "ball",
+      "at": "@collapse+2.4",
+      "mark": "pick"
+     },
+     {
+      "do": "face",
+      "expr": "smug"
+     },
+     {
+      "do": "dunk",
+      "prop": "ball",
+      "mark": "win"
+     },
+     {
+      "do": "celebrate",
+      "dur": 1.4
+     },
+     {
+      "do": "face",
+      "expr": "guilty",
+      "at": "@win.arrive+2.0"
+     },
+     {
+      "do": "sit",
+      "dur": 5,
+      "at": "@win.arrive+2.8"
+     },
+     {
+      "do": "say",
+      "text": "Okay. Okay! Rematch?",
+      "at": "@win.arrive+3.6",
+      "mark": "rematch"
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": "@rematch.done+0.8"
+     }
+    ],
+    "ref": [
+     {
+      "do": "lookAt",
+      "target": "dex",
+      "dur": "hold",
+      "at": 0
+     },
+     {
+      "do": "say",
+      "text": "Basket counts. Pro wins.",
+      "at": "@win.arrive+0.6",
+      "mark": "refWin"
+     },
+     {
+      "do": "shrug",
+      "dur": 1.6,
+      "at": "@win.arrive+0.6"
+     }
+    ],
+    "world": [
+     {
+      "do": "crowd",
+      "level": 0.6,
+      "at": 0
+     },
+     {
+      "do": "sound",
+      "id": "crowdCheer",
+      "at": "@toddlers.tower+0.1",
+      "gain": -4
+     },
+     {
+      "do": "crowd",
+      "level": 1.0,
+      "at": "@toddlers.tower"
+     },
+     {
+      "do": "crowd",
+      "level": 0.2,
+      "at": "@poke"
+     },
+     {
+      "do": "sound",
+      "id": "crowdGasp",
+      "at": "@collapse+0.2",
+      "gain": -2
+     },
+     {
+      "do": "sound",
+      "id": "buzzer",
+      "at": "@win.arrive+0.1",
+      "gain": -6
+     },
+     {
+      "do": "crowd",
+      "level": 0.3,
+      "at": "@win.arrive+1.2",
+      "mood": "boo"
+     },
+     {
+      "do": "sound",
+      "id": "crowdBoo",
+      "at": "@win.arrive+1.3",
+      "gain": -2
+     },
+     {
+      "do": "crowd",
+      "level": 0.0,
+      "at": "@rematch.done+0.4"
+     }
+    ]
+   },
+   "duration": 34
+  }
+ },
+ "videos": {
+  "main": {
+   "title": "100 Toddlers vs 1 Pro",
+   "branch": "main",
+   "narrator": "bm_george",
+   "captions": "all",
+   "music": {
+    "style": "playful",
+    "bpm": 112,
+    "cues": [
+     {
+      "shot": "hook",
+      "at": 0,
+      "intensity": 0.35
+     },
+     {
+      "shot": "drive",
+      "at": 0,
+      "intensity": 0.9
+     },
+     {
+      "shot": "twist",
+      "at": 0,
+      "intensity": 0.4
+     },
+     {
+      "shot": "steal",
+      "at": 0.8,
+      "intensity": 1.0
+     }
+    ]
+   },
+   "score": {
+    "left": {
+     "name": "PRO",
+     "color": "#f2b134"
+    },
+    "right": {
+     "name": "TODDLERS",
+     "color": "#9bf6ff"
+    },
+    "timeline": [
+     {
+      "shot": "drive",
+      "at": 0,
+      "left": 0,
+      "right": 0
+     },
+     {
+      "shot": "swish1",
+      "at": 0.45,
+      "left": 2,
+      "right": 0
+     },
+     {
+      "shot": "three",
+      "at": 1.35,
+      "left": 5,
+      "right": 0
+     },
+     {
+      "shot": "dunk",
+      "at": 0,
+      "left": 18,
+      "right": 0
+     },
+     {
+      "shot": "dunk",
+      "at": 2.6,
+      "left": 20,
+      "right": 0
+     },
+     {
+      "shot": "deal",
+      "at": 1.4,
+      "left": 20,
+      "right": 0,
+      "note": "NEXT BASKET WINS"
+     }
+    ],
+    "until": "gusHero"
+   },
+   "shots": [
+    {
+     "id": "hook",
+     "purpose": "hook",
+     "scene": "game",
+     "from": 0,
+     "to": 2.2,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       1.9,
+       2.7,
+       6.4
+      ],
+      "to": [
+       1.5,
+       2.3,
+       5.2
+      ],
+      "look": [
+       -0.2,
+       0.4,
+       -7.5
+      ],
+      "fov": 46
+     },
+     "narration": {
+      "text": "One professional basketball player. One hundred toddlers.",
+      "at": 0.15
+     },
+     "overlays": [
+      {
+       "kind": "title",
+       "text": "100 toddlers",
+       "sub": "vs. 1 pro",
+       "size": 100,
+       "y": 0.19,
+       "at": 0.1,
+       "dur": 2.0
+      }
+     ]
+    },
+    {
+     "id": "waves",
+     "purpose": "establish",
+     "scene": "game",
+     "from": 2.0,
+     "to": 3.8,
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.2,
+       0.75,
+       -3.6
+      ],
+      "look": [
+       -0.2,
+       0.55,
+       -6.8
+      ],
+      "fov": 44
+     }
+    },
+    {
+     "id": "dexSmug",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@dexLine1-0.15",
+     "to": "@dexLine1.done+0.15",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.8,
+      "rel": 20
+     },
+     "overlays": [
+      {
+       "kind": "label",
+       "target": "dex.headTop",
+       "text": "THE PRO",
+       "sub": "7'1\" \u00b7 never lost",
+       "at": 0.2,
+       "dur": 1.6
+      }
+     ]
+    },
+    {
+     "id": "ref",
+     "purpose": "establish",
+     "scene": "game",
+     "from": "@refRules-0.1",
+     "to": "@whistle+0.35",
+     "camera": {
+      "type": "close",
+      "target": "ref",
+      "dist": 4.4,
+      "rel": 10,
+      "lookHeight": -0.55
+     },
+     "overlays": [
+      {
+       "kind": "label",
+       "target": "ref.headTop",
+       "text": "REF-9000",
+       "sub": "AI referee",
+       "at": 0.2,
+       "dur": 1.5,
+       "bg": "#8ecae6"
+      }
+     ]
+    },
+    {
+     "id": "drive",
+     "purpose": "escalate",
+     "scene": "game",
+     "from": "@drive",
+     "to": "@drive+2.0",
+     "camera": {
+      "type": "track",
+      "target": "dex",
+      "dist": 5.5,
+      "height": 1.2,
+      "lookHeight": 0.9,
+      "rel": 100
+     }
+    },
+    {
+     "id": "heads",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@drive+1.4",
+     "to": "@drive+2.7",
+     "camera": {
+      "type": "static",
+      "pos": [
+       4.0,
+       0.9,
+       -3.2
+      ],
+      "look": [
+       0.3,
+       0.45,
+       -6.6
+      ],
+      "fov": 42
+     }
+    },
+    {
+     "id": "layup",
+     "purpose": "escalate",
+     "scene": "game",
+     "from": "@drive+2.5",
+     "to": "@bucket1.release+0.35",
+     "camera": {
+      "type": "follow",
+      "target": "dex",
+      "dist": 5,
+      "height": 1.6,
+      "rel": 200,
+      "lookHeight": 1.2
+     }
+    },
+    {
+     "id": "swish1",
+     "purpose": "payoff",
+     "scene": "game",
+     "from": "@bucket1.arrive-0.25",
+     "to": "@bucket1.arrive+0.9",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.7,
+       2.4,
+       -10.2
+      ],
+      "look": [
+       0,
+       2.9,
+       -12.6
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "shrug",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@bucket1.end+0.1",
+     "to": "@bucket1.end+1.4",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 2.4,
+      "rel": -15
+     }
+    },
+    {
+     "id": "three",
+     "purpose": "escalate",
+     "scene": "game",
+     "from": "@three+0.05",
+     "to": "@three.arrive+0.45",
+     "camera": {
+      "type": "orbit",
+      "target": "dex",
+      "radius": 6,
+      "height": 1.8,
+      "from": 220,
+      "to": 250,
+      "lookHeight": 1.5
+     },
+     "overlays": [
+      {
+       "kind": "tag",
+       "text": "FROM DOWNTOWN",
+       "at": 0.3,
+       "dur": 1.2
+      }
+     ]
+    },
+    {
+     "id": "dunk",
+     "purpose": "escalate",
+     "scene": "game",
+     "from": "@dunk+0.2",
+     "to": "@dunk.arrive+0.7",
+     "ramp": [
+      {
+       "at": 1.75,
+       "speed": 0.35,
+       "dur": 0.15
+      },
+      {
+       "at": 2.75,
+       "speed": 1,
+       "dur": 0.2
+      }
+     ],
+     "camera": {
+      "type": "track",
+      "target": "dex",
+      "dist": 5.0,
+      "height": 1.4,
+      "lookHeight": 1.7,
+      "rel": 95
+     },
+     "overlays": [
+      {
+       "kind": "tag",
+       "text": "SIX MINUTES LATER",
+       "at": 0.0,
+       "dur": 1.4
+      }
+     ]
+    },
+    {
+     "id": "twist",
+     "purpose": "reveal",
+     "scene": "game",
+     "from": "@twist+0.1",
+     "to": "@approach.end-0.2",
+     "camera": {
+      "type": "follow",
+      "target": "dex",
+      "dist": 3.6,
+      "height": 1.1,
+      "rel": 160,
+      "lookHeight": 0.5
+     },
+     "narration": {
+      "text": "Twenty to nothing. One more basket and it's over.",
+      "at": 0.2
+     }
+    },
+    {
+     "id": "gusHalt",
+     "purpose": "reveal",
+     "scene": "game",
+     "from": "@approach.end-0.3",
+     "to": "@approach.end+0.6",
+     "camera": {
+      "type": "close",
+      "target": "gus",
+      "dist": 1.7,
+      "height": 0.2,
+      "lookHeight": -0.15
+     }
+    },
+    {
+     "id": "dexLine2",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@dexLine2-0.1",
+     "to": "@dexLine2.done+0.4",
+     "camera": {
+      "type": "ots",
+      "from": "gus",
+      "to": "dex",
+      "dist": 1.0,
+      "side": 0.4,
+      "height": 0.15,
+      "fov": 50
+     }
+    },
+    {
+     "id": "unison",
+     "purpose": "reveal",
+     "scene": "game",
+     "from": "@unison-0.3",
+     "to": "@unison+1.3",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       2.9,
+       0.75,
+       -4.4
+      ],
+      "to": [
+       2.5,
+       0.8,
+       -5.0
+      ],
+      "look": [
+       -0.3,
+       0.55,
+       -8.4
+      ],
+      "fov": 50,
+      "handheld": 0.2
+     }
+    },
+    {
+     "id": "dexRef",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@dexRef-0.2",
+     "to": "@dexRef.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.8,
+      "push": 0.3
+     }
+    },
+    {
+     "id": "refNo",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@refLine-0.1",
+     "to": "@refLine.done+0.2",
+     "camera": {
+      "type": "close",
+      "target": "ref",
+      "dist": 4.4,
+      "rel": 15,
+      "lookHeight": -0.55
+     }
+    },
+    {
+     "id": "deal",
+     "purpose": "escalate",
+     "scene": "game",
+     "from": "@dexDeal-0.1",
+     "to": "@dexDeal.done+0.25",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 2.0,
+      "rel": -10
+     }
+    },
+    {
+     "id": "steal",
+     "purpose": "reveal",
+     "scene": "game",
+     "from": "@steal-0.45",
+     "to": "@steal.arrive+0.3",
+     "camera": {
+      "type": "static",
+      "pos": [
+       2.8,
+       0.9,
+       -6.4
+      ],
+      "look": [
+       0,
+       0.75,
+       -6.4
+      ],
+      "fov": 46
+     }
+    },
+    {
+     "id": "dexShock",
+     "purpose": "reaction",
+     "scene": "game",
+     "from": "@steal.arrive",
+     "to": "@steal.arrive+0.9",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.6,
+      "zoomTo": 34,
+      "zoomDur": 0.25
+     }
+    },
+    {
+     "id": "gusHero",
+     "purpose": "payoff",
+     "scene": "game",
+     "from": "@steal.arrive+0.9",
+     "to": "@steal.arrive+2.8",
+     "camera": {
+      "type": "close",
+      "target": "gus",
+      "dist": 1.9,
+      "height": -0.3,
+      "lookHeight": 0.0,
+      "fov": 50
+     }
+    },
+    {
+     "id": "choice",
+     "purpose": "choice",
+     "scene": "game",
+     "from": "@steal.arrive+2.8",
+     "to": "@steal.arrive+7.2",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       3.5,
+       2.6,
+       -2.5
+      ],
+      "to": [
+       3.0,
+       2.9,
+       -1.8
+      ],
+      "look": [
+       0,
+       0.6,
+       -7.6
+      ],
+      "fov": 50,
+      "handheld": 0.3
+     },
+     "narration": {
+      "text": "Next basket wins. The toddlers have the ball. What should they do?",
+      "at": 0.1
+     },
+     "overlays": [
+      {
+       "kind": "choice",
+       "question": "What should the toddlers do?",
+       "red": "All 100 rush the pro",
+       "blue": "Build a toddler tower",
+       "footer": "Choose your team \u2193",
+       "at": 0.3
+      }
+     ]
+    }
+   ],
+   "cover": {
+    "shot": "unison",
+    "at": 1.2
+   }
+  },
+  "red": {
+   "title": "Team Red \u2014 All 100 rush the pro",
+   "branch": "red",
+   "narrator": "bm_george",
+   "captions": "all",
+   "music": {
+    "style": "chase",
+    "bpm": 150,
+    "cues": [
+     {
+      "shot": "charge",
+      "at": 0,
+      "intensity": 1.0
+     },
+     {
+      "shot": "solo",
+      "at": 0,
+      "intensity": 0.15
+     },
+     {
+      "shot": "swishR",
+      "at": 0.2,
+      "intensity": 1.0
+     }
+    ],
+    "gain": -14
+   },
+   "score": {
+    "left": {
+     "name": "PRO",
+     "color": "#f2b134"
+    },
+    "right": {
+     "name": "TODDLERS",
+     "color": "#9bf6ff"
+    },
+    "timeline": [
+     {
+      "shot": "charge",
+      "at": 0,
+      "left": 20,
+      "right": 0,
+      "note": "NEXT BASKET WINS"
+     },
+     {
+      "shot": "swishR",
+      "at": 0.5,
+      "left": 20,
+      "right": 2,
+      "note": "TODDLERS WIN"
+     }
+    ],
+    "until": "party"
+   },
+   "shots": [
+    {
+     "id": "charge",
+     "purpose": "hook",
+     "scene": "red",
+     "from": 0,
+     "to": "@charge.done+0.25",
+     "camera": {
+      "type": "close",
+      "target": "gus",
+      "dist": 1.6,
+      "height": -0.25,
+      "lookHeight": 0.1,
+      "fov": 52
+     },
+     "transition": "flash",
+     "overlays": [
+      {
+       "kind": "tag",
+       "text": "TEAM RED: ALL 100 RUSH THE PRO",
+       "bg": "#e5383b",
+       "at": 0,
+       "dur": 2.4
+      }
+     ]
+    },
+    {
+     "id": "stampede",
+     "purpose": "escalate",
+     "scene": "red",
+     "from": "@charge+0.35",
+     "to": "@charge+1.8",
+     "camera": {
+      "type": "ground",
+      "from": [
+       2.0,
+       0.22,
+       -9.6
+      ],
+      "to": [
+       1.2,
+       0.3,
+       -7.6
+      ],
+      "look": "dex.chest",
+      "fov": 62
+     }
+    },
+    {
+     "id": "panic",
+     "purpose": "reaction",
+     "scene": "red",
+     "from": "@charge+1.2",
+     "to": "@charge+2.2",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.7,
+      "shake": {
+       "at": 0.0,
+       "amp": 0.03
+      }
+     }
+    },
+    {
+     "id": "drag",
+     "purpose": "escalate",
+     "scene": "red",
+     "from": "@drag+0.2",
+     "to": "@drag.end",
+     "camera": {
+      "type": "track",
+      "target": "dex",
+      "dist": 4.8,
+      "height": 1.0,
+      "lookHeight": 0.6,
+      "rel": -80
+     }
+    },
+    {
+     "id": "timber",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@timber-0.2",
+     "to": "@timber+1.1",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -4.6,
+       1.0,
+       -8.6
+      ],
+      "look": [
+       0.6,
+       0.6,
+       -10.2
+      ],
+      "fov": 50,
+      "shake": {
+       "at": 0.85,
+       "amp": 0.12,
+       "decay": 5
+      }
+     }
+    },
+    {
+     "id": "pile",
+     "purpose": "escalate",
+     "scene": "red",
+     "from": "@pile",
+     "to": "@pile.end+0.4",
+     "speed": 1.6,
+     "camera": {
+      "type": "top",
+      "target": "dex",
+      "height": 4.5,
+      "heightTo": 7.0,
+      "tilt": 2.0
+     },
+     "narration": {
+      "text": "Within four seconds, the professional is gone.",
+      "at": 0.3
+     }
+    },
+    {
+     "id": "solo",
+     "purpose": "reveal",
+     "scene": "red",
+     "from": "@gusWalk",
+     "to": "@climb.end+0.5",
+     "camera": {
+      "type": "follow",
+      "target": "gus",
+      "dist": 3.0,
+      "height": 0.9,
+      "rel": 200,
+      "lookHeight": 0.0
+     },
+     "narration": {
+      "text": "But somebody still has to score.",
+      "at": 0.2
+     }
+    },
+    {
+     "id": "throw",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@shot-0.1",
+     "to": "@shot.arrive+0.4",
+     "ramp": [
+      {
+       "at": 0.95,
+       "speed": 0.45,
+       "dur": 0.1
+      },
+      {
+       "at": 1.6,
+       "speed": 1.0,
+       "dur": 0.2
+      }
+     ],
+     "camera": {
+      "type": "static",
+      "pos": [
+       5.8,
+       1.7,
+       -8.6
+      ],
+      "look": [
+       0.4,
+       1.5,
+       -11.2
+      ],
+      "fov": 58
+     }
+    },
+    {
+     "id": "swishR",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@shot.arrive-0.3",
+     "to": "@shot.arrive+1.0",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.7,
+       2.4,
+       -10.2
+      ],
+      "look": [
+       0,
+       2.9,
+       -12.6
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "party",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@shot.arrive+0.5",
+     "to": "@shot.arrive+2.6",
+     "camera": {
+      "type": "orbit",
+      "target": "dex",
+      "radius": 5.5,
+      "height": 2.6,
+      "from": 150,
+      "to": 115,
+      "lookHeight": 0.3
+     }
+    },
+    {
+     "id": "gg",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@thumb",
+     "to": "@gg.done+0.5",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "part": "head",
+      "dist": 1.5,
+      "height": 1.0,
+      "lookHeight": 0.0
+     }
+    },
+    {
+     "id": "endR",
+     "purpose": "payoff",
+     "scene": "red",
+     "from": "@gg.done+0.5",
+     "to": "@gg.done+3.3",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       3.8,
+       3.4,
+       -5.0
+      ],
+      "to": [
+       3.2,
+       3.8,
+       -4.4
+      ],
+      "look": [
+       0.4,
+       0.3,
+       -10.0
+      ],
+      "fov": 50
+     },
+     "overlays": [
+      {
+       "kind": "card",
+       "text": "Toddlers win",
+       "sub": "Final: 20\u20132 (next basket wins)",
+       "color": "#ffffff",
+       "at": 0.2
+      }
+     ]
+    }
+   ],
+   "cover": {
+    "shot": "pile",
+    "at": 1.0
+   }
+  },
+  "blue": {
+   "title": "Team Blue \u2014 Build a toddler tower",
+   "branch": "blue",
+   "narrator": "bm_george",
+   "captions": "all",
+   "music": {
+    "style": "playful",
+    "bpm": 120,
+    "cues": [
+     {
+      "shot": "call",
+      "at": 0,
+      "intensity": 0.8
+     },
+     {
+      "shot": "poke",
+      "at": 0,
+      "intensity": 0.2
+     },
+     {
+      "shot": "dunkB",
+      "at": 0,
+      "intensity": 1.0
+     },
+     {
+      "shot": "silence",
+      "at": 0,
+      "intensity": 0.0
+     }
+    ]
+   },
+   "score": {
+    "left": {
+     "name": "PRO",
+     "color": "#f2b134"
+    },
+    "right": {
+     "name": "TODDLERS",
+     "color": "#9bf6ff"
+    },
+    "timeline": [
+     {
+      "shot": "call",
+      "at": 0,
+      "left": 20,
+      "right": 0,
+      "note": "NEXT BASKET WINS"
+     },
+     {
+      "shot": "dunkB",
+      "at": 2.1,
+      "left": 21,
+      "right": 0,
+      "note": "PRO WINS"
+     }
+    ],
+    "until": "sorry"
+   },
+   "shots": [
+    {
+     "id": "call",
+     "purpose": "hook",
+     "scene": "blue",
+     "from": 0,
+     "to": "@call.done+0.5",
+     "camera": {
+      "type": "close",
+      "target": "gus",
+      "dist": 1.6,
+      "height": -0.25,
+      "lookHeight": 0.1,
+      "fov": 52
+     },
+     "transition": "flash",
+     "overlays": [
+      {
+       "kind": "tag",
+       "text": "TEAM BLUE: BUILD A TODDLER TOWER",
+       "bg": "#2f6fed",
+       "at": 0,
+       "dur": 2.2
+      }
+     ]
+    },
+    {
+     "id": "cute",
+     "purpose": "reaction",
+     "scene": "blue",
+     "from": "@cute-0.2",
+     "to": "@cute.done+0.2",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 2.2,
+      "rel": -15
+     }
+    },
+    {
+     "id": "build1",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@build+0.6",
+     "to": "@build+3.4",
+     "speed": 1.4,
+     "camera": {
+      "type": "orbit",
+      "center": [
+       0,
+       1.0,
+       -11.75
+      ],
+      "radius": 6.5,
+      "height": 1.6,
+      "from": 20,
+      "to": 45,
+      "lookHeight": 0.6
+     },
+     "narration": {
+      "text": "Fourteen toddlers. One Gus. Three meters of pure determination.",
+      "at": 0.2
+     }
+    },
+    {
+     "id": "build2",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@build+3.6",
+     "to": "@toddlers.tower+0.4",
+     "speed": 1.3,
+     "camera": {
+      "type": "orbit",
+      "center": [
+       0,
+       1.6,
+       -11.75
+      ],
+      "radius": 6.0,
+      "height": 2.4,
+      "from": -30,
+      "to": -10,
+      "lookHeight": 0.4
+     }
+    },
+    {
+     "id": "towerReveal",
+     "purpose": "reveal",
+     "scene": "blue",
+     "from": "@toddlers.tower+0.3",
+     "to": "@toddlers.tower+1.9",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       1.4,
+       0.7,
+       -6.6
+      ],
+      "to": [
+       1.2,
+       0.8,
+       -7.2
+      ],
+      "look": [
+       0,
+       2.4,
+       -11.8
+      ],
+      "fov": 56,
+      "clearView": true,
+      "keep": [
+       "gus"
+      ]
+     }
+    },
+    {
+     "id": "ohno",
+     "purpose": "reaction",
+     "scene": "blue",
+     "from": "@ohno-0.1",
+     "to": "@ohno.done+0.1",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.8,
+      "push": 0.4
+     }
+    },
+    {
+     "id": "poke",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@walkover.end-0.6",
+     "to": "@poke.end",
+     "camera": {
+      "type": "static",
+      "pos": [
+       3.6,
+       1.2,
+       -9.0
+      ],
+      "look": [
+       0.1,
+       1.0,
+       -11.2
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "sway",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@sway",
+     "to": "@sway.end",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.6,
+       0.35,
+       -9.3
+      ],
+      "look": [
+       0,
+       2.0,
+       -11.8
+      ],
+      "fov": 56,
+      "handheld": 1.0
+     }
+    },
+    {
+     "id": "collapse",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@collapse-0.05",
+     "to": "@collapse+2.4",
+     "ramp": [
+      {
+       "at": 0.25,
+       "speed": 0.5,
+       "dur": 0.15
+      },
+      {
+       "at": 1.6,
+       "speed": 1.0,
+       "dur": 0.2
+      }
+     ],
+     "camera": {
+      "type": "static",
+      "pos": [
+       5.5,
+       2.2,
+       -6.0
+      ],
+      "look": [
+       0,
+       1.1,
+       -10.8
+      ],
+      "fov": 52,
+      "shake": {
+       "at": 0.9,
+       "amp": 0.05
+      }
+     }
+    },
+    {
+     "id": "pickB",
+     "purpose": "escalate",
+     "scene": "blue",
+     "from": "@pick",
+     "to": "@pick.end+0.1",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 2.6,
+      "rel": 40,
+      "lookHeight": -0.5
+     }
+    },
+    {
+     "id": "dunkB",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@win",
+     "to": "@win.arrive+0.8",
+     "camera": {
+      "type": "track",
+      "target": "dex",
+      "dist": 5.2,
+      "height": 1.4,
+      "lookHeight": 1.6,
+      "rel": -95
+     }
+    },
+    {
+     "id": "silence",
+     "purpose": "reveal",
+     "scene": "blue",
+     "from": "@win.arrive+1.4",
+     "to": "@win.arrive+3.4",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       3.6,
+       2.5,
+       -6.0
+      ],
+      "to": [
+       3.0,
+       2.2,
+       -6.8
+      ],
+      "look": [
+       0,
+       0.4,
+       -10.5
+      ],
+      "fov": 52
+     },
+     "narration": {
+      "text": "Technically, a win.",
+      "at": 0.6
+     }
+    },
+    {
+     "id": "sorry",
+     "purpose": "reaction",
+     "scene": "blue",
+     "from": "@rematch-0.3",
+     "to": "@rematch.done+0.3",
+     "camera": {
+      "type": "close",
+      "target": "dex",
+      "dist": 1.5,
+      "height": -0.1
+     }
+    },
+    {
+     "id": "grins",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@rematch.done+0.4",
+     "to": "@rematch.done+2.0",
+     "camera": {
+      "type": "close",
+      "target": "gus",
+      "dist": 1.5,
+      "zoomTo": 30,
+      "zoomAt": 0.5,
+      "zoomDur": 0.8,
+      "handheld": false
+     }
+    },
+    {
+     "id": "endB",
+     "purpose": "payoff",
+     "scene": "blue",
+     "from": "@rematch.done+2.0",
+     "to": "@rematch.done+4.6",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       3.4,
+       2.0,
+       -6.5
+      ],
+      "to": [
+       3.0,
+       2.2,
+       -6.0
+      ],
+      "look": [
+       0,
+       0.5,
+       -10.0
+      ],
+      "fov": 52
+     },
+     "overlays": [
+      {
+       "kind": "card",
+       "text": "Pro wins",
+       "sub": "21\u20130. Nobody is happy.",
+       "color": "#ffffff",
+       "at": 0.2
+      }
+     ]
+    }
+   ],
+   "cover": {
+    "shot": "towerReveal",
+    "at": 1.0
+   }
+  }
+ },
+ "covers": {
+  "video": "main",
+  "shot": "unison",
+  "at": 1.2,
+  "label": true
+ }
+}

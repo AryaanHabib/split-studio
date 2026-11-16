@@ -1,0 +1,264 @@
+{
+ "id": "test",
+ "title": "Look test",
+ "seed": 3,
+ "characters": {
+  "dex": {
+   "name": "Dex",
+   "archetype": "athlete",
+   "look": {
+    "height": 2.16,
+    "skin": "#8d5a3b",
+    "shirt": "#f2b134",
+    "pants": "#1d1d1d",
+    "number": "1",
+    "accessory": "headband",
+    "accessoryColor": "#f5f5f5",
+    "hair": "buzz",
+    "hairColor": "#1a1210",
+    "shoes": "#f5f5f5"
+   }
+  },
+  "toddler": {
+   "archetype": "toddler",
+   "look": {},
+   "variants": {
+    "shirt": [
+     "#ffadad",
+     "#ffd6a5",
+     "#fdffb6",
+     "#caffbf",
+     "#9bf6ff",
+     "#a0c4ff",
+     "#bdb2ff",
+     "#ffc6ff"
+    ],
+    "skin": [
+     "#f1c7a6",
+     "#d9a07b",
+     "#a86b45",
+     "#ffd9bf",
+     "#c68e63"
+    ],
+    "hair": [
+     "tuft",
+     "curly",
+     "bald",
+     "short"
+    ],
+    "hairColor": [
+     "#3b2a1f",
+     "#e0b04a",
+     "#1a1210",
+     "#8a4b2a"
+    ],
+    "accessory": [
+     "none",
+     "none",
+     "bow",
+     "pacifier"
+    ]
+   }
+  },
+  "gus": {
+   "name": "Gus",
+   "archetype": "toddler",
+   "look": {
+    "shirt": "#2ec4b6",
+    "accessory": "headband",
+    "accessoryColor": "#e63946",
+    "hair": "spiky",
+    "hairColor": "#3b2a1f",
+    "skin": "#e8b48f"
+   }
+  },
+  "ref": {
+   "name": "REF-9000",
+   "kind": "gltf",
+   "model": "models/RobotExpressive.glb",
+   "scale": 0.4
+  }
+ },
+ "scenes": {
+  "a": {
+   "set": "court",
+   "cast": {
+    "dex": {
+     "at": [
+      0,
+      -6
+     ],
+     "facing": [
+      0,
+      0
+     ]
+    },
+    "ref": {
+     "at": "refSpot",
+     "facing": "center"
+    }
+   },
+   "crowds": {
+    "toddlers": {
+     "template": "toddler",
+     "count": 30,
+     "formation": "grid",
+     "center": [
+      0,
+      -1.5
+     ],
+     "spacing": 0.7,
+     "facing": "dex",
+     "named": {
+      "gus": {
+       "char": "gus",
+       "index": 2
+      }
+     }
+    }
+   },
+   "props": {
+    "ball": {
+     "kind": "ball",
+     "heldBy": "dex"
+    }
+   },
+   "tracks": {
+    "dex": [
+     {
+      "do": "dribble",
+      "dur": 1.5
+     },
+     {
+      "do": "face",
+      "expr": "smug"
+     },
+     {
+      "do": "dribbleTo",
+      "prop": "ball",
+      "to": [
+       2,
+       -9
+      ],
+      "gait": "walk"
+     },
+     {
+      "do": "shoot",
+      "prop": "ball",
+      "outcome": "make",
+      "mark": "shot"
+     },
+     {
+      "do": "celebrate",
+      "dur": 1.5
+     }
+    ],
+    "toddlers": [
+     {
+      "do": "group:runTo",
+      "to": [
+       0,
+       -4
+      ],
+      "spread": 0.8,
+      "at": 0.5
+     }
+    ],
+    "gus": [
+     {
+      "do": "face",
+      "expr": "determined"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1,
+       -4.5
+      ]
+     },
+     {
+      "do": "lookAt",
+      "target": "dex",
+      "dur": 3
+     }
+    ],
+    "ref": [
+     {
+      "do": "wave",
+      "dur": 1.5
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       5,
+       -7
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "videos": {
+  "main": {
+   "title": "t",
+   "captions": "none",
+   "shots": [
+    {
+     "scene": "a",
+     "from": 0,
+     "to": 3,
+     "camera": {
+      "type": "wide",
+      "targets": [
+       "dex",
+       "toddlers"
+      ],
+      "yaw": 160,
+      "pitch": 18
+     }
+    },
+    {
+     "scene": "a",
+     "from": 3,
+     "to": 6,
+     "camera": {
+      "type": "follow",
+      "target": "dex",
+      "dist": 4.5,
+      "height": 1.4,
+      "rel": 150,
+      "lookHeight": 1.2
+     }
+    },
+    {
+     "scene": "a",
+     "from": 6,
+     "to": 9,
+     "camera": {
+      "type": "close",
+      "target": "gus"
+     }
+    },
+    {
+     "scene": "a",
+     "from": 9,
+     "to": 11,
+     "camera": {
+      "type": "close",
+      "target": "dex"
+     }
+    },
+    {
+     "scene": "a",
+     "from": 2,
+     "to": 5,
+     "camera": {
+      "type": "close",
+      "target": "ref",
+      "dist": 3
+     }
+    }
+   ]
+  }
+ }
+}

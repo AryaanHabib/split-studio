@@ -1,0 +1,704 @@
+{
+ "id": "ep002",
+ "title": "The Call",
+ "format": "single",
+ "seed": 2002,
+ "logline": "At 3am a man's landline rings. The caller is him, one minute from now, begging him not to open the door.",
+ "hook": "A ringing phone in a dark room, and a voice that sounds exactly like his.",
+ "mandatory": [
+  "phone call from his future self",
+  "the door opens by itself",
+  "the visitor is also him"
+ ],
+ "avoid": [
+  "jump-scare noise spam",
+  "gore"
+ ],
+ "characters": {
+  "sam": {
+   "name": "Sam",
+   "archetype": "adult",
+   "voice": "am_adam",
+   "steps": "footstep",
+   "look": {
+    "skin": "#e0b49a",
+    "shirt": "#3a3f47",
+    "pants": "#22252b",
+    "hair": "short",
+    "hairColor": "#4a3527",
+    "shoes": "#1b1b1b"
+   }
+  },
+  "phone": {
+   "name": "Caller",
+   "archetype": "adult",
+   "voice": "am_adam"
+  }
+ },
+ "scenes": {
+  "night": {
+   "set": "apartment",
+   "params": {
+    "lights": "night"
+   },
+   "duration": 27,
+   "cast": {
+    "sam": {
+     "at": [
+      0.75,
+      -2.15
+     ],
+     "facing": 0
+    },
+    "samFuture": {
+     "char": "sam",
+     "at": [
+      3.45,
+      1.2
+     ],
+     "facing": -90,
+     "hiddenUntil": "@reveal"
+    },
+    "phone": {
+     "at": [
+      1.55,
+      -2.3
+     ],
+     "hiddenFrom": 0
+    }
+   },
+   "props": {
+    "handset": {
+     "kind": "handset",
+     "at": [
+      1.55,
+      0.67,
+      -2.3
+     ]
+    }
+   },
+   "tracks": {
+    "sam": [
+     {
+      "do": "sit",
+      "seat": true,
+      "held": true,
+      "dur": 18.6,
+      "at": 0
+     },
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": 0
+     },
+     {
+      "do": "lookAt",
+      "target": "handset",
+      "dur": 2.0,
+      "at": 1.4
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": 1.6
+     },
+     {
+      "do": "hold",
+      "prop": "handset",
+      "hand": "R",
+      "at": 4.1
+     },
+     {
+      "do": "upper:phoneToEar",
+      "dur": 18.4,
+      "at": 4.1
+     },
+     {
+      "do": "say",
+      "text": "Hello?",
+      "at": 4.6,
+      "mark": "hello"
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": "@warn+0.4"
+     },
+     {
+      "do": "say",
+      "text": "Who is this?",
+      "at": "@warn.done+0.7",
+      "mark": "who"
+     },
+     {
+      "do": "face",
+      "expr": "scared",
+      "at": "@itsYou+0.8"
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       3.0,
+       1.1,
+       1.2
+      ],
+      "dur": "hold",
+      "snap": true,
+      "at": "@knock+0.15"
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": "@knock+0.3"
+     },
+     {
+      "do": "stand",
+      "dur": 0.8,
+      "at": "@doorOpen+1.2"
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       -1.2,
+       -1.9
+      ],
+      "gait": "sneak",
+      "speed": 0.45,
+      "mark": "backAway",
+      "backward": true
+     },
+     {
+      "do": "release",
+      "prop": "handset",
+      "at": "@futureHello.done+0.3",
+      "mark": "drop"
+     },
+     {
+      "do": "shock",
+      "dur": 1.0,
+      "at": "@futureHello.done+0.3"
+     }
+    ],
+    "phone": [
+     {
+      "do": "say",
+      "text": "Don't open the door.",
+      "fx": "phone",
+      "speaker": "Caller",
+      "at": "@hello.done+0.6",
+      "mark": "warn"
+     },
+     {
+      "do": "say",
+      "text": "It's you. About one minute from now.",
+      "fx": "phone",
+      "speaker": "Caller",
+      "at": "@who.done+0.8",
+      "mark": "itsYou"
+     },
+     {
+      "do": "say",
+      "text": "Whatever happens... don't let me in.",
+      "fx": "phone",
+      "speaker": "Caller",
+      "at": "@knock+1.6",
+      "mark": "dontLet"
+     },
+     {
+      "do": "say",
+      "text": "Hello?",
+      "fx": "phone",
+      "speaker": "Caller",
+      "caption": false,
+      "at": "@futureHello",
+      "gain": -4
+     }
+    ],
+    "samFuture": [
+     {
+      "do": "phoneToEar",
+      "dur": 20,
+      "at": 0
+     },
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": 0
+     },
+     {
+      "do": "lookAt",
+      "target": "sam.head",
+      "dur": "hold",
+      "at": "@reveal"
+     },
+     {
+      "do": "say",
+      "text": "Hello?",
+      "speaker": "Sam?",
+      "at": "@reveal+1.4",
+      "mark": "futureHello"
+     }
+    ],
+    "world": [
+     {
+      "do": "lights",
+      "preset": "night",
+      "at": 0
+     },
+     {
+      "do": "phoneRing",
+      "on": true,
+      "at": 0.8
+     },
+     {
+      "do": "sound",
+      "id": "phoneRing",
+      "at": 0.8,
+      "gain": -4
+     },
+     {
+      "do": "sound",
+      "id": "phoneRing",
+      "at": 3.2,
+      "gain": -4
+     },
+     {
+      "do": "phoneRing",
+      "on": false,
+      "at": 4.1
+     },
+     {
+      "do": "sound",
+      "id": "click",
+      "at": 4.1
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "at": "@itsYou.done+1.2",
+      "gain": 2,
+      "mark": "knock"
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "at": "@knock+0.38",
+      "gain": 2
+     },
+     {
+      "do": "sound",
+      "id": "thud",
+      "at": "@knock+0.76",
+      "gain": 2
+     },
+     {
+      "do": "flicker",
+      "dur": 1.4,
+      "at": "@dontLet.done+0.6",
+      "mark": "flick"
+     },
+     {
+      "do": "sound",
+      "id": "glitch",
+      "at": "@flick+0.2",
+      "gain": -14
+     },
+     {
+      "do": "lights",
+      "preset": "blackout",
+      "at": "@flick+1.4"
+     },
+     {
+      "do": "sound",
+      "id": "drone",
+      "at": "@flick+1.4",
+      "gain": -6,
+      "dur": 6
+     },
+     {
+      "do": "door",
+      "open": 0.75,
+      "dur": 3.2,
+      "hallLight": 4,
+      "at": "@flick+1.9",
+      "mark": "doorOpen"
+     },
+     {
+      "do": "sound",
+      "id": "creak",
+      "at": "@doorOpen+0.1",
+      "gain": -2
+     },
+     {
+      "do": "sound",
+      "id": "heartbeat",
+      "at": "@doorOpen+2.2",
+      "gain": -6,
+      "mark": "reveal"
+     },
+     {
+      "do": "sound",
+      "id": "heartbeat",
+      "at": "@reveal+1.0",
+      "gain": -4
+     },
+     {
+      "do": "sound",
+      "id": "stinger",
+      "at": "@futureHello.done+0.3",
+      "gain": -2
+     },
+     {
+      "do": "sound",
+      "id": "phoneRing",
+      "at": "@futureHello.done+2.6",
+      "gain": -8
+     }
+    ]
+   }
+  }
+ },
+ "videos": {
+  "main": {
+   "title": "The Call",
+   "branch": "single",
+   "style": "horror",
+   "captions": "dialogue",
+   "music": {
+    "style": "creepy",
+    "bpm": 60,
+    "key": "D",
+    "cues": [
+     {
+      "shot": "establish",
+      "at": 0,
+      "intensity": 0.3
+     },
+     {
+      "shot": "knock",
+      "at": 0,
+      "intensity": 0.7
+     }
+    ],
+    "gain": -16
+   },
+   "shots": [
+    {
+     "id": "establish",
+     "purpose": "hook",
+     "scene": "night",
+     "from": 0,
+     "to": 3.0,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       -2.3,
+       1.7,
+       2.6
+      ],
+      "to": [
+       -1.9,
+       1.55,
+       2.0
+      ],
+      "look": [
+       0.6,
+       0.7,
+       -2.2
+      ],
+      "fov": 52,
+      "handheld": 0.3
+     },
+     "transition": "fadeIn",
+     "overlays": [
+      {
+       "kind": "tag",
+       "text": "3:07 AM",
+       "at": 0.4,
+       "dur": 2.2,
+       "bg": "rgba(0,0,0,0.55)"
+      }
+     ]
+    },
+    {
+     "id": "phone",
+     "purpose": "establish",
+     "scene": "night",
+     "from": 2.9,
+     "to": 4.3,
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.15,
+       0.95,
+       -1.55
+      ],
+      "look": [
+       1.55,
+       0.62,
+       -2.2
+      ],
+      "fov": 42,
+      "handheld": 0.2
+     }
+    },
+    {
+     "id": "hello",
+     "purpose": "establish",
+     "scene": "night",
+     "from": 4.3,
+     "to": "@hello.done+0.3",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.5,
+      "rel": 25,
+      "lookHeight": -0.12
+     }
+    },
+    {
+     "id": "warn",
+     "purpose": "escalate",
+     "scene": "night",
+     "from": "@warn-0.2",
+     "to": "@warn.done+0.5",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.8,
+      "rel": -15,
+      "push": 0.5,
+      "handheld": 0.4
+     }
+    },
+    {
+     "id": "who",
+     "purpose": "reaction",
+     "scene": "night",
+     "from": "@who-0.1",
+     "to": "@who.done+0.3",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.3,
+      "rel": 30
+     }
+    },
+    {
+     "id": "itsYou",
+     "purpose": "reveal",
+     "scene": "night",
+     "from": "@itsYou-0.2",
+     "to": "@itsYou.done+0.9",
+     "camera": {
+      "type": "static",
+      "pos": [
+       -0.9,
+       1.45,
+       -1.35
+      ],
+      "look": [
+       2.9,
+       1.1,
+       1.2
+      ],
+      "fov": 50,
+      "handheld": 0.3
+     }
+    },
+    {
+     "id": "knock",
+     "purpose": "escalate",
+     "scene": "night",
+     "from": "@knock-0.15",
+     "to": "@knock+1.3",
+     "camera": {
+      "type": "static",
+      "pos": [
+       1.5,
+       1.25,
+       0.1
+      ],
+      "look": [
+       2.95,
+       1.1,
+       1.2
+      ],
+      "fov": 44,
+      "handheld": 0.2
+     }
+    },
+    {
+     "id": "dontLet",
+     "purpose": "escalate",
+     "scene": "night",
+     "from": "@dontLet-0.2",
+     "to": "@dontLet.done+0.4",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.4,
+      "rel": -25,
+      "push": 0.4,
+      "roll": -8,
+      "handheld": 0.5
+     }
+    },
+    {
+     "id": "flicker",
+     "purpose": "escalate",
+     "scene": "night",
+     "from": "@flick",
+     "to": "@doorOpen",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       -2.2,
+       1.6,
+       2.4
+      ],
+      "to": [
+       -2.0,
+       1.55,
+       2.2
+      ],
+      "look": [
+       0.6,
+       0.8,
+       -1.8
+      ],
+      "fov": 54,
+      "handheld": 0.4
+     }
+    },
+    {
+     "id": "door",
+     "purpose": "reveal",
+     "scene": "night",
+     "from": "@doorOpen",
+     "to": "@doorOpen+2.4",
+     "camera": {
+      "type": "dolly",
+      "from": [
+       0.2,
+       1.25,
+       -0.6
+      ],
+      "to": [
+       0.6,
+       1.2,
+       -0.2
+      ],
+      "look": [
+       3.0,
+       1.15,
+       1.2
+      ],
+      "fov": 46,
+      "handheld": 0.3
+     }
+    },
+    {
+     "id": "backAway",
+     "purpose": "reaction",
+     "scene": "night",
+     "from": "@doorOpen+1.8",
+     "to": "@reveal+0.3",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.7,
+      "rel": 20,
+      "handheld": 0.6
+     }
+    },
+    {
+     "id": "reveal",
+     "purpose": "reveal",
+     "scene": "night",
+     "from": "@reveal+0.2",
+     "to": "@futureHello.done+0.3",
+     "camera": {
+      "type": "ots",
+      "from": "sam",
+      "to": "samFuture",
+      "dist": 0.9,
+      "side": -0.5,
+      "height": 0.1,
+      "fov": 44,
+      "roll": 4,
+      "handheld": 0.3
+     }
+    },
+    {
+     "id": "drop",
+     "purpose": "payoff",
+     "scene": "night",
+     "from": "@drop",
+     "to": "@drop+1.2",
+     "camera": {
+      "type": "close",
+      "target": "sam",
+      "dist": 1.4,
+      "rel": -30,
+      "zoomTo": 32,
+      "zoomDur": 0.3,
+      "handheld": 0.8
+     }
+    },
+    {
+     "id": "end",
+     "purpose": "payoff",
+     "scene": "night",
+     "from": "@drop+1.2",
+     "to": "@drop+4.4",
+     "camera": {
+      "type": "ots",
+      "from": "sam",
+      "to": "samFuture",
+      "dist": 0.9,
+      "side": -0.5,
+      "height": 0.1,
+      "fov": 38,
+      "handheld": 0.2
+     },
+     "overlays": [
+      {
+       "kind": "fade",
+       "from": 0,
+       "to": 1,
+       "at": 0.4,
+       "dur": 0.8
+      },
+      {
+       "kind": "fade",
+       "from": 1,
+       "to": 1,
+       "at": 1.2,
+       "dur": 2.0
+      },
+      {
+       "kind": "title",
+       "text": "The Call",
+       "size": 110,
+       "y": 0.45,
+       "color": "#e8e8e8",
+       "at": 1.3,
+       "dur": 1.9
+      }
+     ]
+    }
+   ],
+   "cover": {
+    "shot": "reveal",
+    "at": 1.6
+   }
+  }
+ },
+ "covers": {
+  "video": "main",
+  "shot": "reveal",
+  "at": 1.8,
+  "label": false
+ }
+}

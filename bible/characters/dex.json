@@ -1,0 +1,25 @@
+{
+ "name": "Dex",
+ "archetype": "athlete",
+ "voice": "am_onyx",
+ "steps": "squeak",
+ "look": {
+  "height": 2.16,
+  "skin": "#8d5a3b",
+  "shirt": "#f2b134",
+  "pants": "#1d1d1d",
+  "number": "1",
+  "accessory": "headband",
+  "accessoryColor": "#f5f5f5",
+  "hair": "buzz",
+  "hairColor": "#1a1210",
+  "shoes": "#f5f5f5"
+ },
+ "traits": "smug, lazy, secretly fragile",
+ "history": [
+  {
+   "episode": "ep001",
+   "note": "Red: buried by toddlers, lost on a header assist. Blue: won 21-0, everyone cried."
+  }
+ ]
+}

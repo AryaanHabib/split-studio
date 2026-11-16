@@ -1,0 +1,21 @@
+{
+ "name": "Gus",
+ "archetype": "toddler",
+ "voice": "af_sky",
+ "voicePitch": 5,
+ "look": {
+  "shirt": "#2ec4b6",
+  "accessory": "headband",
+  "accessoryColor": "#e63946",
+  "hair": "spiky",
+  "hairColor": "#3b2a1f",
+  "skin": "#e8b48f"
+ },
+ "traits": "tiny general, zero fear",
+ "history": [
+  {
+   "episode": "ep001",
+   "note": "Stole the ball from Dex; led the charge (Red) / topped the tower (Blue)."
+  }
+ ]
+}

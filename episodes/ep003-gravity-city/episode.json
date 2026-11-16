@@ -1,0 +1,1044 @@
+{
+ "id": "ep003",
+ "title": "Gravity Doubles Every 5 Seconds",
+ "format": "single",
+ "seed": 3003,
+ "logline": "A normal morning in the city, until gravity starts doubling every five seconds.",
+ "mandatory": [
+  "visible rule: gravity doubles every 5s",
+  "same kid jump at different gravities",
+  "buildings collapse under their own weight"
+ ],
+ "characters": {
+  "kid": {
+   "name": "Kid",
+   "archetype": "child",
+   "look": {
+    "shirt": "#ffb703",
+    "pants": "#1d3557",
+    "hair": "curly",
+    "hairColor": "#2b1d14",
+    "skin": "#c68e63",
+    "accessory": "cap",
+    "accessoryColor": "#e63946"
+   }
+  },
+  "jogger": {
+   "name": "Jogger",
+   "archetype": "athlete",
+   "look": {
+    "height": 1.85,
+    "outfit": "jersey",
+    "number": "5",
+    "shirt": "#e63946",
+    "pants": "#222",
+    "skin": "#f1c7a6",
+    "hair": "short",
+    "hairColor": "#8a4b2a",
+    "accessory": "headband",
+    "accessoryColor": "#ffffff"
+   }
+  },
+  "coffee": {
+   "name": "Office guy",
+   "archetype": "adult",
+   "look": {
+    "outfit": "suit",
+    "shirt": "#2b2d42",
+    "pants": "#2b2d42",
+    "skin": "#d9a07b",
+    "hair": "short",
+    "hairColor": "#111",
+    "accessory": "glasses"
+   }
+  },
+  "lady": {
+   "name": "Woman",
+   "archetype": "adult",
+   "look": {
+    "height": 1.7,
+    "shirt": "#2a9d8f",
+    "pants": "#264653",
+    "skin": "#a86b45",
+    "hair": "long",
+    "hairColor": "#1a1210"
+   }
+  },
+  "elder": {
+   "name": "Old man",
+   "archetype": "elder",
+   "look": {
+    "shirt": "#8d99ae",
+    "pants": "#5c4b3b",
+    "hair": "bald",
+    "skin": "#e8c4a8",
+    "accessory": "glasses"
+   }
+  }
+ },
+ "scenes": {
+  "city": {
+   "set": "city",
+   "duration": 33,
+   "cast": {
+    "kid": {
+     "at": [
+      -8.4,
+      -9.2
+     ],
+     "y": 0.18,
+     "facing": 90
+    },
+    "jogger": {
+     "at": [
+      -22,
+      -7.6
+     ],
+     "y": 0.18,
+     "facing": 90
+    },
+    "coffee": {
+     "at": [
+      7.6,
+      14
+     ],
+     "y": 0.18,
+     "facing": 180
+    },
+    "lady": {
+     "at": [
+      -7.4,
+      10
+     ],
+     "y": 0.18,
+     "facing": 180
+    },
+    "elder": {
+     "at": [
+      9.5,
+      -8.0
+     ],
+     "y": 0.18,
+     "facing": -120
+    }
+   },
+   "structures": {
+    "towerSW": {
+     "at": [
+      -15,
+      15
+     ],
+     "floors": 6,
+     "size": [
+      8,
+      7
+     ],
+     "color": "#c9b79c"
+    },
+    "towerNW": {
+     "at": [
+      -15,
+      -15
+     ],
+     "floors": 9,
+     "size": [
+      8,
+      8
+     ],
+     "color": "#9aa7b8"
+    },
+    "towerNE": {
+     "at": [
+      15,
+      -15
+     ],
+     "floors": 11,
+     "size": [
+      8,
+      8
+     ],
+     "color": "#b7a48f"
+    },
+    "towerSE": {
+     "at": [
+      15.5,
+      15.5
+     ],
+     "floors": 14,
+     "size": [
+      9,
+      9
+     ],
+     "color": "#7f8a99"
+    }
+   },
+   "props": {
+    "mug": {
+     "kind": "mug",
+     "heldBy": "coffee",
+     "hand": "R"
+    },
+    "crate1": {
+     "kind": "crate",
+     "at": [
+      12.5,
+      33.6,
+      -11.5
+     ],
+     "params": {
+      "size": 1.2
+     }
+    },
+    "crate2": {
+     "kind": "crate",
+     "at": [
+      13.8,
+      33.6,
+      -11.2
+     ],
+     "params": {
+      "size": 1.0,
+      "color": "#7a5230"
+     }
+    },
+    "crate3": {
+     "kind": "crate",
+     "at": [
+      12.0,
+      33.6,
+      -12.8
+     ],
+     "params": {
+      "size": 1.1
+     }
+    }
+   },
+   "tracks": {
+    "world": [
+     {
+      "do": "gravity",
+      "value": 1,
+      "at": 0
+     },
+     {
+      "do": "gravity",
+      "value": 2,
+      "at": 5,
+      "mark": "g2"
+     },
+     {
+      "do": "sound",
+      "id": "rumble",
+      "at": 5,
+      "gain": -6,
+      "dur": 1.5
+     },
+     {
+      "do": "gravity",
+      "value": 4,
+      "at": 10,
+      "mark": "g4"
+     },
+     {
+      "do": "sound",
+      "id": "rumble",
+      "at": 10,
+      "gain": -3,
+      "dur": 1.8
+     },
+     {
+      "do": "dropProps",
+      "props": [
+       "crate1",
+       "crate2",
+       "crate3"
+      ],
+      "at": 10.4,
+      "dur": 3,
+      "mark": "crates"
+     },
+     {
+      "do": "gravity",
+      "value": 8,
+      "at": 15,
+      "mark": "g8"
+     },
+     {
+      "do": "sound",
+      "id": "rumble",
+      "at": 15,
+      "gain": 0,
+      "dur": 2.2
+     },
+     {
+      "do": "collapse",
+      "structures": [
+       "towerSW"
+      ],
+      "mode": "crumble",
+      "at": 17.2,
+      "dur": 4,
+      "mark": "fallSW",
+      "gravity": 2.5,
+      "note": "simulated at reduced visual gravity so the motion is readable",
+      "failFraction": 0.7,
+      "jitter": 1.6,
+      "interval": 0.13
+     },
+     {
+      "do": "gravity",
+      "value": 16,
+      "at": 20,
+      "mark": "g16"
+     },
+     {
+      "do": "collapse",
+      "structures": [
+       "towerNW",
+       "towerNE"
+      ],
+      "mode": "crumble",
+      "at": 20.3,
+      "dur": 4.5,
+      "mark": "fallN",
+      "gravity": 2.5,
+      "note": "simulated at reduced visual gravity so the motion is readable",
+      "failFraction": 0.7,
+      "jitter": 1.6,
+      "interval": 0.13
+     },
+     {
+      "do": "gravity",
+      "value": 32,
+      "at": 25,
+      "mark": "g32"
+     },
+     {
+      "do": "collapse",
+      "structures": [
+       "towerSE"
+      ],
+      "mode": "crumble",
+      "blowout": 8,
+      "at": 25.2,
+      "dur": 5,
+      "mark": "fallSE",
+      "gravity": 3,
+      "note": "simulated at reduced visual gravity so the motion is readable",
+      "failFraction": 0.7,
+      "jitter": 1.6,
+      "interval": 0.13
+     },
+     {
+      "do": "lights",
+      "preset": "dusk",
+      "at": 25
+     }
+    ],
+    "kid": [
+     {
+      "do": "face",
+      "expr": "happy",
+      "at": 0
+     },
+     {
+      "do": "jump",
+      "height": 0.5,
+      "at": 1.0,
+      "dur": 0.75
+     },
+     {
+      "do": "jump",
+      "height": 0.5,
+      "at": 3.0,
+      "dur": 0.75,
+      "mark": "jump1"
+     },
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": 5.2
+     },
+     {
+      "do": "jump",
+      "height": 0.25,
+      "at": 6.6,
+      "dur": 0.55,
+      "mark": "jump2"
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": 10.2
+     },
+     {
+      "do": "jump",
+      "height": 0.1,
+      "at": 11.2,
+      "dur": 0.4,
+      "mark": "jump4"
+     },
+     {
+      "do": "sit",
+      "dur": 4,
+      "at": 12.0
+     },
+     {
+      "do": "face",
+      "expr": "scared",
+      "at": 15.2
+     },
+     {
+      "do": "fall",
+      "dir": 1,
+      "dur": 0.5,
+      "at": 15.4
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": 20.2
+     }
+    ],
+    "jogger": [
+     {
+      "do": "face",
+      "expr": "happy",
+      "at": 0
+     },
+     {
+      "do": "runTo",
+      "to": [
+       -4,
+       -7.6
+      ],
+      "speed": 3.6,
+      "at": 0.2
+     },
+     {
+      "do": "stumble",
+      "dur": 0.8,
+      "at": 5.0
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": 5.0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       -1.0,
+       -7.6
+      ],
+      "gait": "heavyWalk",
+      "speed": 0.7
+     },
+     {
+      "do": "face",
+      "expr": "angry",
+      "at": 10.0
+     },
+     {
+      "do": "crouch",
+      "dur": 0.6,
+      "at": 10.1
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       1.5,
+       -7.6
+      ],
+      "gait": "crawl",
+      "speed": 0.25,
+      "mark": "crawl"
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": 15.2
+     },
+     {
+      "do": "fall",
+      "dir": 1,
+      "dur": 0.4,
+      "at": 15.2
+     }
+    ],
+    "coffee": [
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": 0
+     },
+     {
+      "do": "walkTo",
+      "to": [
+       7.6,
+       7.0
+      ],
+      "speed": 1.2,
+      "at": 0.3
+     },
+     {
+      "do": "face",
+      "expr": "shock",
+      "at": 5.1
+     },
+     {
+      "do": "release",
+      "prop": "mug",
+      "at": 5.6,
+      "mark": "spill"
+     },
+     {
+      "do": "shock",
+      "dur": 0.9,
+      "at": 5.6
+     },
+     {
+      "do": "handsOnHips",
+      "dur": 1.0
+     },
+     {
+      "do": "sit",
+      "dur": 5,
+      "at": 10.3
+     },
+     {
+      "do": "fall",
+      "dir": -1,
+      "dur": 0.5,
+      "at": 15.3
+     },
+     {
+      "do": "face",
+      "expr": "dazed",
+      "at": 15.8
+     }
+    ],
+    "lady": [
+     {
+      "do": "walkTo",
+      "to": [
+       -7.4,
+       6.4
+      ],
+      "speed": 1.1,
+      "at": 0.5
+     },
+     {
+      "do": "face",
+      "expr": "worried",
+      "at": 5.2
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       0,
+       6,
+       0
+      ],
+      "dur": 2,
+      "at": 5.2
+     },
+     {
+      "do": "crouch",
+      "dur": 5,
+      "at": 10.2
+     },
+     {
+      "do": "fall",
+      "dir": -1,
+      "dur": 0.5,
+      "at": 15.1
+     },
+     {
+      "do": "face",
+      "expr": "terrified",
+      "at": 15.6
+     },
+     {
+      "do": "lookAt",
+      "target": [
+       -15,
+       12,
+       15
+      ],
+      "dur": "hold",
+      "at": 16.5
+     }
+    ],
+    "elder": [
+     {
+      "do": "face",
+      "expr": "confused",
+      "at": 0
+     },
+     {
+      "do": "idle",
+      "dur": 5,
+      "at": 0
+     },
+     {
+      "do": "shrug",
+      "dur": 1.4,
+      "at": 5.4
+     },
+     {
+      "do": "sit",
+      "dur": 5,
+      "at": 9.9
+     },
+     {
+      "do": "lie",
+      "dir": -1,
+      "dur": 10,
+      "at": 15.0
+     },
+     {
+      "do": "face",
+      "expr": "sleepy",
+      "at": 15.0
+     }
+    ]
+   }
+  }
+ },
+ "videos": {
+  "main": {
+   "title": "Gravity Doubles Every 5 Seconds",
+   "branch": "single",
+   "style": "disaster-epic",
+   "narrator": "bm_george",
+   "captions": "all",
+   "music": {
+    "style": "tension",
+    "bpm": 90,
+    "cues": [
+     {
+      "shot": "aerial",
+      "at": 0,
+      "intensity": 0.3
+     },
+     {
+      "shot": "crates",
+      "at": 0,
+      "intensity": 0.6
+     },
+     {
+      "shot": "collapseSW",
+      "at": 0,
+      "intensity": 1.0
+     }
+    ],
+    "gain": -15
+   },
+   "overlays": [
+    {
+     "kind": "counter",
+     "bind": "gravity",
+     "label": "Gravity",
+     "x": 0.5,
+     "y": 0.19,
+     "color": "#ffffff",
+     "at": 0
+    }
+   ],
+   "shots": [
+    {
+     "id": "aerial",
+     "purpose": "hook",
+     "scene": "city",
+     "from": 0,
+     "to": 2.8,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       22,
+       26,
+       30
+      ],
+      "to": [
+       17,
+       20,
+       24
+      ],
+      "look": [
+       0,
+       2,
+       0
+      ],
+      "fov": 50
+     },
+     "narration": {
+      "text": "Every five seconds, gravity doubles.",
+      "at": 0.3
+     }
+    },
+    {
+     "id": "kid1",
+     "purpose": "establish",
+     "scene": "city",
+     "from": 2.8,
+     "to": 4.4,
+     "camera": {
+      "type": "static",
+      "pos": [
+       -8.4,
+       1.2,
+       -5.6
+      ],
+      "look": [
+       -8.4,
+       0.9,
+       -9.2
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "jogger",
+     "purpose": "escalate",
+     "scene": "city",
+     "from": 4.4,
+     "to": 6.3,
+     "camera": {
+      "type": "track",
+      "target": "jogger",
+      "dist": 4.5,
+      "height": 1.2,
+      "rel": -90,
+      "lookHeight": 0.8,
+      "shake": {
+       "at": 0.6,
+       "amp": 0.08
+      }
+     },
+     "narration": {
+      "text": "Two G. Your body suddenly weighs twice as much.",
+      "at": 0.7
+     }
+    },
+    {
+     "id": "mug",
+     "purpose": "reaction",
+     "scene": "city",
+     "from": 5.3,
+     "to": 6.4,
+     "camera": {
+      "type": "close",
+      "target": "coffee",
+      "dist": 2.2,
+      "rel": 30,
+      "lookHeight": -0.5
+     }
+    },
+    {
+     "id": "kid2",
+     "purpose": "escalate",
+     "scene": "city",
+     "from": 6.4,
+     "to": 7.8,
+     "camera": {
+      "type": "static",
+      "pos": [
+       -8.4,
+       1.2,
+       -5.6
+      ],
+      "look": [
+       -8.4,
+       0.9,
+       -9.2
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "crates",
+     "purpose": "escalate",
+     "scene": "city",
+     "from": 9.9,
+     "to": 11.9,
+     "camera": {
+      "type": "static",
+      "pos": [
+       6.5,
+       1.6,
+       -3.0
+      ],
+      "look": [
+       12.5,
+       4.5,
+       -12.0
+      ],
+      "fov": 58,
+      "shake": {
+       "at": 1.0,
+       "amp": 0.1
+      }
+     },
+     "narration": {
+      "text": "Four G. Standing up is now a workout nobody can finish.",
+      "at": 0.3
+     }
+    },
+    {
+     "id": "kid4",
+     "purpose": "escalate",
+     "scene": "city",
+     "from": 11.1,
+     "to": 12.3,
+     "camera": {
+      "type": "static",
+      "pos": [
+       -8.4,
+       1.2,
+       -5.6
+      ],
+      "look": [
+       -8.4,
+       0.9,
+       -9.2
+      ],
+      "fov": 48
+     }
+    },
+    {
+     "id": "crawl",
+     "purpose": "reaction",
+     "scene": "city",
+     "from": 12.3,
+     "to": 14.8,
+     "camera": {
+      "type": "ground",
+      "from": [
+       2.8,
+       0.45,
+       -6.2
+      ],
+      "to": [
+       2.4,
+       0.45,
+       -6.4
+      ],
+      "look": "jogger.head",
+      "fov": 50
+     }
+    },
+    {
+     "id": "flat",
+     "purpose": "escalate",
+     "scene": "city",
+     "from": 15.0,
+     "to": 17.1,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       -3.5,
+       2.6,
+       0.5
+      ],
+      "to": [
+       -3.8,
+       2.2,
+       1.5
+      ],
+      "look": [
+       -7.4,
+       0.3,
+       6.0
+      ],
+      "fov": 52,
+      "shake": {
+       "at": 0.1,
+       "amp": 0.06
+      }
+     },
+     "narration": {
+      "text": "Eight G. Fighter pilots black out here. The buildings are next.",
+      "at": 0.2
+     }
+    },
+    {
+     "id": "collapseSW",
+     "purpose": "payoff",
+     "scene": "city",
+     "from": 17.1,
+     "to": 19.6,
+     "speed": 0.6,
+     "camera": {
+      "type": "static",
+      "pos": [
+       -3,
+       2.0,
+       3.5
+      ],
+      "look": [
+       -15,
+       7,
+       15
+      ],
+      "fov": 56,
+      "shake": {
+       "at": 0.6,
+       "amp": 0.12
+      }
+     }
+    },
+    {
+     "id": "collapseNW",
+     "purpose": "payoff",
+     "scene": "city",
+     "from": 20.1,
+     "to": 21.4,
+     "speed": 0.6,
+     "camera": {
+      "type": "static",
+      "pos": [
+       -4.5,
+       1.4,
+       -3.0
+      ],
+      "look": [
+       -15,
+       9,
+       -15
+      ],
+      "fov": 62,
+      "shake": {
+       "at": 0.2,
+       "amp": 0.12
+      }
+     },
+     "narration": {
+      "text": "Sixteen G. Steel and concrete were never designed for this.",
+      "at": 0.1
+     }
+    },
+    {
+     "id": "collapseNE",
+     "purpose": "payoff",
+     "scene": "city",
+     "from": 21.0,
+     "to": 23.0,
+     "speed": 0.6,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       4.0,
+       1.2,
+       -2.5
+      ],
+      "to": [
+       4.5,
+       1.0,
+       -3.5
+      ],
+      "look": [
+       15,
+       10,
+       -15
+      ],
+      "fov": 62,
+      "shake": {
+       "at": 0.1,
+       "amp": 0.1
+      }
+     }
+    },
+    {
+     "id": "lady",
+     "purpose": "reaction",
+     "scene": "city",
+     "from": 22.6,
+     "to": 24.0,
+     "camera": {
+      "type": "close",
+      "target": "lady",
+      "dist": 1.6,
+      "height": 0.9,
+      "lookHeight": 0.0
+     }
+    },
+    {
+     "id": "collapseSE",
+     "purpose": "payoff",
+     "scene": "city",
+     "from": 25.0,
+     "to": 28.4,
+     "speed": 0.55,
+     "camera": {
+      "type": "static",
+      "pos": [
+       4.5,
+       0.6,
+       4.0
+      ],
+      "look": [
+       15.5,
+       16,
+       15.5
+      ],
+      "fov": 62,
+      "shake": {
+       "at": 0.4,
+       "amp": 0.15
+      }
+     },
+     "narration": {
+      "text": "Thirty-two G.",
+      "at": 0.2
+     }
+    },
+    {
+     "id": "end",
+     "purpose": "payoff",
+     "scene": "city",
+     "from": 28.4,
+     "to": 32.6,
+     "camera": {
+      "type": "dolly",
+      "from": [
+       20,
+       30,
+       26
+      ],
+      "to": [
+       16,
+       34,
+       22
+      ],
+      "look": [
+       0,
+       0,
+       0
+      ],
+      "fov": 52
+     },
+     "overlays": [
+      {
+       "kind": "card",
+       "text": "At 32G the city is gone",
+       "sub": "Rigid-body simulation \u00b7 collapse slowed for visibility",
+       "size": 86,
+       "at": 0.8
+      }
+     ]
+    }
+   ],
+   "cover": {
+    "shot": "collapseSE",
+    "at": 2.5
+   }
+  }
+ },
+ "covers": {
+  "video": "main",
+  "shot": "collapseSE",
+  "at": 2.5,
+  "label": false
+ }
+}

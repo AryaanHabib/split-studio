@@ -1,0 +1,35 @@
+{
+  "name": "split-studio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "studio": "tsx engine/src/cli.ts",
+    "docs": "tsx engine/src/tools/gen-docs.ts",
+    "validate": "tsx engine/src/cli.ts validate",
+    "produce": "tsx engine/src/cli.ts produce",
+    "stills": "tsx engine/src/cli.ts stills",
+    "typecheck": "tsc",
+    "doctor": "node tools/doctor.mjs",
+    "setup:voices": "node tools/setup-voices.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dimforge/rapier3d-deterministic-compat": "^0.21.0",
+    "sharp": "^0.34.4",
+    "three": "^0.180.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/three": "^0.180.0",
+    "esbuild": "^0.25.10",
+    "playwright": "^1.63.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "type": "module"
+}
